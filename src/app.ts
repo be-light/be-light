@@ -20,7 +20,7 @@ class App {
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
     /* setting  default static folder */
-    this.app.use(express.static("public"));
+    this.app.use(express.static("public_dist"));
   }
 }
 
