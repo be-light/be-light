@@ -16,6 +16,9 @@ module.exports = [
     module: {
       rules: [{ test: /\.ts?$/, use: ["ts-loader"] }]
     },
+    node: {
+      __dirname: true
+    },
     externals: [nodeExternals()]
   }
 ];
