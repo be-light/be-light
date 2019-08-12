@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import sequelize from "../sequelize";
 
 export class Routes {
   public routes(app): void {
