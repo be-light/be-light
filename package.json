@@ -20,18 +20,25 @@
   },
   "homepage": "https://github.com/be-light/be-light#readme",
   "devDependencies": {
+    "@types/bluebird": "^3.5.27",
     "@types/body-parser": "^1.17.0",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^4.17.0",
-    "@types/node": "^12.6.8",
+    "@types/node": "^12.7.1",
+    "@types/sequelize": "^4.28.4",
+    "@types/validator": "^10.11.2",
     "body-parser": "^1.19.0",
     "css-loader": "^3.1.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mini-css-extract-plugin": "^0.8.0",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
     "node-sass": "^4.12.0",
     "pug": "^2.0.4",
     "sass-loader": "^7.1.0",
+    "sequelize": "^5.13.1",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
@@ -41,5 +48,9 @@
     "webpack-cli": "^3.3.6",
     "webpack-node-externals": "^1.7.2",
     "webpack-watch-server": "^1.2.1"
+  },
+  "dependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "@types/jsonwebtoken": "^8.3.3"
   }
 }
