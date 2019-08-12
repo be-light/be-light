@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import sequelize from "../sequelize";
 
 export class Routes {
   public routes(app): void {
@@ -9,5 +10,7 @@ export class Routes {
         message: "Express.js + Pug + Webpack + Typescript + SaSS"
       });
     });
+
+    app.route("/dummy").get((req: Request, res: Response) => {});
   }
 }
