@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
+import { UserController } from "../controllers/user.controller";
 import { User } from "../models/user.model";
-import * as jwt from "jsonwebtoken";
-import secretObj from "../config/jwt";
 
 export class Routes {
   public routes(app): void {
@@ -15,25 +14,15 @@ export class Routes {
 
     app.route("/api/auth/login").post((req: Request, res: Response) => {
       let id = req.body.userId;
-
-      let token = jwt.sign(
-        {
-          userId: id
-        },
-        secretObj.secret,
-        {
-          expiresIn: "5m"
-        }
-      );
-
-      User.findOne({ where: { userId: id } }).then(user => {
-        //if (user.userPassword === "1234") {
-        res.cookie("user", token);
-        res.json({
-          token: token
+      let pw = req.body.userPassword;
+      UserController.login(id, pw)
+        .then(user => {
+          user.setDataValue("token", UserController.getToken(id));
+          res.json(user.dataValues);
+        })
+        .catch(err => {
+          res.status(400).json("Bad Request");
         });
-        //}
-      });
     });
   }
 }

@@ -1,5 +1,6 @@
 import { Sequelize, DataType, Unique, AllowNull } from "sequelize-typescript";
 import "dotenv/config";
+import { User } from "./user.model";
 
 /* sequelize-typescript config */
 const config = {
@@ -8,7 +9,7 @@ const config = {
   password: process.env.MYSQL_PASSWORD,
   host: process.env.MYSQL_HOST,
   dialect: process.env.MYSQL_DIALECT,
-  modelsPaths: [__dirname + "./models/*.ts"],
+  modelPaths: [__dirname + "/models"],
   modelMatch: (filename, member) => {
     return (
       filename.substring(0, filename.indexOf(".model")) === member.toLowerCase()
@@ -18,7 +19,7 @@ const config = {
 
 /* create sequelize instance */
 const sequelize: Sequelize = new Sequelize(config);
-
+sequelize.addModels([User]);
 /* define models */
 sequelize.define(
   "User",
@@ -27,49 +28,31 @@ sequelize.define(
       type: DataType.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
-      unique: true
+      primaryKey: true
     },
     userId: {
       type: DataType.STRING,
-      allowNull: false,
       unique: true
     },
     userPassword: {
-      type: DataType.STRING,
-      allowNull: false
+      type: DataType.STRING
     },
     userName: {
-      type: DataType.STRING,
-      allowNull: false
+      type: DataType.STRING
     },
     userEmail: {
-      type: DataType.STRING,
-      allowNull: false
+      type: DataType.STRING
     },
     userPhoneNumber: {
-      type: DataType.STRING,
-      allowNull: false
+      type: DataType.STRING
     },
     userAddress: {
-      type: DataType.STRING,
-      allowNull: false
-    },
-    createdAt: {
-      type: DataType.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataType.DATE,
-      allowNull: false
+      type: DataType.STRING
     }
   },
-  { timestamps: true, paranoid: true }
+  { timestamps: false, paranoid: false }
 );
 
 /* export */
-const db = <any>{};
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
-export default db;
+export default sequelize;
