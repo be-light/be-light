@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { UserController } from "../controllers/user.controller";
-import { User } from "../models/user.model";
 
 export class Routes {
   public routes(app): void {
@@ -12,16 +11,40 @@ export class Routes {
       });
     });
 
+    /* User Login */
     app.route("/api/auth/login").post((req: Request, res: Response) => {
       let id = req.body.userId;
       let pw = req.body.userPassword;
+
       UserController.login(id, pw)
         .then(user => {
-          user.setDataValue("token", UserController.getToken(id));
-          res.json(user.dataValues);
+          let token = UserController.getToken(id);
+          res.cookie("user", token); // token save - req.cookies.user
+          res.json({ status: 200, token: token }); // return token
         })
-        .catch(err => {
-          res.status(400).json(err);
+        .catch(() => {
+          res.json({ status: 400, error: "Check Your id and pw" });
+        });
+    });
+
+    app.route("/api/auth/register").post((req: Request, res: Response) => {
+      let token = UserController.verifyToken(req.cookies.user);
+      let id, pw, name, email, phone, address;
+      [id, pw, name, email, phone, address] = [
+        req.body.userId,
+        req.body.userPassword,
+        req.body.userName,
+        req.body.userEmail,
+        req.body.userPhoneNumber,
+        req.body.userAddress
+      ];
+
+      UserController.register(id, pw, name, email, phone, address)
+        .then(user => {
+          res.json({ status: 200, msg: "Welcome to the BeLight" });
+        })
+        .catch(() => {
+          res.json({ status: 400, error: "ID Already Exists." });
         });
     });
   }

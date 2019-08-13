@@ -7,12 +7,37 @@ export class UserController {
     return new Promise((resolve, reject) => {
       User.findOne({ where: { userId: id, userPassword: pw } }).then(user => {
         if (user) resolve(user);
-        else reject(new Error("Check Your Account"));
+        else reject(new Error("Check Your id and pw"));
       });
     });
+  }
 
-    //let token = this.getToken(id);
-    //return token;
+  public static register(
+    id: string,
+    pw: string,
+    name: string,
+    email: string,
+    phone: string,
+    address: string
+  ): Promise<User> {
+    return new Promise((resolve, reject) => {
+      User.findOne({ where: { userId: id } }).then(user => {
+        if (!user) {
+          User.create({
+            userId: id,
+            userPassword: pw,
+            userName: name,
+            userEmail: email,
+            userPhoneNumber: phone,
+            userAddress: address
+          }).then(user => {
+            resolve(user);
+          });
+        } else {
+          reject(new Error("Already Exists."));
+        }
+      });
+    });
   }
 
   public static getToken(id: string): string {
@@ -21,5 +46,10 @@ export class UserController {
     });
 
     return token;
+  }
+
+  public static verifyToken(token: string): any {
+    if (token) return jwt.verify(token, secretObj.secret);
+    else return false;
   }
 }
