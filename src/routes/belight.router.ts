@@ -21,7 +21,7 @@ export class Routes {
           res.json(user.dataValues);
         })
         .catch(err => {
-          res.status(400).json("Bad Request");
+          res.status(400).json(err);
         });
     });
   }
