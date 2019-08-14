@@ -10,15 +10,18 @@ class ExpressJWT {
 
   public getToken(id: string): string {
     let token = jwt.sign({ userId: id }, this.jwtObj.secret, {
-      expiresIn: "10m"
+      expiresIn: "1m"
     });
 
     return token;
   }
 
   public verifyToken(token: string): any {
-    if (token) return jwt.verify(token, this.jwtObj.secret);
-    else return false;
+    if (token) {
+      return jwt.verify(token, this.jwtObj.secret);
+    } else {
+      return false;
+    }
   }
 }
 
