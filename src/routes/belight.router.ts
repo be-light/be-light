@@ -16,11 +16,8 @@ export class Routes {
     app.route("/api/auth/login").post((req: Request, res: Response) => {
       let id = req.body.userId;
       let pw = req.body.userPassword;
-      let loginCheck = UserController.loginCheck(req.cookies.user);
-
-      if (!loginCheck) {
-        //Login Check
-        res.json({ status: 400, error: "Already logged in." });
+      if (req.cookies.user) {
+        res.redirect("/");
         return;
       }
 
@@ -31,12 +28,17 @@ export class Routes {
           res.json({ status: 200, token: token }); // return token
         })
         .catch(() => {
-          res.json({ status: 400, error: "Check Your id and pw" });
+          res.json({ status: 400, msg: "Check Your id and pw" });
         });
     });
 
+    /* User Register */
     app.route("/api/auth/register").post((req: Request, res: Response) => {
-      let isToken = expressJWT.verifyToken(req.cookies.user);
+      if (req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
+
       let reqUser = {
         id: req.body.userId,
         pw: req.body.userPassword,
@@ -51,7 +53,18 @@ export class Routes {
           res.json({ status: 200, msg: "Welcome to the BeLight" });
         })
         .catch(() => {
-          res.json({ status: 400, error: "ID Already Exists." });
+          res.json({ status: 400, msg: "ID Already Exists." });
+        });
+    });
+
+    /* Bring User Profile */
+    app.route("/api/user").get((req: Request, res: Response) => {
+      UserController.bringMyProfile(req.cookies.user)
+        .then(user => {
+          res.json({ status: 200, msg: "Get Your Profile..", user: user });
+        })
+        .catch(() => {
+          res.json({ status: 400, msg: "You have to login now." });
         });
     });
   }

@@ -3,4 +3,12 @@ interface ResSkeleton {
   msg: string;
 }
 
-export { ResSkeleton };
+interface ResponseUser {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+}
+
+export { ResSkeleton, ResponseUser };
