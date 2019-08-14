@@ -3,35 +3,34 @@ import { ResSkeleton, ResponseUser } from "../utils/global.interface";
 import { User } from "../models/user.model";
 
 interface UserControllerInterface {
+  successMsg: ResSkeleton;
   login(id: string, pw: string): Promise<ResponseUser>;
-  loginCheck(token: string): boolean;
-  register(reqUser: object): Promise<User>;
+  register(reqUser: object): Promise<ResSkeleton>;
   bringMyProfile(token: string): Promise<ResponseUser>;
   updateMyProfile(reqUser: object): Promise<ResSkeleton>;
   withDraw(token: string): Promise<ResSkeleton>;
 }
 
 class UserController implements UserControllerInterface {
+  public successMsg: ResSkeleton;
+
+  public constructor() {
+    this.successMsg = { status: 200, msg: "success" };
+  }
+
   public login(id: string, pw: string): Promise<ResponseUser> {
     return new Promise((resolve, reject) => {
-      let responseJSON = <any>{};
-
-      User.findOne({ where: { userId: id, userPassword: pw } }).then(user => {
-        if (user.dataValues) {
-          responseJSON.userId = user.dataValues.id;
-          responseJSON.userName = user.dataValues.userName;
-          responseJSON.userEmail = user.dataValues.userEmail;
-          responseJSON.userPhoneNumber = user.dataValues.userPhoneNumber;
-          responseJSON.userAddress = user.dataValues.userAddress;
-          resolve(responseJSON);
-        } else {
-          reject(new Error("Check Your id and pw"));
-        }
+      User.findOne({
+        where: { userId: id, userPassword: pw },
+        attributes: { exclude: ["userPassword"] }
+      }).then(user => {
+        if (user) resolve(user);
+        else reject(new Error("Check Your id and pw"));
       });
     });
   }
 
-  public register(reqUser: object): Promise<User> {
+  public register(reqUser: object): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       User.findOne({ where: { userId: reqUser["id"] } }).then(user => {
         if (!user) {
@@ -43,7 +42,7 @@ class UserController implements UserControllerInterface {
             userPhoneNumber: reqUser["phone"],
             userAddress: reqUser["address"]
           }).then(user => {
-            resolve(user);
+            resolve(this.successMsg);
           });
         } else {
           reject(new Error("Already Exists."));
@@ -52,24 +51,18 @@ class UserController implements UserControllerInterface {
     });
   }
 
-  public loginCheck(token: string): boolean {
-    let isToken = expressJWT.verifyToken(token);
-    return isToken.userId ? true : false;
-  }
-
   public bringMyProfile(token: string): Promise<ResponseUser> {
     return new Promise((resolve, reject) => {
       let tokens = expressJWT.verifyToken(token);
-      let responseJSON = <any>{};
 
       if (tokens) {
-        User.findOne({ where: { userId: tokens.userId } }).then(user => {
-          responseJSON.userId = user.dataValues.id;
-          responseJSON.userName = user.dataValues.userName;
-          responseJSON.userEmail = user.dataValues.userEmail;
-          responseJSON.userPhoneNumber = user.dataValues.userPhoneNumber;
-          responseJSON.userAddress = user.dataValues.userAddress;
-          resolve(responseJSON);
+        User.findOne({
+          where: { userId: tokens.userId },
+          attributes: {
+            exclude: ["userPassword"]
+          }
+        }).then(user => {
+          resolve(user);
         });
       } else {
         reject(new Error("Something Error."));

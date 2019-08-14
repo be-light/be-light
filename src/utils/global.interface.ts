@@ -4,11 +4,11 @@ interface ResSkeleton {
 }
 
 interface ResponseUser {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  userPhoneNumber: string;
+  userAddress: string;
 }
 
 export { ResSkeleton, ResponseUser };

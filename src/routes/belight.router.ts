@@ -50,7 +50,7 @@ export class Routes {
 
       UserController.register(reqUser)
         .then(user => {
-          res.json({ status: 200, msg: "Welcome to the BeLight" });
+          res.json(user);
         })
         .catch(() => {
           res.json({ status: 400, msg: "ID Already Exists." });
