@@ -1,10 +1,14 @@
 import expressJWT from "../utils/jwt";
+import { ResSkeleton } from "../utils/global.interface";
 import { User } from "../models/user.model";
 
 interface UserControllerInterface {
   login(id: string, pw: string): Promise<User>;
-  register(reqUser: object): Promise<User>;
   loginCheck(token: string): boolean;
+  register(reqUser: object): Promise<User>;
+  bringMyProfile(id: string): Promise<User>;
+  updateMyProfile(reqUser: object): Promise<ResSkeleton>;
+  withDraw(id: string, pw: string): Promise<ResSkeleton>;
 }
 
 class UserController implements UserControllerInterface {
@@ -42,6 +46,18 @@ class UserController implements UserControllerInterface {
     let isToken = expressJWT.verifyToken(token);
     if (isToken) return true;
     else return false;
+  }
+
+  public bringMyProfile(id: string): Promise<User> {
+    return new Promise((resolve, reject) => {});
+  }
+
+  public updateMyProfile(reqUser: object): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {});
+  }
+
+  public withDraw(id: string, pw: string): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {});
   }
 }
 
