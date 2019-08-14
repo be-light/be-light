@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { UserController } from "../controllers/user.controller";
+import UserController from "../controllers/user.controller";
+import expressJWT from "../utils/jwt";
 
 export class Routes {
   public routes(app): void {
@@ -25,7 +26,7 @@ export class Routes {
 
       UserController.login(id, pw)
         .then(user => {
-          let token = UserController.getToken(id);
+          let token = expressJWT.getToken(id);
           res.cookie("user", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
@@ -35,7 +36,7 @@ export class Routes {
     });
 
     app.route("/api/auth/register").post((req: Request, res: Response) => {
-      let isToken = UserController.verifyToken(req.cookies.user);
+      let isToken = expressJWT.verifyToken(req.cookies.user);
       let reqUser = {
         id: req.body.userId,
         pw: req.body.userPassword,

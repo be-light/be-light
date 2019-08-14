@@ -1,9 +1,14 @@
-import * as jwt from "jsonwebtoken";
-import secretObj from "../config/jwt";
+import expressJWT from "../utils/jwt";
 import { User } from "../models/user.model";
 
-export class UserController {
-  public static login(id: string, pw: string): Promise<User> {
+interface UserControllerInterface {
+  login(id: string, pw: string): Promise<User>;
+  register(reqUser: object): Promise<User>;
+  loginCheck(token: string): boolean;
+}
+
+class UserController implements UserControllerInterface {
+  public login(id: string, pw: string): Promise<User> {
     return new Promise((resolve, reject) => {
       User.findOne({ where: { userId: id, userPassword: pw } }).then(user => {
         if (user) resolve(user);
@@ -12,7 +17,7 @@ export class UserController {
     });
   }
 
-  public static register(reqUser: object): Promise<User> {
+  public register(reqUser: object): Promise<User> {
     return new Promise((resolve, reject) => {
       User.findOne({ where: { userId: reqUser["id"] } }).then(user => {
         if (!user) {
@@ -33,21 +38,11 @@ export class UserController {
     });
   }
 
-  public static getToken(id: string): string {
-    let token = jwt.sign({ userId: id }, secretObj.secret, {
-      expiresIn: "10m"
-    });
-
-    return token;
-  }
-
-  public static verifyToken(token: string): any {
-    if (token) return jwt.verify(token, secretObj.secret);
-    else return false;
-  }
-  public static loginCheck(token: string): boolean {
-    let isToken = this.verifyToken(token);
+  public loginCheck(token: string): boolean {
+    let isToken = expressJWT.verifyToken(token);
     if (isToken) return true;
     else return false;
   }
 }
+
+export default new UserController();
