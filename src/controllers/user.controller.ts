@@ -12,24 +12,17 @@ export class UserController {
     });
   }
 
-  public static register(
-    id: string,
-    pw: string,
-    name: string,
-    email: string,
-    phone: string,
-    address: string
-  ): Promise<User> {
+  public static register(reqUser: object): Promise<User> {
     return new Promise((resolve, reject) => {
-      User.findOne({ where: { userId: id } }).then(user => {
+      User.findOne({ where: { userId: reqUser["id"] } }).then(user => {
         if (!user) {
           User.create({
-            userId: id,
-            userPassword: pw,
-            userName: name,
-            userEmail: email,
-            userPhoneNumber: phone,
-            userAddress: address
+            userId: reqUser["id"],
+            userPassword: reqUser["pw"],
+            userName: reqUser["name"],
+            userEmail: reqUser["email"],
+            userPhoneNumber: reqUser["phone"],
+            userAddress: reqUser["address"]
           }).then(user => {
             resolve(user);
           });
@@ -50,6 +43,11 @@ export class UserController {
 
   public static verifyToken(token: string): any {
     if (token) return jwt.verify(token, secretObj.secret);
+    else return false;
+  }
+  public static loginCheck(token: string): boolean {
+    let isToken = this.verifyToken(token);
+    if (isToken) return true;
     else return false;
   }
 }

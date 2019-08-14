@@ -15,6 +15,13 @@ export class Routes {
     app.route("/api/auth/login").post((req: Request, res: Response) => {
       let id = req.body.userId;
       let pw = req.body.userPassword;
+      let loginCheck = UserController.loginCheck(req.cookies.user);
+
+      if (!loginCheck) {
+        //Login Check
+        res.json({ status: 400, error: "Already logged in." });
+        return;
+      }
 
       UserController.login(id, pw)
         .then(user => {
@@ -28,18 +35,17 @@ export class Routes {
     });
 
     app.route("/api/auth/register").post((req: Request, res: Response) => {
-      let token = UserController.verifyToken(req.cookies.user);
-      let id, pw, name, email, phone, address;
-      [id, pw, name, email, phone, address] = [
-        req.body.userId,
-        req.body.userPassword,
-        req.body.userName,
-        req.body.userEmail,
-        req.body.userPhoneNumber,
-        req.body.userAddress
-      ];
+      let isToken = UserController.verifyToken(req.cookies.user);
+      let reqUser = {
+        id: req.body.userId,
+        pw: req.body.userPassword,
+        name: req.body.userName,
+        email: req.body.userEmail,
+        phone: req.body.userPhoneNumber,
+        address: req.body.userAddress
+      };
 
-      UserController.register(id, pw, name, email, phone, address)
+      UserController.register(reqUser)
         .then(user => {
           res.json({ status: 200, msg: "Welcome to the BeLight" });
         })
