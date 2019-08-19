@@ -16,6 +16,7 @@ export class Routes {
     app.route("/api/auth/login").post((req: Request, res: Response) => {
       let id = req.body.userId;
       let pw = req.body.userPassword;
+      console.log(req.cookies.user);
       if (req.cookies.user) {
         res.redirect("/");
         return;
@@ -64,7 +65,8 @@ export class Routes {
           res.json({ status: 200, msg: "Get Your Profile..", user: user });
         })
         .catch(() => {
-          res.json({ status: 400, msg: "You have to login now." });
+          res.clearCookie("user");
+          res.status(403).json({ status: 403, msg: "You have to login now" });
         });
     });
   }
