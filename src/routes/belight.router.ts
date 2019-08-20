@@ -16,7 +16,6 @@ export class Routes {
     app.route("/api/auth/login").post((req: Request, res: Response) => {
       let id = req.body.userId;
       let pw = req.body.userPassword;
-      console.log(req.cookies.user);
       if (req.cookies.user) {
         res.redirect("/");
         return;
