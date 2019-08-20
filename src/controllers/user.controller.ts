@@ -25,7 +25,7 @@ class UserController implements UserControllerInterface {
         attributes: { exclude: ["userPassword"] }
       }).then(user => {
         if (user) resolve(user);
-        else reject(new Error("Check Your id and pw"));
+        else reject(new Error("ID and Password is not valid"));
       });
     });
   }
@@ -65,7 +65,7 @@ class UserController implements UserControllerInterface {
           resolve(user);
         });
       } else {
-        reject(new Error("Something Error."));
+        reject(new Error("Your token is Expired."));
       }
     });
   }
@@ -90,7 +90,7 @@ class UserController implements UserControllerInterface {
             resolve(this.successMsg);
           })
           .catch(() => {
-            reject("Something Error.");
+            reject(new Error("Request is not valid"));
           });
       } else {
         reject(new Error("Maybe Token Expired."));
