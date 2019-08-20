@@ -1,6 +1,7 @@
 import expressJWT from "../utils/jwt";
 import { ResSkeleton, ResponseUser } from "../utils/global.interface";
 import { User } from "../models/user.model";
+import encrypt from "../utils/encrypt";
 
 interface UserControllerInterface {
   successMsg: ResSkeleton;
@@ -21,7 +22,7 @@ class UserController implements UserControllerInterface {
   public login(id: string, pw: string): Promise<ResponseUser> {
     return new Promise((resolve, reject) => {
       User.findOne({
-        where: { userId: id, userPassword: pw },
+        where: { userId: id, userPassword: encrypt.encryptPassword(pw) },
         attributes: { exclude: ["userPassword"] }
       }).then(user => {
         if (user) resolve(user);
@@ -36,7 +37,7 @@ class UserController implements UserControllerInterface {
         if (!user) {
           User.create({
             userId: reqUser["id"],
-            userPassword: reqUser["pw"],
+            userPassword: encrypt.encryptPassword(reqUser["pw"]),
             userName: reqUser["name"],
             userEmail: reqUser["email"],
             userPhoneNumber: reqUser["phone"],
@@ -102,7 +103,12 @@ class UserController implements UserControllerInterface {
     return new Promise((resolve, reject) => {
       let tokens = expressJWT.verifyToken(token);
       if (tokens) {
-        User.destroy({ where: { userId: tokens.userId, userPassword: pw } })
+        User.destroy({
+          where: {
+            userId: tokens.userId,
+            userPassword: encrypt.encryptPassword(pw)
+          }
+        })
           .then(result => {
             resolve(this.successMsg);
           })

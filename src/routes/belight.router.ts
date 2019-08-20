@@ -14,8 +14,8 @@ export class Routes {
 
     /* User Login */
     app.route("/api/auth/login").post((req: Request, res: Response) => {
-      let id = req.body.userId;
-      let pw = req.body.userPassword;
+      let id: string = req.body.userId;
+      let pw: string = req.body.userPassword;
       if (req.cookies.user) {
         res.redirect("/");
         return;
@@ -23,7 +23,7 @@ export class Routes {
 
       UserController.login(id, pw)
         .then(user => {
-          let token = expressJWT.getToken(id);
+          let token: string = expressJWT.getToken(id);
           res.cookie("user", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
@@ -39,7 +39,7 @@ export class Routes {
         return;
       }
 
-      let reqUser = {
+      let reqUser: object = {
         id: req.body.userId,
         pw: req.body.userPassword,
         name: req.body.userName,
@@ -71,7 +71,7 @@ export class Routes {
 
     /* Update My Profile */
     app.route("/api/user").put((req: Request, res: Response) => {
-      let reqUser = {
+      let reqUser: object = {
         email: req.body.userEmail,
         phone: req.body.userPhoneNumber,
         address: req.body.userAddress
@@ -89,7 +89,7 @@ export class Routes {
 
     /* Destory User */
     app.route("/api/user").delete((req: Request, res: Response) => {
-      let userPassword = req.body.userPassword;
+      let userPassword: string = req.body.userPassword;
 
       UserController.withDraw(userPassword, req.cookies.user)
         .then(user => {
