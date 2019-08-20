@@ -68,5 +68,22 @@ export class Routes {
           res.status(403).json({ status: 403, msg: "You have to login now" });
         });
     });
+
+    app.route("/api/user").put((req: Request, res: Response) => {
+      let reqUser = {
+        email: req.body.userEmail,
+        phone: req.body.userPhoneNumber,
+        address: req.body.userAddress
+      };
+
+      UserController.updateMyProfile(reqUser, req.cookies.user)
+        .then(user => {
+          res.json(user);
+        })
+        .catch(() => {
+          res.clearCookie("user");
+          res.status(403).json({ status: 403, msg: "Your Token is Expired." });
+        });
+    });
   }
 }

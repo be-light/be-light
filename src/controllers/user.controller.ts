@@ -7,7 +7,7 @@ interface UserControllerInterface {
   login(id: string, pw: string): Promise<ResponseUser>;
   register(reqUser: object): Promise<ResSkeleton>;
   bringMyProfile(token: string): Promise<ResponseUser>;
-  updateMyProfile(reqUser: object): Promise<ResSkeleton>;
+  updateMyProfile(reqUser: object, token: string): Promise<ResSkeleton>;
   withDraw(token: string): Promise<ResSkeleton>;
 }
 
@@ -70,8 +70,32 @@ class UserController implements UserControllerInterface {
     });
   }
 
-  public updateMyProfile(reqUser: object): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+  public updateMyProfile(reqUser: object, token: string): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let tokens = expressJWT.verifyToken(token);
+
+      if (tokens) {
+        User.update(
+          {
+            userEmail: reqUser["email"],
+            userPhone: reqUser["phone"],
+            userAddress: reqUser["address"]
+          },
+          {
+            where: { userId: tokens.userId },
+            returning: false
+          }
+        )
+          .then(user => {
+            resolve(this.successMsg);
+          })
+          .catch(() => {
+            reject("Something Error.");
+          });
+      } else {
+        reject(new Error("Maybe Token Expired."));
+      }
+    });
   }
 
   public withDraw(token: string): Promise<ResSkeleton> {
