@@ -45,7 +45,7 @@ class UserController implements UserControllerInterface {
             resolve(this.successMsg);
           });
         } else {
-          reject(new Error("Already Exists."));
+          reject(new Error("ID Already Exists."));
         }
       });
     });
