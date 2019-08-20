@@ -8,7 +8,7 @@ interface UserControllerInterface {
   register(reqUser: object): Promise<ResSkeleton>;
   bringMyProfile(token: string): Promise<ResponseUser>;
   updateMyProfile(reqUser: object, token: string): Promise<ResSkeleton>;
-  withDraw(token: string): Promise<ResSkeleton>;
+  withDraw(pw: string, token: string): Promise<ResSkeleton>;
 }
 
 class UserController implements UserControllerInterface {
@@ -98,8 +98,21 @@ class UserController implements UserControllerInterface {
     });
   }
 
-  public withDraw(token: string): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+  public withDraw(pw: string, token: string): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let tokens = expressJWT.verifyToken(token);
+      if (tokens) {
+        User.destroy({ where: { userId: tokens.userId, userPassword: pw } })
+          .then(result => {
+            resolve(this.successMsg);
+          })
+          .catch(() => {
+            reject(new Error("ID and Password is not valid"));
+          });
+      } else {
+        reject(new Error("Maybe Token Expired."));
+      }
+    });
   }
 }
 

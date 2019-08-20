@@ -69,6 +69,7 @@ export class Routes {
         });
     });
 
+    /* Update My Profile */
     app.route("/api/user").put((req: Request, res: Response) => {
       let reqUser = {
         email: req.body.userEmail,
@@ -83,6 +84,20 @@ export class Routes {
         .catch(() => {
           res.clearCookie("user");
           res.status(403).json({ status: 403, msg: "Your Token is Expired." });
+        });
+    });
+
+    /* Destory User */
+    app.route("/api/user").delete((req: Request, res: Response) => {
+      let userPassword = req.body.userPassword;
+
+      UserController.withDraw(userPassword, req.cookies.user)
+        .then(user => {
+          res.clearCookie("user");
+          res.json(user);
+        })
+        .catch(() => {
+          res.status(400).json({ status: 400, msg: "Your Token is Expired." });
         });
     });
   }

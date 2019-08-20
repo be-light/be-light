@@ -10,7 +10,7 @@ class ExpressJWT {
 
   public getToken(id: string): string {
     let token = jwt.sign({ userId: id }, this.jwtObj.secret, {
-      expiresIn: "60m"
+      expiresIn: "30m"
     });
 
     return token;
