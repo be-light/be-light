@@ -10,11 +10,6 @@ import {
 @Table
 export class User extends Model<User> {
   @PrimaryKey
-  @AutoIncrement
-  @Column
-  public idx!: number;
-
-  @Unique
   @Column
   public userId!: string;
 
