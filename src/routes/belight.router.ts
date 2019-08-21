@@ -69,7 +69,7 @@ export class Routes {
         });
     });
 
-    /* Update My Profile */
+    /* Update My Profile  */
     app.route("/api/user").put((req: Request, res: Response) => {
       let reqUser: object = {
         email: req.body.userEmail,
