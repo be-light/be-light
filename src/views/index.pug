@@ -4,6 +4,7 @@ html(lang="en")
         title #{title}
         link(rel="stylesheet" href="app.css")
     body
+        h1 User
         p Login Form
         form(action="/api/auth/login" method="POST")
             input(type="text" name="userId")
@@ -37,4 +38,14 @@ html(lang="en")
         p withDraw Form.
         form(action="/api/user?_method=DELETE" method="POST")
             input(type="text" name="userPassword")
+            input(type="submit")
+
+        h1 HostUser
+        p HostUser Register Form
+        form(action="/api/host/register", method="POST")
+            input(type="text" name="hostUserId")
+            input(type="text" name="hostUserPassword")
+            input(type="text" name="hostUserName")
+            input(type="text" name="hostUserEmail")
+            input(type="text" name="hostUserPhoneNumber")
             input(type="submit")

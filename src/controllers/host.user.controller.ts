@@ -24,7 +24,29 @@ class HostUserController implements HostUserControllerInterface {
   }
 
   public register(reqHost: object): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      HostUser.findOne({ where: { hostUserId: reqHost["hostUserId"] } }).then(
+        host => {
+          if (!host) {
+            HostUser.create({
+              hostUserId: reqHost["hostUserId"],
+              hostUserPassword: reqHost["hostUserPassword"],
+              hostUserName: reqHost["hostUserName"],
+              hostUserEmail: reqHost["hostUserEmail"],
+              hostUserPhoneNumber: reqHost["hostUserPhoneNumber"]
+            })
+              .then(host => {
+                resolve(this.successMsg);
+              })
+              .catch(() => {
+                reject(new Error("Something Errors."));
+              });
+          } else {
+            reject(new Error("Id Already Exists."));
+          }
+        }
+      );
+    });
   }
 
   public bringHostProfile(token: string): Promise<ResponseUser> {
@@ -39,3 +61,5 @@ class HostUserController implements HostUserControllerInterface {
     return new Promise((resolve, reject) => {});
   }
 }
+
+export default new HostUserController();

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import UserController from "../controllers/user.controller";
+import HostUserController from "../controllers/host.user.controller";
 import expressJWT from "../utils/jwt";
-import { EDESTADDRREQ } from "constants";
 
 export class Routes {
   public routes(app): void {
@@ -107,7 +107,7 @@ export class Routes {
     app.route("/api/auth/host/login").post((req: Request, res: Response) => {});
 
     /* HostUser Register */
-    app.route("/api/auth/host/register").post((req: Request, res: Response) => {
+    app.route("/api/host/register").post((req: Request, res: Response) => {
       if (req.cookies.host) {
         res.redirect("/");
         return;
@@ -118,8 +118,16 @@ export class Routes {
         hostUserPassword: req.body.hostUserPassword,
         hostUserName: req.body.hostUserName,
         hostUserEmail: req.body.hostUserEmail,
-        hostUserPhoneNUmber: req.body.hostUserPhoneNumber
+        hostUserPhoneNumber: req.body.hostUserPhoneNumber
       };
+
+      HostUserController.register(reqHost)
+        .then(host => {
+          res.json(host);
+        })
+        .catch(() => {
+          res.json({ status: 400, msg: "ID Already Exists." });
+        });
     });
   }
 }
