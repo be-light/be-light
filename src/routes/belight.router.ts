@@ -158,10 +158,26 @@ export class Routes {
           res.status(403).json({ status: 403, msg: msg });
         });
     });
+
     /* HostUser Profile Update */
+    app.route("/api/host").put((req: Request, res: Response) => {
+      let reqUser: object = {
+        hostUserEmail: req.body.hostUserEmail,
+        hostUserPhoneNumber: req.body.hostUserPhoneNumber,
+        hostUserName: req.body.hostUserName
+      };
+
+      HostUserController.updateHostProfile(reqUser, req.cookies.host)
+        .then(host => {
+          res.json(host);
+        })
+        .catch(msg => {
+          res.clearCookie("host");
+          res.status(403).json({ status: 403, msg: msg });
+        });
+    });
 
     /* HostUser Destroy */
-
     app.route("/api/host").delete((req: Request, res: Response) => {
       let hostUserPassword: string = req.body.hostUserPassword;
 

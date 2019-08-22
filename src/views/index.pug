@@ -60,7 +60,17 @@ html(lang="en")
         form(action="/api/host", method="GET")
             input(type="submit")
 
+        p HostUser Update Profile
+        form(action="/api/host?_method=PUT", method="POST")
+            input(type="text" name="hostUserName")
+            input(type="text" name="hostUserEmail")
+            input(type="text" name="hostUserPhoneNumber")
+            input(type="submit")
+
+
         p HostUser Destory Form
         form(action="/api/host?_method=DELETE" method="POST")
             input(type="text" name="hostUserPassword")
             input(type="submit")
+
+        

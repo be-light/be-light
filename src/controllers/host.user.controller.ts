@@ -81,7 +81,27 @@ class HostUserController implements HostUserControllerInterface {
   }
 
   public updateHostProfile(reqHost: object, tok: string): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(tok).userId;
+      if (tok) {
+        HostUser.update(
+          {
+            hostUserEmail: reqHost["hostUserEmail"],
+            hostUserName: reqHost["hostUserName"],
+            hostUserPhoneNumber: reqHost["hostUserPhoneNumber"]
+          },
+          { where: { hostUserId: hostUserId }, returning: false }
+        )
+          .then(host => {
+            resolve(this.successMsg);
+          })
+          .catch(() => {
+            reject("Request is not valid");
+          });
+      } else {
+        reject("Maybe Token Expired");
+      }
+    });
   }
 
   public hostWithDraw(pw: string, token: string): Promise<ResSkeleton> {
