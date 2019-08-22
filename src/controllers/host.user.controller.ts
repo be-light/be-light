@@ -15,7 +15,7 @@ interface HostUserControllerInterface {
 class HostUserController implements HostUserControllerInterface {
   public successMsg: ResSkeleton;
 
-  public costructor() {
+  public constructor() {
     this.successMsg = { status: 200, msg: "success" };
   }
 
