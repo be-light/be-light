@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserController from "../controllers/user.controller";
 import expressJWT from "../utils/jwt";
+import { EDESTADDRREQ } from "constants";
 
 export class Routes {
   public routes(app): void {
@@ -99,6 +100,26 @@ export class Routes {
         .catch(() => {
           res.status(400).json({ status: 400, msg: "Your Token is Expired." });
         });
+    });
+
+    // HostUser ---
+    /* HostUser Login */
+    app.route("/api/auth/host/login").post((req: Request, res: Response) => {});
+
+    /* HostUser Register */
+    app.route("/api/auth/host/register").post((req: Request, res: Response) => {
+      if (req.cookies.host) {
+        res.redirect("/");
+        return;
+      }
+
+      let reqHost: object = {
+        hostUserId: req.body.hostUserId,
+        hostUserPassword: req.body.hostUserPassword,
+        hostUserName: req.body.hostUserName,
+        hostUserEmail: req.body.hostUserEmail,
+        hostUserPhoneNUmber: req.body.hostUserPhoneNumber
+      };
     });
   }
 }
