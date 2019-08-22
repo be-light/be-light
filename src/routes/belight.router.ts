@@ -28,8 +28,8 @@ export class Routes {
           res.cookie("user", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
-        .catch(() => {
-          res.json({ status: 400, msg: "Check Your id and pw" });
+        .catch(msg => {
+          res.json({ status: 400, msg: msg });
         });
     });
 
@@ -53,8 +53,8 @@ export class Routes {
         .then(user => {
           res.json(user);
         })
-        .catch(() => {
-          res.json({ status: 400, msg: "ID Already Exists." });
+        .catch(msg => {
+          res.json({ status: 400, msg: msg });
         });
     });
 
@@ -64,9 +64,9 @@ export class Routes {
         .then(user => {
           res.json({ status: 200, msg: "Get Your Profile..", user: user });
         })
-        .catch(() => {
+        .catch(msg => {
           res.clearCookie("user");
-          res.status(403).json({ status: 403, msg: "You have to login now" });
+          res.status(403).json({ status: 403, msg: msg });
         });
     });
 
@@ -82,9 +82,9 @@ export class Routes {
         .then(user => {
           res.json(user);
         })
-        .catch(() => {
+        .catch(msg => {
           res.clearCookie("user");
-          res.status(403).json({ status: 403, msg: "Your Token is Expired." });
+          res.status(403).json({ status: 403, msg: msg });
         });
     });
 
@@ -97,8 +97,8 @@ export class Routes {
           res.clearCookie("user");
           res.json(user);
         })
-        .catch(() => {
-          res.status(400).json({ status: 400, msg: "Your Token is Expired." });
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg: msg });
         });
     });
 
@@ -118,8 +118,8 @@ export class Routes {
           res.cookie("host", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
-        .catch(() => {
-          res.json({ status: 400, msg: "Check Your id and pw" });
+        .catch(msg => {
+          res.json({ status: 400, msg: msg });
         });
     });
 
@@ -142,8 +142,27 @@ export class Routes {
         .then(host => {
           res.json(host);
         })
-        .catch(() => {
-          res.json({ status: 400, msg: "ID Already Exists." });
+        .catch(msg => {
+          res.json({ status: 400, msg: msg });
+        });
+    });
+
+    /* HostUser Get Profile */
+
+    /* HostUser Profile Update */
+
+    /* HostUser Destroy */
+
+    app.route("/api/host").delete((req: Request, res: Response) => {
+      let hostUserPassword: string = req.body.hostUserPassword;
+
+      HostUserController.hostWithDraw(hostUserPassword, req.cookies.host)
+        .then(host => {
+          res.clearCookie("host");
+          res.json(host);
+        })
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg: msg });
         });
     });
   }

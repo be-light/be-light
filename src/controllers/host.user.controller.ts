@@ -30,7 +30,7 @@ class HostUserController implements HostUserControllerInterface {
         attributes: { exclude: ["hostUserPassword"] }
       }).then(host => {
         if (host) resolve(host);
-        else reject(new Error("ID and Password is not valid."));
+        else reject("ID and Password is not valid.");
       });
     });
   }
@@ -51,10 +51,10 @@ class HostUserController implements HostUserControllerInterface {
                 resolve(this.successMsg);
               })
               .catch(() => {
-                reject(new Error("Something Errors."));
+                reject("Something Errors.");
               });
           } else {
-            reject(new Error("Id Already Exists."));
+            reject("Id Already Exists.");
           }
         }
       );
@@ -70,7 +70,26 @@ class HostUserController implements HostUserControllerInterface {
   }
 
   public hostWithDraw(pw: string, token: string): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+      if (hostUserId) {
+        HostUser.destroy({
+          where: {
+            hostUserId: hostUserId,
+            hostUserPassword: pw
+          }
+        })
+          .then(result => {
+            if (result) resolve(this.successMsg);
+            else reject("Id and Password is not valid.");
+          })
+          .catch(() => {
+            reject("Id and Password is not valid");
+          });
+      } else {
+        reject("Maybe Token Expired.");
+      }
+    });
   }
 }
 
