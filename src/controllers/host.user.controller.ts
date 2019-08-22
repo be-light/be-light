@@ -1,12 +1,16 @@
 import expressJWT from "../utils/jwt";
-import { ResSkeleton, ResponseUser } from "../utils/global.interface";
+import {
+  ResSkeleton,
+  ResponseUser,
+  ResponseHostUser
+} from "../utils/global.interface";
 import { HostUser } from "../models/host.user.model";
 
 interface HostUserControllerInterface {
   successMsg: ResSkeleton;
-  login(id: string, pw: string): Promise<ResponseUser>;
+  login(id: string, pw: string): Promise<ResponseHostUser>;
   register(reqHost: object): Promise<ResSkeleton>;
-  bringHostProfile(token: string): Promise<ResponseUser>;
+  bringHostProfile(token: string): Promise<ResponseHostUser>;
   updateHostProfile(reqHost: object, token: string): Promise<ResSkeleton>;
   hostWithDraw(pw: string, token: string): Promise<ResSkeleton>;
 }
@@ -19,8 +23,16 @@ class HostUserController implements HostUserControllerInterface {
     this.successMsg = { status: 200, msg: "success" };
   }
 
-  public login(id: string, pw: string): Promise<ResponseUser> {
-    return new Promise((resolve, reject) => {});
+  public login(id: string, pw: string): Promise<ResponseHostUser> {
+    return new Promise((resolve, reject) => {
+      HostUser.findOne({
+        where: { hostUserId: id, hostUserPassword: pw },
+        attributes: { exclude: ["hostUserPassword"] }
+      }).then(host => {
+        if (host) resolve(host);
+        else reject(new Error("ID and Password is not valid."));
+      });
+    });
   }
 
   public register(reqHost: object): Promise<ResSkeleton> {
@@ -49,7 +61,7 @@ class HostUserController implements HostUserControllerInterface {
     });
   }
 
-  public bringHostProfile(token: string): Promise<ResponseUser> {
+  public bringHostProfile(token: string): Promise<ResponseHostUser> {
     return new Promise((resolve, reject) => {});
   }
 

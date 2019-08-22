@@ -11,4 +11,11 @@ interface ResponseUser {
   userAddress: string;
 }
 
-export { ResSkeleton, ResponseUser };
+interface ResponseHostUser {
+  hostUserId: string;
+  hostUserName: string;
+  hostUserEmail: string;
+  hostUserPhoneNumber: string;
+}
+
+export { ResSkeleton, ResponseUser, ResponseHostUser };

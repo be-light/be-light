@@ -104,7 +104,24 @@ export class Routes {
 
     // HostUser ---
     /* HostUser Login */
-    app.route("/api/auth/host/login").post((req: Request, res: Response) => {});
+    app.route("/api/auth/host/login").post((req: Request, res: Response) => {
+      let id: string = req.body.hostUserId;
+      let pw: string = req.body.hostUserPassword;
+      if (req.cookies.host) {
+        res.redirect("/");
+        return;
+      }
+
+      HostUserController.login(id, pw)
+        .then(user => {
+          let token: string = expressJWT.getToken(id);
+          res.cookie("host", token); // token save - req.cookies.user
+          res.json({ status: 200, token: token }); // return token
+        })
+        .catch(() => {
+          res.json({ status: 400, msg: "Check Your id and pw" });
+        });
+    });
 
     /* HostUser Register */
     app.route("/api/host/register").post((req: Request, res: Response) => {

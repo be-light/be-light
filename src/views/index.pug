@@ -49,3 +49,9 @@ html(lang="en")
             input(type="text" name="hostUserEmail")
             input(type="text" name="hostUserPhoneNumber")
             input(type="submit")
+
+        p HostUser Login
+        form(action="/api/auth/host/login", method="POST")
+            input(type="text" name="hostUserId")
+            input(type="text" name="hostUserPassword")
+            input(type="submit")
