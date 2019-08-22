@@ -11,6 +11,7 @@ interface UserControllerInterface {
   withDraw(pw: string, token: string): Promise<ResSkeleton>;
 }
 
+/* UserController */
 class UserController implements UserControllerInterface {
   public successMsg: ResSkeleton;
 
