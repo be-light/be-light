@@ -62,7 +62,22 @@ class HostUserController implements HostUserControllerInterface {
   }
 
   public bringHostProfile(token: string): Promise<ResponseHostUser> {
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+
+      if (hostUserId) {
+        HostUser.findOne({
+          where: { hostUserId: hostUserId },
+          attributes: {
+            exclude: ["hostUserPassword"]
+          }
+        }).then(user => {
+          resolve(user);
+        });
+      } else {
+        reject("Your Token is Expired.");
+      }
+    });
   }
 
   public updateHostProfile(reqHost: object, tok: string): Promise<ResSkeleton> {

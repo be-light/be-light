@@ -148,7 +148,16 @@ export class Routes {
     });
 
     /* HostUser Get Profile */
-
+    app.route("/api/host").get((req: Request, res: Response) => {
+      HostUserController.bringHostProfile(req.cookies.host)
+        .then(host => {
+          res.json({ status: 200, msg: "Get Your Profile..", user: host });
+        })
+        .catch(msg => {
+          res.clearCookie("host");
+          res.status(403).json({ status: 403, msg: msg });
+        });
+    });
     /* HostUser Profile Update */
 
     /* HostUser Destroy */

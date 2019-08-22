@@ -56,6 +56,10 @@ html(lang="en")
             input(type="text" name="hostUserPassword")
             input(type="submit")
 
+        p HostUser Get Profile
+        form(action="/api/host", method="GET")
+            input(type="submit")
+
         p HostUser Destory Form
         form(action="/api/host?_method=DELETE" method="POST")
             input(type="text" name="hostUserPassword")
