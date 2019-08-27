@@ -42,7 +42,7 @@ html(lang="en")
 
         h1 HostUser
         p HostUser Register Form
-        form(action="/api/host/register", method="POST")
+        form(action="/api/hoster/register", method="POST")
             input(type="text" name="hostUserId")
             input(type="text" name="hostUserPassword")
             input(type="text" name="hostUserName")
@@ -51,17 +51,17 @@ html(lang="en")
             input(type="submit")
 
         p HostUser Login
-        form(action="/api/auth/host/login", method="POST")
+        form(action="/api/auth/hoster/login", method="POST")
             input(type="text" name="hostUserId")
             input(type="text" name="hostUserPassword")
             input(type="submit")
 
         p HostUser Get Profile
-        form(action="/api/host", method="GET")
+        form(action="/api/hoster", method="GET")
             input(type="submit")
 
         p HostUser Update Profile
-        form(action="/api/host?_method=PUT", method="POST")
+        form(action="/api/hoster?_method=PUT", method="POST")
             input(type="text" name="hostUserName")
             input(type="text" name="hostUserEmail")
             input(type="text" name="hostUserPhoneNumber")
@@ -69,7 +69,7 @@ html(lang="en")
 
 
         p HostUser Destory Form
-        form(action="/api/host?_method=DELETE" method="POST")
+        form(action="/api/hoster?_method=DELETE" method="POST")
             input(type="text" name="hostUserPassword")
             input(type="submit")
 
