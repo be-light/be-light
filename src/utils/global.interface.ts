@@ -1,8 +1,10 @@
+/* Response Skeleton Interface */
 interface ResSkeleton {
   status: number;
   msg: string;
 }
 
+/* Response User Profile Interface */
 interface ResponseUser {
   userId: string;
   userName: string;
@@ -11,6 +13,7 @@ interface ResponseUser {
   userAddress: string;
 }
 
+/* Response HostUser Profile Interface */
 interface ResponseHostUser {
   hostUserId: string;
   hostUserName: string;

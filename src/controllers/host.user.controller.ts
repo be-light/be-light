@@ -6,6 +6,7 @@ import {
 } from "../utils/global.interface";
 import { HostUser } from "../models/host.user.model";
 
+/* HostUserController Interface */
 interface HostUserControllerInterface {
   successMsg: ResSkeleton;
   login(id: string, pw: string): Promise<ResponseHostUser>;
@@ -19,10 +20,12 @@ interface HostUserControllerInterface {
 class HostUserController implements HostUserControllerInterface {
   public successMsg: ResSkeleton;
 
+  /* Settings Default successMsg from constructor */
   public constructor() {
     this.successMsg = { status: 200, msg: "success" };
   }
 
+  /* HostUser Login */
   public login(id: string, pw: string): Promise<ResponseHostUser> {
     return new Promise((resolve, reject) => {
       HostUser.findOne({
@@ -35,6 +38,7 @@ class HostUserController implements HostUserControllerInterface {
     });
   }
 
+  /* HostUser Register */
   public register(reqHost: object): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       HostUser.findOne({ where: { hostUserId: reqHost["hostUserId"] } }).then(
@@ -61,6 +65,7 @@ class HostUserController implements HostUserControllerInterface {
     });
   }
 
+  /* Get Host User Profile */
   public bringHostProfile(token: string): Promise<ResponseHostUser> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(token).userId;
@@ -80,6 +85,7 @@ class HostUserController implements HostUserControllerInterface {
     });
   }
 
+  /* Update Host User Profile */
   public updateHostProfile(reqHost: object, tok: string): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(tok).userId;
@@ -104,6 +110,7 @@ class HostUserController implements HostUserControllerInterface {
     });
   }
 
+  /* Destroy HostUser */
   public hostWithDraw(pw: string, token: string): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(token).userId;

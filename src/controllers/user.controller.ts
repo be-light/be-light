@@ -2,6 +2,7 @@ import expressJWT from "../utils/jwt";
 import { ResSkeleton, ResponseUser } from "../utils/global.interface";
 import { User } from "../models/user.model";
 
+/* Define User Controller Interface */
 interface UserControllerInterface {
   successMsg: ResSkeleton;
   login(id: string, pw: string): Promise<ResponseUser>;
@@ -15,10 +16,12 @@ interface UserControllerInterface {
 class UserController implements UserControllerInterface {
   public successMsg: ResSkeleton;
 
+  /* Setting Default sucessMsg from constructor */
   public constructor() {
     this.successMsg = { status: 200, msg: "success" };
   }
 
+  /* User Login */
   public login(id: string, pw: string): Promise<ResponseUser> {
     return new Promise((resolve, reject) => {
       User.findOne({
@@ -31,6 +34,7 @@ class UserController implements UserControllerInterface {
     });
   }
 
+  /* User Register */
   public register(reqUser: object): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       User.findOne({ where: { userId: reqUser["id"] } }).then(user => {
@@ -52,6 +56,7 @@ class UserController implements UserControllerInterface {
     });
   }
 
+  /* Get User Profile */
   public bringMyProfile(token: string): Promise<ResponseUser> {
     return new Promise((resolve, reject) => {
       let tokens = expressJWT.verifyToken(token);
@@ -71,6 +76,7 @@ class UserController implements UserControllerInterface {
     });
   }
 
+  /* Update User Profile */
   public updateMyProfile(reqUser: object, token: string): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let tokens = expressJWT.verifyToken(token);
@@ -99,6 +105,7 @@ class UserController implements UserControllerInterface {
     });
   }
 
+  /* Destroy User */
   public withDraw(pw: string, token: string): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let userId = expressJWT.verifyToken(token).userId;

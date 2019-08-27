@@ -8,6 +8,7 @@ class ExpressJWT {
     this.jwtObj.secret = "gwanwoodev";
   }
 
+  /* Create JWT Token & Return */
   public getToken(id: string): string {
     let token = jwt.sign({ userId: id }, this.jwtObj.secret, {
       expiresIn: "30m"
@@ -16,6 +17,7 @@ class ExpressJWT {
     return token;
   }
 
+  /* Verify JWT */
   public verifyToken(token: string): any {
     if (token) {
       return jwt.verify(token, this.jwtObj.secret);
