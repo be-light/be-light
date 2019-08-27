@@ -2,7 +2,13 @@ doctype html
 html(lang="en")
     head
         title #{title}
+        link(rel="stylesheet" href="vendor/css/uikit.min.css")
+        link(rel="stylesheet" href="vendor/css/components/autocomplete.css")
         link(rel="stylesheet" href="app.css")
+
+        script(src="vendor/js/jquery.min.js")
+        script(src="vendor/js/uikit.min.js")
+        script(src="vendor/js/components/autocomplete.js")
     body
         h1 User
         p Login Form
@@ -78,6 +84,6 @@ html(lang="en")
         p UserOrder requestNewOrder
         form(action="/api/user/order" method="POST")
             input(type="date", name="checkIn")
-            input(type="date" name="checkOut")
-            input(type="paid" name="paid")
+            input(type="text" name="checkOut")
+            input(type="text" name="paid")
             input(type="submit")
