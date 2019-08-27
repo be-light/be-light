@@ -104,7 +104,7 @@ export class Routes {
 
     // HostUser ---
     /* HostUser Login */
-    app.route("/api/auth/host/login").post((req: Request, res: Response) => {
+    app.route("/api/auth/hoster/login").post((req: Request, res: Response) => {
       let id: string = req.body.hostUserId;
       let pw: string = req.body.hostUserPassword;
       if (req.cookies.host) {
@@ -124,7 +124,7 @@ export class Routes {
     });
 
     /* HostUser Register */
-    app.route("/api/host/register").post((req: Request, res: Response) => {
+    app.route("/api/hoster/register").post((req: Request, res: Response) => {
       if (req.cookies.host) {
         res.redirect("/");
         return;
@@ -148,7 +148,7 @@ export class Routes {
     });
 
     /* HostUser Get Profile */
-    app.route("/api/host").get((req: Request, res: Response) => {
+    app.route("/api/hoster").get((req: Request, res: Response) => {
       HostUserController.bringHostProfile(req.cookies.host)
         .then(host => {
           res.json({ status: 200, msg: "Get Your Profile..", user: host });
@@ -160,7 +160,7 @@ export class Routes {
     });
 
     /* HostUser Profile Update */
-    app.route("/api/host").put((req: Request, res: Response) => {
+    app.route("/api/hoster").put((req: Request, res: Response) => {
       let reqUser: object = {
         hostUserEmail: req.body.hostUserEmail,
         hostUserPhoneNumber: req.body.hostUserPhoneNumber,
@@ -178,7 +178,7 @@ export class Routes {
     });
 
     /* HostUser Destroy */
-    app.route("/api/host").delete((req: Request, res: Response) => {
+    app.route("/api/hoster").delete((req: Request, res: Response) => {
       let hostUserPassword: string = req.body.hostUserPassword;
 
       HostUserController.hostWithDraw(hostUserPassword, req.cookies.host)
@@ -189,6 +189,14 @@ export class Routes {
         .catch(msg => {
           res.status(400).json({ status: 400, msg: msg });
         });
+    });
+
+    /* Get User Order List */
+    app.route("/api/user/order").get((req: Request, res: Response) => {
+      if (req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
     });
   }
 }
