@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserController from "../controllers/user.controller";
 import HostUserController from "../controllers/host.user.controller";
+import UserOrderController from "../controllers/user.order.controller";
 import expressJWT from "../utils/jwt";
 
 export class Routes {
@@ -197,6 +198,28 @@ export class Routes {
         res.redirect("/");
         return;
       }
+    });
+
+    /* Request New User Order */
+    app.route("/api/user/order").post((req: Request, res: Response) => {
+      if (!req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
+
+      let reqOrder: object = {
+        checkIn: req.body.checkIn,
+        checkOut: req.body.checkOut,
+        paid: req.body.paid
+      };
+
+      UserOrderController.requestNewOrder(reqOrder, req.cookies.user)
+        .then(order => {
+          res.json(order);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg: msg });
+        });
     });
   }
 }

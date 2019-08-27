@@ -38,7 +38,7 @@ class UserOrderController implements UserOrderControllerInterface {
           userId: userId,
           checkIn: reqOrder["checkIn"],
           checkOut: reqOrder["checkOut"],
-          paid: reqOrder["paid"] // TODO: Calculate Paid
+          paid: reqOrder["paid"] // TODO: Calculate Paid, Host Mapping Code
         })
           .then(order => {
             resolve(this.successMsg);

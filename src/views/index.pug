@@ -73,4 +73,11 @@ html(lang="en")
             input(type="text" name="hostUserPassword")
             input(type="submit")
 
-        
+        h1 UserOrder
+
+        p UserOrder requestNewOrder
+        form(action="/api/user/order" method="POST")
+            input(type="date", name="checkIn")
+            input(type="date" name="checkOut")
+            input(type="paid" name="paid")
+            input(type="submit")
