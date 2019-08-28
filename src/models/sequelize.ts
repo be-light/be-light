@@ -125,6 +125,10 @@ userOrder.belongsTo(user, {
   foreignKey: "userId"
 });
 
+userOrder.belongsTo(host, {
+  foreignKey: "hostName"
+});
+
 /* export */
 
 export default sequelize;
