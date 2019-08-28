@@ -22,6 +22,10 @@ class UserOrderController implements UserOrderControllerInterface {
 
   /* Get UserOrder */
   public getOrderList(token: string): Promise<UserOrder[]> {
+    /* Get UserName, Check-In, Check-Out, 
+       Recepit Number, Paid, HostName, 
+       Host Postal-Code, HostAddress, HostUserPhoneNumber
+    */
     return new Promise((resolve, reject) => {});
   }
 
