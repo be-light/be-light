@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserController from "../controllers/user.controller";
 import HostUserController from "../controllers/host.user.controller";
+import HostController from "../controllers/host.controller";
 import UserOrderController from "../controllers/user.order.controller";
 import expressJWT from "../utils/jwt";
 
@@ -192,6 +193,20 @@ export class Routes {
         });
     });
 
+    // Host =====
+    /* Get all Host */
+    app.route("/api/host").get((req: Request, res: Response) => {});
+
+    /* Add New Host */
+    app.route("/api/host").post((req: Request, res: Response) => {});
+
+    /* update Host */
+    app.route("/api/host").put((req: Request, res: Response) => {});
+
+    /* Destroy Host */
+    app.route("/api/host").delete((req: Request, res: Response) => {});
+
+    // UserOrder =====
     /* Get User Order List */
     app.route("/api/user/order").get((req: Request, res: Response) => {
       if (req.cookies.user) {
