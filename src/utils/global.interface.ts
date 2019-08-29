@@ -21,4 +21,13 @@ interface ResponseHostUser {
   hostUserPhoneNumber: string;
 }
 
-export { ResSkeleton, ResponseUser, ResponseHostUser };
+/* Response Host Info Skeleton */
+interface HostSkeleton {
+  hostUserId: string;
+  hostName: string;
+  hostTel: string;
+  hostAddress: string;
+  hostPostalCode: string;
+}
+
+export { ResSkeleton, ResponseUser, ResponseHostUser, HostSkeleton };

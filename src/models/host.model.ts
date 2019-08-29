@@ -18,9 +18,6 @@ export class Host extends Model<Host> {
   public hostUserId!: string;
 
   @Column
-  public hostPassword!: string;
-
-  @Column
   public hostName!: string;
 
   @Column
