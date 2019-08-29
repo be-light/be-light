@@ -7,7 +7,7 @@ import expressJWT from "../utils/jwt";
 
 export class Routes {
   public routes(app): void {
-    /* index.pug routing */
+    /* index.pug routing (API TEST PAGE)*/
     app.route("/").get((req: Request, res: Response) => {
       res.render("index", {
         title: "BeLight",
@@ -15,6 +15,7 @@ export class Routes {
       });
     });
 
+    // User =====
     /* User Login */
     app.route("/api/auth/login").post((req: Request, res: Response) => {
       let id: string = req.body.userId;
