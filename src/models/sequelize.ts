@@ -79,9 +79,6 @@ const host = sequelize.define("Host", {
   hostUserId: {
     type: DataType.STRING
   },
-  hostPassword: {
-    type: DataType.STRING
-  },
   hostName: {
     type: DataType.STRING
   },
