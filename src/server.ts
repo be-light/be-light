@@ -6,7 +6,7 @@ import sequelize from "./models/sequelize";
 const PORT: any = process.env.SERVER_PORT || 3000;
 
 /* Sequelize Sync */
-sequelize.sync({ force: true });
+sequelize.sync({ force: false });
 
 /* Server Start */
 app.listen(PORT, () => {

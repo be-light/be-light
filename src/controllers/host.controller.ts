@@ -22,7 +22,23 @@ class HostController implements HostControllerInterface {
 
   /* Get All Host Information */
   public getAllHost(token: string): Promise<HostSkeleton[]> {
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+      if (hostUserId) {
+        Host.findAll({
+          where: {
+            hostUserId
+          },
+          attributes: {
+            exclude: ["hostUserId"]
+          }
+        }).then(host => {
+          resolve(host);
+        });
+      } else {
+        reject("Your Token is not valid.");
+      }
+    });
   }
 
   /* Add New Host */

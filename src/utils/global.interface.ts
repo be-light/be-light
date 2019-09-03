@@ -23,7 +23,6 @@ interface ResponseHostUser {
 
 /* Response Host Info Skeleton */
 interface HostSkeleton {
-  hostUserId: string;
   hostName: string;
   hostTel: string;
   hostAddress: string;

@@ -196,7 +196,15 @@ export class Routes {
 
     // Host =====
     /* Get all Host */
-    app.route("/api/host").get((req: Request, res: Response) => {});
+    app.route("/api/host").get((req: Request, res: Response) => {
+      HostController.getAllHost(req.cookies.host)
+        .then(host => {
+          res.json(host);
+        })
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg });
+        });
+    });
 
     /* Add New Host */
     app.route("/api/host").post((req: Request, res: Response) => {});
