@@ -96,6 +96,11 @@ html(lang="en")
             input(type="text" name="hostPostalCode")
             input(type="submit")
 
+        p Host Destroy
+        form(action="/api/host?_method=DELETE" method="POST")
+            input(type="text" name="idx")
+            input(type="submit")
+
         h1 UserOrder
 
         p UserOrder requestNewOrder

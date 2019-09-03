@@ -8,7 +8,7 @@ interface HostControllerInterface {
   getAllHost(token: string): Promise<HostSkeleton[]>;
   addNewHost(token: string, hostObj: object): Promise<ResSkeleton>;
   updateHost(token: string, idx: number, hostObj: object): Promise<ResSkeleton>;
-  withDrawHost(pw: string, token: string): Promise<ResSkeleton>;
+  withDrawHost(idx: number, token: string): Promise<ResSkeleton>;
 }
 
 /* HostController */
@@ -98,8 +98,22 @@ class HostController implements HostControllerInterface {
   }
 
   /* With Draw Host */
-  public withDrawHost(pw: string, token: string): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+  public withDrawHost(idx: number, token: string): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+      if (hostUserId) {
+        Host.destroy({
+          where: {
+            idx,
+            hostUserId
+          }
+        }).then(result => {
+          resolve(this.successMsg);
+        });
+      } else {
+        reject("Your token is not valid. or Expired.");
+      }
+    });
   }
 }
 
