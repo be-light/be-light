@@ -73,6 +73,29 @@ html(lang="en")
             input(type="text" name="hostUserPassword")
             input(type="submit")
 
+        h1 Host
+
+        p Host addNewHost
+        form(action="/api/host" method="POST")
+            input(type="text" name="hostName")
+            input(type="text" name="hostTel")
+            input(type="text" name="hostAddress")
+            input(type="text" name="hostPostalCode")
+            input(type="submit")
+
+        p Host getAllHost
+        form(action="/api/host" method="GET")
+            input(type="submit")
+
+        p Host updateHost
+        form(action="/api/host?_method=PUT" method="POST")
+            input(type="text" name="idx")
+            input(type="text" name="hostName")
+            input(type="text" name="hostTel")
+            input(type="text" name="hostAddress")
+            input(type="text" name="hostPostalCode")
+            input(type="submit")
+
         h1 UserOrder
 
         p UserOrder requestNewOrder
@@ -82,3 +105,6 @@ html(lang="en")
             input(type="text" name="checkOut")
             input(type="text" name="paid")
             input(type="submit")
+
+
+        

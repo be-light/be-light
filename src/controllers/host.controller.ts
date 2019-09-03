@@ -6,8 +6,8 @@ import { Host } from "../models/host.model";
 interface HostControllerInterface {
   successMsg: ResSkeleton;
   getAllHost(token: string): Promise<HostSkeleton[]>;
-  addNewHost(token: string): Promise<ResSkeleton>;
-  updateHost(token: string, idx: number): Promise<ResSkeleton>;
+  addNewHost(token: string, hostObj: object): Promise<ResSkeleton>;
+  updateHost(token: string, idx: number, hostObj: object): Promise<ResSkeleton>;
   withDrawHost(pw: string, token: string): Promise<ResSkeleton>;
 }
 
@@ -36,19 +36,65 @@ class HostController implements HostControllerInterface {
           resolve(host);
         });
       } else {
-        reject("Your Token is not valid.");
+        reject("Your Token is not valid. or Expired.");
       }
     });
   }
 
   /* Add New Host */
-  public addNewHost(token: string): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+  public addNewHost(token: string, hostObj: object): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+
+      if (hostUserId) {
+        Host.create({
+          hostUserId: hostUserId,
+          hostName: hostObj["hostName"],
+          hostTel: hostObj["hostTel"],
+          hostAddress: hostObj["hostAddress"],
+          hostPostalCode: hostObj["hostPostalCode"]
+        }).then(host => {
+          resolve(this.successMsg);
+        });
+      } else {
+        reject("Your Token is not valid. or Expired.");
+      }
+    });
   }
 
   /* Update Host Information */
-  public updateHost(token: string, idx: number): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+  public updateHost(
+    token: string,
+    idx: number,
+    hostObj: object
+  ): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+      if (hostUserId) {
+        Host.update(
+          {
+            hostName: hostObj["hostName"],
+            hostTel: hostObj["hostTel"],
+            hostAddress: hostObj["hostAddress"],
+            hostPostalCode: hostObj["hostPostalCode"]
+          },
+          {
+            where: {
+              idx
+            },
+            returning: false
+          }
+        )
+          .then(msg => {
+            resolve(this.successMsg);
+          })
+          .catch(() => {
+            reject("Request is not valid.");
+          });
+      } else {
+        reject("Your Token is not valid. or Expired.");
+      }
+    });
   }
 
   /* With Draw Host */

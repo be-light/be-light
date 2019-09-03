@@ -207,10 +207,40 @@ export class Routes {
     });
 
     /* Add New Host */
-    app.route("/api/host").post((req: Request, res: Response) => {});
+    app.route("/api/host").post((req: Request, res: Response) => {
+      let hostObj: object = {
+        hostName: req.body.hostName,
+        hostTel: req.body.hostTel,
+        hostAddress: req.body.hostAddress,
+        hostPostalCode: req.body.hostPostalCode
+      };
+
+      HostController.addNewHost(req.cookies.host, hostObj)
+        .then(msg => {
+          res.json(msg);
+        })
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg });
+        });
+    });
 
     /* update Host */
-    app.route("/api/host").put((req: Request, res: Response) => {});
+    app.route("/api/host").put((req: Request, res: Response) => {
+      let hostObj: object = {
+        hostName: req.body.hostName,
+        hostTel: req.body.hostTel,
+        hostAddress: req.body.hostAddress,
+        hostPostalCode: req.body.hostPostalCode
+      };
+
+      HostController.updateHost(req.cookies.host, req.body.idx, hostObj)
+        .then(msg => {
+          res.json(msg);
+        })
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg });
+        });
+    });
 
     /* Destroy Host */
     app.route("/api/host").delete((req: Request, res: Response) => {});
