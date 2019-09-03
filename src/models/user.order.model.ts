@@ -22,7 +22,7 @@ export class UserOrder extends Model<UserOrder> {
   public paid!: number;
 
   @Column
-  public hostName!: string;
+  public hostIdx!: string;
 
   @PrimaryKey
   @AutoIncrement

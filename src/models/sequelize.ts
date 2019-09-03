@@ -123,7 +123,7 @@ userOrder.belongsTo(user, {
 });
 
 userOrder.belongsTo(host, {
-  foreignKey: "hostName"
+  foreignKey: "hostIdx"
 });
 
 /* export */
