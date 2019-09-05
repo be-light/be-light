@@ -3,5 +3,4 @@ node_modules/*
 package-lock.json
 .vscode/*
 public_dist/*
-src/utils/jwt.ts
 req.rest
