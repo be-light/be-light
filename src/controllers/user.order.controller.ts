@@ -27,7 +27,7 @@ class UserOrderController implements UserOrderControllerInterface {
   public getOrderList(token: string): Promise<UserOrderList[]> {
     /* Get UserName, Check-In, Check-Out, 
        Recepit Number, Paid, HostIdx, 
-       Host Postal-Code, HostAddress, HostUserPhoneNumber
+       Host Postal-Code, HostAddress, HostUserPhoneNumber, HostName
     */
     return new Promise((resolve, reject) => {
       let userId = expressJWT.verifyToken(token).userId;
@@ -40,6 +40,7 @@ class UserOrderController implements UserOrderControllerInterface {
       a.HostIdx as hostIdx,
       b.hostAddress as hostaddress,
       b.hostPostalCode as hostPostalCode,
+      b.hostName as hostName,
       (select hostUserPhoneNumber from HostUser where hostuserId = b.hostUserId) as hostUserPhoneNumber
     FROM
       UserOrder as a left outer JOIN Host as b
