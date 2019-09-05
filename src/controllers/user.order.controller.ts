@@ -10,7 +10,7 @@ interface UserOrderControllerInterface {
   successMsg: ResSkeleton;
   getOrderList(token: string): Promise<UserOrderList[]>;
   requestNewOrder(reqOrder: object, token: string): Promise<ResSkeleton>;
-  updateOrder(reqOrder: object): Promise<ResSkeleton>;
+  updateOrder(reqOrder: object, token: string): Promise<ResSkeleton>;
   withDrawOrder(token: string, reciptNumber: number): Promise<ResSkeleton>;
 }
 
@@ -90,9 +90,35 @@ class UserOrderController implements UserOrderControllerInterface {
     });
   }
 
-  /* Update Order TODO Later*/
-  public updateOrder(reqOrder: object): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+  /* Update Order*/
+  public updateOrder(reqOrder: object, token: string): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let userId: string = expressJWT.verifyToken(token).userId;
+
+      if (userId) {
+        UserOrder.update(
+          {
+            checkIn: reqOrder["checkIn"],
+            checkOut: reqOrder["checkOut"]
+          },
+          {
+            where: {
+              userId: userId,
+              reciptNumber: reqOrder["reciptNumber"]
+            },
+            returning: false
+          }
+        )
+          .then(update => {
+            resolve(this.successMsg);
+          })
+          .catch(() => {
+            reject("Your Request Faild.");
+          });
+      } else {
+        reject("Your Token is not valid. or Expired.");
+      }
+    });
   }
 
   /* withDraw Order */

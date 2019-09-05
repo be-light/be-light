@@ -115,10 +115,17 @@ html(lang="en")
             input(type="text" name="paid")
             input(type="submit")
 
+        p UserOrder Update
+        form(action="/api/user/order?_method=PUT" method="POST")
+            input(type="text" name="reciptNumber")
+            input(type="date" name="checkIn")
+            input(type="date" name="checkOut")
+            
+            input(type="submit")
+
         p UserOrder Cancel
         form(action="/api/user/order?_method=DELETE" method="POST")
             input(type="text" name="reciptNumber")
             input(type="submit")
-
 
         

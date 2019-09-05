@@ -292,6 +292,28 @@ export class Routes {
         });
     });
 
+    /* Update User Order */
+    app.route("/api/user/order").put((req: Request, res: Response) => {
+      if (!req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
+
+      let reqOrder: object = {
+        checkIn: req.body.checkIn,
+        checkOut: req.body.checkOut,
+        reciptNumber: req.body.reciptNumber
+      };
+
+      UserOrderController.updateOrder(reqOrder, req.cookies.user)
+        .then(result => {
+          res.json(result);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
+
     /* Destroy UserOrder */
     app.route("/api/user/order").delete((req: Request, res: Response) => {
       if (!req.cookies.user) {

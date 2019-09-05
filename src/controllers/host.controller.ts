@@ -80,7 +80,7 @@ class HostController implements HostControllerInterface {
           },
           {
             where: {
-              idx
+              hostIdx: idx
             },
             returning: false
           }
