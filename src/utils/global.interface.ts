@@ -29,4 +29,23 @@ interface HostSkeleton {
   hostPostalCode: string;
 }
 
-export { ResSkeleton, ResponseUser, ResponseHostUser, HostSkeleton };
+/* Response UserOrder List */
+interface UserOrderList {
+  userId: string;
+  checkIn: Date;
+  checkOut: Date;
+  paid: number;
+  reciptNumber: number;
+  hostIdx: number;
+  hostAddress: string;
+  hostPostalCode: string;
+  hostUserPhoneNumber: string;
+}
+
+export {
+  ResSkeleton,
+  ResponseUser,
+  ResponseHostUser,
+  HostSkeleton,
+  UserOrderList
+};

@@ -1,13 +1,14 @@
 import expressJWT from "../utils/jwt";
-import { ResSkeleton } from "../utils/global.interface";
+import { ResSkeleton, UserOrderList } from "../utils/global.interface";
 import { UserOrder } from "../models/user.order.model";
 import { Host } from "../models/host.model";
 import { HostUser } from "../models/host.user.model";
+import { Sequelize } from "sequelize-typescript";
 
 /* Define UserOrder Controller Interface */
 interface UserOrderControllerInterface {
   successMsg: ResSkeleton;
-  getOrderList(token: string): Promise<UserOrder[]>;
+  getOrderList(token: string): Promise<UserOrderList[]>;
   requestNewOrder(reqOrder: object, token: string): Promise<ResSkeleton>;
   updateOrder(reqOrder: object): Promise<ResSkeleton>;
   withDrawOrder(pw: string, token: string): Promise<ResSkeleton>;
@@ -23,21 +24,36 @@ class UserOrderController implements UserOrderControllerInterface {
   }
 
   /* Get UserOrder */
-  public getOrderList(token: string): Promise<UserOrder[]> {
+  public getOrderList(token: string): Promise<UserOrderList[]> {
     /* Get UserName, Check-In, Check-Out, 
        Recepit Number, Paid, HostIdx, 
        Host Postal-Code, HostAddress, HostUserPhoneNumber
     */
     return new Promise((resolve, reject) => {
       let userId = expressJWT.verifyToken(token).userId;
+      let query = `SELECT
+      a.userId as userId,
+      a.checkIn as checkin,
+      a.checkOut as checkOut,
+      a.paid as paid,
+      a.reciptNumber as reciptNumber,
+      a.HostIdx as hostIdx,
+      b.hostAddress as hostaddress,
+      b.hostPostalCode as hostPostalCode,
+      (select hostUserPhoneNumber from HostUser where hostuserId = b.hostUserId) as hostUserPhoneNumber
+    FROM
+      UserOrder as a left outer JOIN Host as b
+    ON
+      a.hostIdx = b.hostIdx
+    
+    WHERE a.userId = "${userId}"`;
+
       if (userId) {
-        UserOrder.findAll({
-          where: {
-            userId
-          }
-        }).then(order => {
-          resolve(order);
-        });
+        resolve(
+          UserOrder.sequelize.query(query, {
+            type: Sequelize.QueryTypes.SELECT
+          })
+        );
       } else {
         reject("Your Token is not valid. or Expired.");
       }
