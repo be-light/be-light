@@ -1,6 +1,8 @@
 import expressJWT from "../utils/jwt";
 import { ResSkeleton } from "../utils/global.interface";
 import { UserOrder } from "../models/user.order.model";
+import { Host } from "../models/host.model";
+import { HostUser } from "../models/host.user.model";
 
 /* Define UserOrder Controller Interface */
 interface UserOrderControllerInterface {
@@ -23,10 +25,33 @@ class UserOrderController implements UserOrderControllerInterface {
   /* Get UserOrder */
   public getOrderList(token: string): Promise<UserOrder[]> {
     /* Get UserName, Check-In, Check-Out, 
-       Recepit Number, Paid, HostName, 
+       Recepit Number, Paid, HostIdx, 
        Host Postal-Code, HostAddress, HostUserPhoneNumber
     */
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      let userId = expressJWT.verifyToken(token).userId;
+      if (userId) {
+        UserOrder.findAll({
+          where: {
+            userId
+          },
+          include: [
+            {
+              model: Host,
+              attributes: ["HostPostalCode", "HostAddress"]
+            },
+            {
+              model: HostUser,
+              attributes: ["HostUserPhoneNumber"]
+            }
+          ]
+        }).then(order => {
+          resolve(order);
+        });
+      } else {
+        reject("Your Token is not valid. or Expired.");
+      }
+    });
   }
 
   /* Request New Order */
@@ -43,7 +68,7 @@ class UserOrderController implements UserOrderControllerInterface {
           checkIn: reqOrder["checkIn"],
           checkOut: reqOrder["checkOut"],
           paid: reqOrder["paid"],
-          hostName: reqOrder["hostName"]
+          hostIdx: reqOrder["hostIdx"]
           // TODO: Calculate Paid, Host Mapping Code
         })
           .then(order => {

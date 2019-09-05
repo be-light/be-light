@@ -103,6 +103,10 @@ html(lang="en")
 
         h1 UserOrder
 
+        p UserOrder getOrderList
+        form(action="/api/user/order" method="GET")
+            input(type="submit")
+
         p UserOrder requestNewOrder
         form(action="/api/user/order" method="POST")
             input(type="text", name="hostName")

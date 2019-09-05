@@ -256,10 +256,17 @@ export class Routes {
     // UserOrder =====
     /* Get User Order List */
     app.route("/api/user/order").get((req: Request, res: Response) => {
-      if (req.cookies.user) {
+      if (!req.cookies.user) {
         res.redirect("/");
         return;
       }
+      UserOrderController.getOrderList(req.cookies.user)
+        .then(order => {
+          res.json(order);
+        })
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg });
+        });
     });
 
     /* Request New User Order */
@@ -272,7 +279,8 @@ export class Routes {
       let reqOrder: object = {
         checkIn: req.body.checkIn,
         checkOut: req.body.checkOut,
-        paid: req.body.paid
+        paid: req.body.paid,
+        hostIdx: 1
       };
 
       UserOrderController.requestNewOrder(reqOrder, req.cookies.user)
