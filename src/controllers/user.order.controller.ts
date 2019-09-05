@@ -34,17 +34,7 @@ class UserOrderController implements UserOrderControllerInterface {
         UserOrder.findAll({
           where: {
             userId
-          },
-          include: [
-            {
-              model: Host,
-              attributes: ["HostPostalCode", "HostAddress"]
-            },
-            {
-              model: HostUser,
-              attributes: ["HostUserPhoneNumber"]
-            }
-          ]
+          }
         }).then(order => {
           resolve(order);
         });

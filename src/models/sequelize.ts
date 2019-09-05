@@ -71,7 +71,7 @@ const hostUser = sequelize.define("HostUser", {
 });
 
 const host = sequelize.define("Host", {
-  idx: {
+  hostIdx: {
     type: DataType.INTEGER,
     primaryKey: true,
     autoIncrement: true

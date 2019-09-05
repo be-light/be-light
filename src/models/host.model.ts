@@ -12,7 +12,7 @@ export class Host extends Model<Host> {
   @AutoIncrement
   @PrimaryKey
   @Column
-  public idx!: number;
+  public hostIdx!: number;
 
   @Column
   public hostUserId!: string;

@@ -280,7 +280,7 @@ export class Routes {
         checkIn: req.body.checkIn,
         checkOut: req.body.checkOut,
         paid: req.body.paid,
-        hostIdx: 1
+        hostIdx: req.body.hostIdx // TODO
       };
 
       UserOrderController.requestNewOrder(reqOrder, req.cookies.user)
