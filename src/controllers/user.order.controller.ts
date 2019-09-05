@@ -11,7 +11,7 @@ interface UserOrderControllerInterface {
   getOrderList(token: string): Promise<UserOrderList[]>;
   requestNewOrder(reqOrder: object, token: string): Promise<ResSkeleton>;
   updateOrder(reqOrder: object): Promise<ResSkeleton>;
-  withDrawOrder(pw: string, token: string): Promise<ResSkeleton>;
+  withDrawOrder(token: string, reciptNumber: number): Promise<ResSkeleton>;
 }
 
 /* UserOrderController */
@@ -90,14 +90,35 @@ class UserOrderController implements UserOrderControllerInterface {
     });
   }
 
-  /* Update Order */
+  /* Update Order TODO Later*/
   public updateOrder(reqOrder: object): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {});
   }
 
   /* withDraw Order */
-  public withDrawOrder(pw: string, token: string): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+  public withDrawOrder(
+    token: string,
+    reciptNumber: number
+  ): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let userId: string = expressJWT.verifyToken(token).userId;
+      if (userId) {
+        UserOrder.destroy({
+          where: {
+            reciptNumber,
+            userId
+          }
+        })
+          .then(result => {
+            resolve(this.successMsg);
+          })
+          .catch(msg => {
+            reject("Your Permission Denied.");
+          });
+      } else {
+        reject("Your Token is not valid. or Expired.");
+      }
+    });
   }
 }
 

@@ -291,5 +291,21 @@ export class Routes {
           res.json({ status: 400, msg: msg });
         });
     });
+
+    /* Destroy UserOrder */
+    app.route("/api/user/order").delete((req: Request, res: Response) => {
+      if (!req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
+      const reciptNumber = req.body.reciptNumber;
+      UserOrderController.withDrawOrder(req.cookies.user, reciptNumber)
+        .then(cancel => {
+          res.json(cancel);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
   }
 }
