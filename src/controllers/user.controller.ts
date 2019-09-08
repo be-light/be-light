@@ -85,7 +85,7 @@ class UserController implements UserControllerInterface {
         User.update(
           {
             userEmail: reqUser["email"],
-            userPhone: reqUser["phone"],
+            userPhoneNumber: reqUser["phone"],
             userAddress: reqUser["address"]
           },
           {
