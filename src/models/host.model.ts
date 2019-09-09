@@ -28,4 +28,10 @@ export class Host extends Model<Host> {
 
   @Column
   public hostPostalCode!: string;
+
+  @Column
+  public hostLatitude!: string;
+
+  @Column
+  public hostLongitude!: string;
 }

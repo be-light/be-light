@@ -90,6 +90,12 @@ const host = sequelize.define("Host", {
   },
   hostPostalCode: {
     type: DataType.STRING
+  },
+  hostLatitude: {
+    type: DataType.STRING
+  },
+  hostLongitude: {
+    type: DataType.STRING
   }
 });
 
