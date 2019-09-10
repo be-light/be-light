@@ -112,6 +112,10 @@ const userOrder = sequelize.define("UserOrder", {
   paid: {
     type: DataType.INTEGER
   },
+  statusCode: {
+    type: DataType.INTEGER,
+    defaultValue: 0
+  },
   reciptNumber: {
     type: DataType.INTEGER,
     primaryKey: true,

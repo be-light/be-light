@@ -26,7 +26,7 @@ class UserOrderController implements UserOrderControllerInterface {
   /* Get UserOrder */
   public getOrderList(token: string): Promise<UserOrderList[]> {
     /* Get UserName, Check-In, Check-Out, 
-       Recepit Number, Paid, HostIdx, 
+       Recepit Number, Paid, HostIdx, statusCode
        Host Postal-Code, HostAddress, HostUserPhoneNumber, HostName
     */
     return new Promise((resolve, reject) => {
@@ -38,6 +38,7 @@ class UserOrderController implements UserOrderControllerInterface {
       a.paid as paid,
       a.reciptNumber as reciptNumber,
       a.HostIdx as hostIdx,
+      a.statusCode as statusCode,
       b.hostAddress as hostaddress,
       b.hostPostalCode as hostPostalCode,
       b.hostName as hostName,
@@ -62,6 +63,13 @@ class UserOrderController implements UserOrderControllerInterface {
   }
 
   /* Request New Order */
+
+  /*
+      statusCode Default Value = 0,
+      0 = Wating
+      1 = Accept
+      -1 = Refuse
+  */
   public requestNewOrder(
     reqOrder: object,
     token: string

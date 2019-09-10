@@ -24,6 +24,9 @@ export class UserOrder extends Model<UserOrder> {
   @Column
   public hostIdx!: string;
 
+  @Column
+  public statusCode!: number;
+
   @PrimaryKey
   @AutoIncrement
   @Column
