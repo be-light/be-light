@@ -3,6 +3,8 @@ import UserController from "../controllers/user.controller";
 import HostUserController from "../controllers/host.user.controller";
 import HostController from "../controllers/host.controller";
 import UserOrderController from "../controllers/user.order.controller";
+import MapController from "../controllers/map.controller";
+
 import expressJWT from "../utils/jwt";
 
 export class Routes {
@@ -324,6 +326,23 @@ export class Routes {
       UserOrderController.withDrawOrder(req.cookies.user, reciptNumber)
         .then(cancel => {
           res.json(cancel);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
+
+    //Map =====
+    /* Get Hosts for Google Maps */
+    app.route("/api/map/hosts").get((req: Request, res: Response) => {
+      const pos = {
+        latitude: req.query.lat,
+        longitude: req.query.lng
+      };
+
+      MapController.getHosts(pos)
+        .then(hosts => {
+          res.json(hosts);
         })
         .catch(msg => {
           res.json({ status: 400, msg });

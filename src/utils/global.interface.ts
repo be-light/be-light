@@ -42,10 +42,20 @@ interface UserOrderList {
   hostUserPhoneNumber: string;
 }
 
+/* Hosts Interface */
+interface Hosts {
+  hostName: string;
+  hostPostalCode: string;
+  hostAddress: string;
+  hostTel: string;
+  hostIdx: number;
+}
+
 export {
   ResSkeleton,
   ResponseUser,
   ResponseHostUser,
   HostSkeleton,
-  UserOrderList
+  UserOrderList,
+  Hosts
 };
