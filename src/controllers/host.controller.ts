@@ -98,13 +98,13 @@ class HostController implements HostControllerInterface {
   }
 
   /* With Draw Host */
-  public withDrawHost(idx: number, token: string): Promise<ResSkeleton> {
+  public withDrawHost(hostIdx: number, token: string): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(token).userId;
       if (hostUserId) {
         Host.destroy({
           where: {
-            idx,
+            hostIdx,
             hostUserId
           }
         }).then(result => {

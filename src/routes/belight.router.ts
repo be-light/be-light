@@ -244,7 +244,7 @@ export class Routes {
 
     /* Destroy Host */
     app.route("/api/host").delete((req: Request, res: Response) => {
-      HostController.withDrawHost(req.body.idx, req.cookies.host)
+      HostController.withDrawHost(req.body.hostIdx, req.cookies.host)
         .then(msg => {
           res.json(msg);
         })
