@@ -2,6 +2,7 @@ dist/*
 node_modules/*
 package-lock.json
 .vscode/*
-public_dist/*
+public_dist/app.css
+pubic_dist/bundle.js
 req.rest
 goorm.manifest
