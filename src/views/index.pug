@@ -129,6 +129,9 @@ html(lang="en")
             input(type="submit")
 
         p Google Maps Test
+        form(method="POST" class="search__form")
+            input(type="text" placeholder="Search.." name="search__text", class="search__text")
+
         div#map
 
     script(src="lightMap.js")
