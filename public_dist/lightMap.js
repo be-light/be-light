@@ -1,14 +1,30 @@
 var map;
 var geocoder;
+var ZOOM = 12;
 
 function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: {
-            lat: 37.5665,
-            lng: 126.9780
-        },
-        zoom: 8
-    });
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude
+                },
+                zoom: ZOOM
+            });
+
+            var marker = new google.maps.Marker({
+                map: map,
+                position: {
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude
+                }
+            });
+        });
+    } else {
+        alert('This browser is not support geolocation.');
+    }
+
 
     geocoder = new google.maps.Geocoder();
 }
@@ -26,10 +42,11 @@ function findAddress(event) {
             return;
         }
         map.setCenter(results[0].geometry.location);
+        map.setZoom(ZOOM);
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
-        })
+        });
     });
 
 }
