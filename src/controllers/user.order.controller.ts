@@ -113,12 +113,12 @@ class UserOrderController implements UserOrderControllerInterface {
             where: {
               userId: userId,
               reciptNumber: reqOrder["reciptNumber"]
-            },
-            returning: false
+            }
           }
         )
           .then(update => {
-            resolve(this.successMsg);
+            if (update.toString() !== "0") resolve(this.successMsg);
+            else reject("Your Request is not valid.");
           })
           .catch(() => {
             reject("Your Request Faild.");
@@ -144,7 +144,8 @@ class UserOrderController implements UserOrderControllerInterface {
           }
         })
           .then(result => {
-            resolve(this.successMsg);
+            if (result) resolve(this.successMsg);
+            else reject("Your Request is not valid.");
           })
           .catch(msg => {
             reject("Your Permission Denied.");
