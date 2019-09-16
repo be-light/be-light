@@ -96,6 +96,9 @@ const host = sequelize.define("Host", {
   },
   hostLongitude: {
     type: DataType.STRING
+  },
+  hostIntro: {
+    type: DataType.STRING
   }
 });
 

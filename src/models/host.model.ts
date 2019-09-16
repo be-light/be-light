@@ -34,4 +34,7 @@ export class Host extends Model<Host> {
 
   @Column
   public hostLongitude!: string;
+
+  @Column
+  public hostIntro!: string;
 }

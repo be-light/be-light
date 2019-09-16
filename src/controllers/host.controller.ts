@@ -52,7 +52,10 @@ class HostController implements HostControllerInterface {
           hostName: hostObj["hostName"],
           hostTel: hostObj["hostTel"],
           hostAddress: hostObj["hostAddress"],
-          hostPostalCode: hostObj["hostPostalCode"]
+          hostPostalCode: hostObj["hostPostalCode"],
+          hostLatitude: hostObj["hostLatitude"],
+          hostLongitude: hostObj["hostLongitude"],
+          hostIntro: hostObj["hostIntro"]
         }).then(host => {
           resolve(this.successMsg);
         });
@@ -76,17 +79,22 @@ class HostController implements HostControllerInterface {
             hostName: hostObj["hostName"],
             hostTel: hostObj["hostTel"],
             hostAddress: hostObj["hostAddress"],
-            hostPostalCode: hostObj["hostPostalCode"]
+            hostPostalCode: hostObj["hostPostalCode"],
+            hostLatitude: hostObj["hostLatitude"],
+            hostLongitude: hostObj["hostLongitude"],
+            hostIntro: hostObj["hostIntro"]
           },
           {
             where: {
-              hostIdx: idx
+              hostIdx: idx,
+              hostUserId: hostUserId
             },
             returning: false
           }
         )
           .then(msg => {
-            resolve(this.successMsg);
+            if (msg.toString() !== "0") resolve(this.successMsg);
+            else reject("Request is not valid.");
           })
           .catch(() => {
             reject("Request is not valid.");
@@ -108,7 +116,8 @@ class HostController implements HostControllerInterface {
             hostUserId
           }
         }).then(result => {
-          resolve(this.successMsg);
+          if (result) resolve(this.successMsg);
+          else reject("Your Request is not valid.");
         });
       } else {
         reject("Your token is not valid. or Expired.");
