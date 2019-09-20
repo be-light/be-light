@@ -6,3 +6,6 @@ public_dist/app.css
 public_dist/bundle.js
 req.rest
 goorm.manifest
+v8-compile-cache-0/*
+acme-challenge/*
+nohup.out
