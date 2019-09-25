@@ -5,14 +5,12 @@ import * as http from "http";
 import * as https from "https";
 
 /* Setting Servers */
-const PORT: any = process.env.SERVER_PORT || 3000;
+const HTTP_PORT: any = process.env.HTTP_PORT;
+const HTTPS_PORT: any = process.env.HTTPS_PORT;
 
 /* Sequelize Sync */
 sequelize.sync({ force: false });
 
 /* Server Start */
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer({}, app);
-
-httpServer.listen(80);
-httpsServer.listen(443);
+http.createServer(app).listen(HTTP_PORT);
+https.createServer({}, app).listen(HTTPS_PORT);
