@@ -13,7 +13,8 @@ function initMap() {
         },
         zoom: ZOOM,
         fullscreenControl: false,
-        streetViewControl: false
+        streetViewControl: false,
+        mapTypeControl: false
       });
 
       /* Create Testing Marker */
