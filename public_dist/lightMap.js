@@ -17,16 +17,7 @@ function initMap() {
         mapTypeControl: false
       });
 
-      let marker;
-      for (let i = 0; i < hostList.length; i++) {
-        let marker = new google.maps.Marker({
-          map: map,
-          position: {
-            lat: Number.parseInt(hostList[i].hostLatitude),
-            lng: Number.parseInt(hostList[i].hostLongitude)
-          }
-        });
-      }
+      for (let i = 0; i < hostList.length; i++) createMarker(map, hostList[i]);
     });
   } else {
     alert("This browser is not support geolocation.");
@@ -34,6 +25,26 @@ function initMap() {
 
   geocoder = new google.maps.Geocoder();
 }
+
+function createMarker(map, host) {
+  let marker = new google.maps.Marker({
+    map: map,
+    position: {
+      lat: Number.parseInt(host.hostLatitude),
+      lng: Number.parseInt(host.hostLongitude)
+    }
+  });
+
+  google.maps.event.addListener(marker, "click", function() {
+    let infoWindow = new google.maps.InfoWindow({
+      content: "Hello, Google Maps!"
+    });
+    infoWindow.open(map, marker);
+  });
+  return marker;
+}
+
+// Old Version
 
 var search__form = document.querySelector(".search__form");
 var search__text = document.querySelector(".search__text");
