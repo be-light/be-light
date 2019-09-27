@@ -136,14 +136,16 @@ html(lang="en")
 
         p Google Maps Test
         form(method="POST" class="search__form")
-            input(type="text" placeholder="Search.." name="search__text", class="search__text")
+            input(type="text" placeholder="Search.." name="search__text", class="search__text" id="searchTextField")
 
         div#map
         script.
             const hostList = !{JSON.stringify(hostList)};
             console.log(hostList);
 
+    
+
     script(src="lightMap.js")
-    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap")
+    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap&libraries=places")
 
         

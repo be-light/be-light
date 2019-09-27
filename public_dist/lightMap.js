@@ -24,6 +24,11 @@ function initMap() {
   }
 
   geocoder = new google.maps.Geocoder();
+  /*
+  const input = document.getElementById("searchTextField");
+  let autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ["(cities)"]
+  });*/
 }
 
 function createMarker(map, host) {
