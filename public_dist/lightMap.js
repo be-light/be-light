@@ -17,14 +17,16 @@ function initMap() {
         mapTypeControl: false
       });
 
-      /* Create Testing Marker */
-      var marker = new google.maps.Marker({
-        map: map,
-        position: {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        }
-      });
+      let marker;
+      for (let i = 0; i < hostList.length; i++) {
+        let marker = new google.maps.Marker({
+          map: map,
+          position: {
+            lat: Number.parseInt(hostList[i].hostLatitude),
+            lng: Number.parseInt(hostList[i].hostLongitude)
+          }
+        });
+      }
     });
   } else {
     alert("This browser is not support geolocation.");
