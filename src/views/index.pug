@@ -141,6 +141,7 @@ html(lang="en")
         div#map
         script.
             const hostList = !{JSON.stringify(hostList)};
+            console.log(hostList);
 
     script(src="lightMap.js")
     script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap")
