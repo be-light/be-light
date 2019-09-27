@@ -49,6 +49,9 @@ interface Hosts {
   hostAddress: string;
   hostTel: string;
   hostIdx: number;
+  hostLatitude: number;
+  hostLongitude: number;
+  hostIntro: string;
 }
 
 export {

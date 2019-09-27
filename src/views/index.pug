@@ -139,6 +139,8 @@ html(lang="en")
             input(type="text" placeholder="Search.." name="search__text", class="search__text")
 
         div#map
+        script.
+            const hostList = !{JSON.stringify(hostList)};
 
     script(src="lightMap.js")
     script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap")

@@ -11,9 +11,12 @@ export class Routes {
   public routes(app): void {
     /* index.pug routing (API TEST PAGE)*/
     app.route("/").get((req: Request, res: Response) => {
-      res.render("index", {
-        title: "BeLight",
-        message: "Express.js + Pug + Webpack + Typescript + SaSS"
+      MapController.getAllHosts().then(result => {
+        res.render("index", {
+          title: "BeLight",
+          message: "Express.js + Pug + Webpack + Typescript + SaSS",
+          hostList: result
+        });
       });
     });
 
@@ -346,7 +349,7 @@ export class Routes {
         longitude: req.query.lng
       };
 
-      MapController.getHosts(pos)
+      MapController.getSearchHosts(pos)
         .then(hosts => {
           res.json(hosts);
         })

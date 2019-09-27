@@ -4,7 +4,8 @@ import { Sequelize } from "sequelize-typescript";
 
 /* Define Map Controller Interface */
 interface MapControllerInterface {
-  getHosts(pos: object): Promise<Hosts>;
+  getAllHosts(): Promise<Hosts[]>;
+  getSearchHosts(pos: object): Promise<Hosts>;
 }
 
 /* MapController */
@@ -12,8 +13,22 @@ class MapController implements MapControllerInterface {
   /* Setting Default constructor */
   public constructor() {}
 
-  /* Get Hosts for GoogleMaps. */
-  public getHosts(pos: object): Promise<Hosts> {
+  /* Get All Hosts for GoogleMaps */
+  public getAllHosts(): Promise<Hosts[]> {
+    let query = `
+    SELECT hostName, hostAddress, hostTel, hostPostalCode, hostIdx, hostLatitude, hostLongitude, hostIntro FROM Host
+    `;
+    return new Promise((resolve, reject) => {
+      resolve(
+        Host.sequelize.query(query, {
+          type: Sequelize.QueryTypes.SELECT
+        })
+      );
+    });
+  }
+
+  /* Get Search Hosts for GoogleMaps. */
+  public getSearchHosts(pos: object): Promise<Hosts> {
     let query = `
     SELECT hostName , hostAddress, hostTel, hostPostalCode, hostIdx, hostLatitude, hostLongitude, ( 6371 * acos( cos( radians( ${pos["latitude"]} ) ) * cos( radians( hostLatitude ) ) * cos( radians( hostLongitude ) - radians( ${pos["longitude"]} ) ) + sin( radians( ${pos["latitude"]} ) ) * sin( radians( hostLatitude ) ) ) ) AS distance FROM Host HAVING distance < 5 ORDER BY  distance  DESC LIMIT 0 , 3
     `;
