@@ -4,7 +4,6 @@ import { Sequelize } from "sequelize-typescript";
 
 /* Define Map Controller Interface */
 interface MapControllerInterface {
-  getAllHosts(): Promise<Hosts[]>;
   getSearchHosts(pos: object): Promise<Hosts>;
 }
 
@@ -12,20 +11,6 @@ interface MapControllerInterface {
 class MapController implements MapControllerInterface {
   /* Setting Default constructor */
   public constructor() {}
-
-  /* Get All Hosts for GoogleMaps */
-  public getAllHosts(): Promise<Hosts[]> {
-    let query = `
-    SELECT hostName, hostAddress, hostTel, hostPostalCode, hostIdx, hostLatitude, hostLongitude, hostIntro FROM Host
-    `;
-    return new Promise((resolve, reject) => {
-      resolve(
-        Host.sequelize.query(query, {
-          type: Sequelize.QueryTypes.SELECT
-        })
-      );
-    });
-  }
 
   /* Get Search Hosts for GoogleMaps. */
   public getSearchHosts(pos: object): Promise<Hosts> {

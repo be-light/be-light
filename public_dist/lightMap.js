@@ -17,8 +17,6 @@ function initMap() {
         streetViewControl: false,
         mapTypeControl: false
       });
-
-      for (let i = 0; i < hostList.length; i++) createMarker(map, hostList[i]);
     });
   } else {
     alert("This browser is not support geolocation.");
@@ -28,7 +26,7 @@ function initMap() {
 
   const input = document.getElementById("searchTextField");
   let autocomplete = new google.maps.places.Autocomplete(input, {
-    types: ["establishment"]
+    types: ["geocode"]
   });
 }
 
