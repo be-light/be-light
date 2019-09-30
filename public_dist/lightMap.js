@@ -1,6 +1,7 @@
 var map;
 var geocoder;
 var ZOOM = 12;
+var prev_infowindow = false;
 
 /* Initialize Google Maps */
 function initMap() {
@@ -44,6 +45,10 @@ function createMarker(map, host) {
     let infoWindow = new google.maps.InfoWindow({
       content: "Hello, Google Maps!"
     });
+
+    if (prev_infowindow) prev_infowindow.close();
+    prev_infowindow = infoWindow;
+
     infoWindow.open(map, marker);
   });
   return marker;
