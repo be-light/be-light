@@ -24,11 +24,11 @@ function initMap() {
   }
 
   geocoder = new google.maps.Geocoder();
-  /*
+
   const input = document.getElementById("searchTextField");
   let autocomplete = new google.maps.places.Autocomplete(input, {
-    types: ["(cities)"]
-  });*/
+    types: ["establishment"]
+  });
 }
 
 function createMarker(map, host) {

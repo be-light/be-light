@@ -12,6 +12,10 @@ export class Routes {
     /* index.pug routing (API TEST PAGE)*/
     app.route("/").get((req: Request, res: Response) => {
       MapController.getAllHosts().then(result => {
+        res.cookie("hostList", JSON.stringify(result), {
+          maxAge: 24 * 60 * 60 * 1000 //24 hours
+        });
+
         res.render("index", {
           title: "BeLight",
           message: "Express.js + Pug + Webpack + Typescript + SaSS",
