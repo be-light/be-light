@@ -1,9 +1,14 @@
 @import "./reset.scss";
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
 @import "./header.scss";
+@import "./intro.scss";
 
 body {
   font-family: "Nanum Gothic";
+}
+
+#contents {
+  margin: 50px 100px;
 }
 
 #map {

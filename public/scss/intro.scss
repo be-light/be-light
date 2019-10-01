@@ -1,0 +1,24 @@
+#intro {
+
+    .intro__header {
+        .intro__header--title {
+            font-size: 25px;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .intro__contents {
+        background-image: url("../../public_dist/images/background.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+
+
+        .intro__contents--paragraph {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+    }
+}
