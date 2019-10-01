@@ -1,0 +1,26 @@
+section#intro
+    div.intro__header
+        h2.intro__header--title 비라이트와 함께 가벼운 여행을 떠나세요!
+    div.intro__contents
+        p.intro__contents--paragraph 비라이트의 파트너 상점에 짐을 맡기고 원하는 장소에서 짐을 찾아가세요
+        p.intro__contents--paragraph 가벼운 몸과 마음으로 여행, 출장, 데이트를 즐기세요
+    
+    form.intro__searchform(action="/api/map/hosts", method="GET")
+        img(src="menu.svg", alt="menu" class="intro__searchform--menu")
+
+        div.intro__searchform--block
+            img(src="markerpin01.svg" alt="markerpin01" class="intro__searchform--pin")
+            input(type="text" placeholder="Where? City, Street, Postal")
+
+        div.intro__searchform--block
+            img(src="calendar.svg" alt="calendar" class="intro__searchform--calendar")
+            input(type="text" placeholder="Drop-off -> Pick-up")
+
+        div.intro__searchform--block
+            img(src="back.svg" alt="back" class="intro__searchform--back")
+            span.intro__searchform--backlabel Choose your object
+            span.intro__searchform--backcount 0
+            img(src="minus.svg" alt="minus" class="intro__searchform--minusbtn")
+            img(src="plus.svg" alt="plus" class="intro__searchform--plusbtn")
+
+        input(type="submit" value="Search" class="intro__searchform--submitbtn")
