@@ -10,6 +10,7 @@
     }
 
     .intro__contents {
+        min-height: 310px;
         background-image: url("../../public_dist/images/background.png");
         background-size: 100%;
         background-repeat: no-repeat;
@@ -19,6 +20,10 @@
             margin-top: 10px;
             margin-bottom: 10px;
             font-weight: 400;
+        }
+
+        .intro__searchform {
+            display: flex;
         }
     }
 }

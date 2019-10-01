@@ -4,23 +4,23 @@ section#intro
     div.intro__contents
         p.intro__contents--paragraph 비라이트의 파트너 상점에 짐을 맡기고 원하는 장소에서 짐을 찾아가세요
         p.intro__contents--paragraph 가벼운 몸과 마음으로 여행, 출장, 데이트를 즐기세요
-    
-        form.intro__searchform(action="/api/map/hosts", method="GET")
-            img(src="menu.svg", alt="menu" class="intro__searchform--menu")
 
-            div.intro__searchform--block
-                img(src="markerpin01.svg" alt="markerpin01" class="intro__searchform--pin")
-                input(type="text" placeholder="Where? City, Street, Postal")
+    form.intro__searchform(action="/api/map/hosts", method="GET")
+        img(src="images/menu.png", alt="menu" class="intro__searchform--menu icon--sm")
 
-            div.intro__searchform--block
-                img(src="calendar.svg" alt="calendar" class="intro__searchform--calendar")
-                input(type="text" placeholder="Drop-off -> Pick-up")
+        div.intro__searchform--block
+            img(src="images/markerpin01.png" alt="markerpin01" class="intro__searchform--pin icon--sm")
+            input(type="text" placeholder="Where? City, Street, Postal")
 
-            div.intro__searchform--block
-                img(src="back.svg" alt="back" class="intro__searchform--back")
-                span.intro__searchform--backlabel Choose your object
-                span.intro__searchform--backcount 0
-                img(src="minus.svg" alt="minus" class="intro__searchform--minusbtn")
-                img(src="plus.svg" alt="plus" class="intro__searchform--plusbtn")
+        div.intro__searchform--block
+            img(src="images/calendar.png" alt="calendar" class="intro__searchform--calendar icon--sm")
+            input(type="text" placeholder="Drop-off -> Pick-up")
 
-            input(type="submit" value="Search" class="intro__searchform--submitbtn")
+        div.intro__searchform--block
+            img(src="images/bag.png" alt="bag" class="intro__searchform--bag icon--sm")
+            span.intro__searchform--baglabel Choose your object
+            span.intro__searchform--bagcount 0
+            img(src="images/minus.png" alt="minus" class="intro__searchform--minusbtn icon--sm")
+            img(src="images/plus.png" alt="plus" class="intro__searchform--plusbtn icon--sm")
+
+        input(type="submit" value="Search" class="intro__searchform--submitbtn")
