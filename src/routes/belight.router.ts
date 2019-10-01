@@ -9,9 +9,17 @@ import expressJWT from "../utils/jwt";
 
 export class Routes {
   public routes(app): void {
-    /* index.pug routing (API TEST PAGE)*/
+    /* Main Page Routing */
     app.route("/").get((req: Request, res: Response) => {
       res.render("index", {
+        title: "BeLight",
+        message: "Express.js + Pug + Webpack + Typescript + SaSS"
+      });
+    });
+
+    /* change test page routing */
+    app.route("/test").get((req: Request, res: Response) => {
+      res.render("test", {
         title: "BeLight",
         message: "Express.js + Pug + Webpack + Typescript + SaSS"
       });
