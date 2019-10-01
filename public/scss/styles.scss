@@ -1,6 +1,10 @@
 @import "./reset.scss";
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
 @import "./header.scss";
 
+body {
+  font-family: "Nanum Gothic";
+}
 
 #map {
   width: 500px;
