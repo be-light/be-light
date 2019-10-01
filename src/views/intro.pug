@@ -6,19 +6,19 @@ section#intro
         p.intro__contents--paragraph 가벼운 몸과 마음으로 여행, 출장, 데이트를 즐기세요
 
     form.intro__searchform(action="/api/map/hosts", method="GET")
-        img(src="images/menu.png", alt="menu" class="intro__searchform--menu icon--sm")
+        img(src="images/menu.png", alt="menu" class="intro__searchform--menu icon--menu")
 
         div.intro__searchform--block
             img(src="images/markerpin01.png" alt="markerpin01" class="intro__searchform--pin icon--sm")
-            input(type="text" placeholder="Where? City, Street, Postal")
+            input(type="text" placeholder="Where? City, Street, Postal" class="input__place")
 
-        div.intro__searchform--block
+        div.intro__searchform--block.space
             img(src="images/calendar.png" alt="calendar" class="intro__searchform--calendar icon--sm")
             input(type="text" placeholder="Drop-off -> Pick-up")
 
-        div.intro__searchform--block
+        div.intro__searchform--block.space
             img(src="images/bag.png" alt="bag" class="intro__searchform--bag icon--sm")
-            span.intro__searchform--baglabel Choose your object
+            span.intro__searchform--baglabel Choose your object &nbsp;
             span.intro__searchform--bagcount 0
             img(src="images/minus.png" alt="minus" class="intro__searchform--minusbtn icon--sm")
             img(src="images/plus.png" alt="plus" class="intro__searchform--plusbtn icon--sm")
