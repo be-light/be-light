@@ -13,4 +13,4 @@ sequelize.sync({ force: false });
 
 /* Server Start */
 http.createServer(app).listen(HTTP_PORT);
-// https.createServer({}, app).listen(HTTPS_PORT);
+https.createServer({}, app).listen(HTTPS_PORT);
