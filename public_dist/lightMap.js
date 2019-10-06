@@ -39,7 +39,7 @@ function createMarker(map, host) {
     }
   });
 
-  google.maps.event.addListener(marker, "click", function () {
+  google.maps.event.addListener(marker, "click", function() {
     let infoWindow = new google.maps.InfoWindow({
       content: "Hello, Google Maps!"
     });
@@ -60,7 +60,8 @@ var search__text = document.querySelector(".search__text");
 /* Search Address */
 function findAddress(event) {
   event.preventDefault();
-  geocoder.geocode({
+  geocoder.geocode(
+    {
       address: search__text.value
     },
     (results, status) => {
@@ -73,8 +74,8 @@ function findAddress(event) {
 
       const pos = results[0].geometry.location;
       fetch(`/api/map/hosts?lat=${pos.lat()}&lng=${pos.lng()}`, {
-          method: "GET"
-        })
+        method: "GET"
+      })
         .then(response => {
           return response.json();
         })
