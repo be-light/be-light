@@ -64,6 +64,12 @@ interface ReviewList {
   hostIdx: number;
 }
 
+/* ReviewObject Interface */
+interface ReviewObject {
+  review: string;
+  rewviewScore: number;
+}
+
 export {
   ResSkeleton,
   ResponseUser,
@@ -71,5 +77,6 @@ export {
   HostSkeleton,
   UserOrderList,
   Hosts,
-  ReviewList
+  ReviewList,
+  ReviewObject
 };

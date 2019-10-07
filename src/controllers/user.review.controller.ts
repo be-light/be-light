@@ -1,5 +1,9 @@
 import expressJWT from "../utils/jwt";
-import { ResSkeleton, ReviewList } from "../utils/global.interface";
+import {
+  ResSkeleton,
+  ReviewList,
+  ReviewObject
+} from "../utils/global.interface";
 import { UserReview } from "../models/user.review.model";
 import { Sequelize } from "sequelize-typescript";
 
@@ -8,9 +12,9 @@ interface UserReviewControllerInterface {
   successMsg: ResSkeleton;
   getAllReviews(): Promise<ReviewList[]>;
   getLastReviews(): Promise<ReviewList[]>;
-  createReview(token: string): Promise<ResSkeleton>;
-  updateReview(token: string): Promise<ResSkeleton>;
-  deleteReview(token: string): Promise<ResSkeleton>;
+  createReview(token: string, revObj: object): Promise<ResSkeleton>;
+  updateReview(token: string, revObj: object): Promise<ResSkeleton>;
+  deleteReview(token: string, revObj: object): Promise<ResSkeleton>;
 }
 
 class UserReviewController implements UserReviewControllerInterface {
@@ -33,17 +37,26 @@ class UserReviewController implements UserReviewControllerInterface {
   }
 
   /* Create New Review */
-  public createReview(token: string): Promise<ResSkeleton> {
+  public createReview(
+    token: string,
+    revObj: ReviewObject
+  ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {});
   }
 
   /* Update Review */
-  public updateReview(token: string): Promise<ResSkeleton> {
+  public updateReview(
+    token: string,
+    revObj: ReviewObject
+  ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {});
   }
 
   /* Delete Review */
-  public deleteReview(token: string): Promise<ResSkeleton> {
+  public deleteReview(
+    token: string,
+    revObj: ReviewObject
+  ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {});
   }
 }
