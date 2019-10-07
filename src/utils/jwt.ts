@@ -1,6 +1,12 @@
 import * as jwt from "jsonwebtoken";
 
-class ExpressJWT {
+interface ExpressJWTInterface {
+  jwtObj: any;
+  getToken(id: string): string;
+  verifyToken(token: string): any;
+}
+
+class ExpressJWT implements ExpressJWTInterface {
   public jwtObj;
 
   constructor() {

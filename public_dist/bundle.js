@@ -105,7 +105,7 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./publ
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n__webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\r\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
 
 /***/ })
 
