@@ -54,11 +54,22 @@ interface Hosts {
   hostIntro: string;
 }
 
+/* Review Default Interface */
+interface ReviewList {
+  userId: string;
+  review: string;
+  reviewScore: number;
+  reviewDate: Date;
+  reviewNumber: number;
+  hostIdx: number;
+}
+
 export {
   ResSkeleton,
   ResponseUser,
   ResponseHostUser,
   HostSkeleton,
   UserOrderList,
-  Hosts
+  Hosts,
+  ReviewList
 };
