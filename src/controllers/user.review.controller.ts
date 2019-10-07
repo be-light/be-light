@@ -83,7 +83,35 @@ class UserReviewController implements UserReviewControllerInterface {
     token: string,
     revObj: ReviewObject
   ): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      let userId = expressJWT.verifyToken(token).userId;
+      const now: string = dateFormat(new Date(), "yyyy-mm-dd HH:MM");
+      if (userId) {
+        UserReview.update(
+          {
+            review: revObj["review"],
+            reviewScore: revObj["reviewScore"],
+            reviewDate: now
+          },
+          {
+            where: {
+              hostIdx: revObj["hostIdx"],
+              userId
+            },
+            returning: false
+          }
+        )
+          .then(msg => {
+            if (msg.toString() !== "0") resolve(this.successMsg);
+            else reject("Request is not valid");
+          })
+          .catch(() => {
+            reject("Request is not valid.");
+          });
+      } else {
+        reject("Your Token is not valid. or Expired.");
+      }
+    });
   }
 
   /* Delete Review */
@@ -91,7 +119,22 @@ class UserReviewController implements UserReviewControllerInterface {
     token: string,
     revObj: ReviewObject
   ): Promise<ResSkeleton> {
-    return new Promise((resolve, reject) => {});
+    return new Promise((resolve, reject) => {
+      let userId = expressJWT.verifyToken(token).userId;
+      if (userId) {
+        UserReview.destroy({
+          where: {
+            hostIdx: revObj["hostIdx"],
+            userId
+          }
+        }).then(result => {
+          if (result) resolve(this.successMsg);
+          else reject("Your Request is not valid.");
+        });
+      } else {
+        reject("Your Token is not valid. or Expired.");
+      }
+    });
   }
 }
 
