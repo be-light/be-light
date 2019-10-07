@@ -4,7 +4,7 @@ import HostUserController from "../controllers/host.user.controller";
 import HostController from "../controllers/host.controller";
 import UserOrderController from "../controllers/user.order.controller";
 import MapController from "../controllers/map.controller";
-
+import UserReviewController from "../controllers/user.review.controller";
 import expressJWT from "../utils/jwt";
 
 export class Routes {
@@ -365,24 +365,103 @@ export class Routes {
 
     // Review =====
     /* Get All Reviews */
-    app.route("/api/review").get((req: Request, res: Response) => {});
+    app.route("/api/review").get((req: Request, res: Response) => {
+      const hostIdx = req.body.hostIdx;
+
+      UserReviewController.getAllReviews(hostIdx)
+        .then(reviews => {
+          res.json(reviews);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
 
     /* Get 5 Reviews */
     app.route("/api/review/:count").get((req: Request, res: Response) => {
-      console.log(req.params);
+      const count = req.params.count;
+      UserReviewController.getLastReviews(count)
+        .then(reviews => {
+          res.json(reviews);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
     });
 
     /* Create New Review */
-    app.route("/api/review").post((req: Request, res: Response) => {});
+    app.route("/api/review").post((req: Request, res: Response) => {
+      if (!req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
+
+      const revObj = {
+        review: req.body.review,
+        reviewScore: req.body.reviewScore,
+        hostIdx: req.body.hostIdx
+      };
+
+      UserReviewController.createReview(req.cookies.user, revObj)
+        .then(result => {
+          res.json(result);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
 
     /* Update Review */
     app
       .route("/api/review/:reviewNumber")
-      .put((req: Request, res: Response) => {});
+      .put((req: Request, res: Response) => {
+        if (!req.cookies.user) {
+          res.redirect("/");
+          return;
+        }
+        const reviewNumber = req.params.reviewNumber;
+        const revObj = {
+          review: req.body.review,
+          reviewScore: req.body.reviewScore,
+          hostIdx: req.body.hostIdx
+        };
+
+        UserReviewController.updateReview(
+          req.cookies.user,
+          reviewNumber,
+          revObj
+        )
+          .then(result => {
+            res.json(result);
+          })
+          .catch(msg => {
+            res.json({ status: 400, msg });
+          });
+      });
 
     /* Delete Review */
     app
       .route("/api/review/:reviewNumber")
-      .delete((req: Request, res: Response) => {});
+      .delete((req: Request, res: Response) => {
+        if (!req.cookies.user) {
+          res.redirect("/");
+          return;
+        }
+
+        const reviewNumber = req.params.reviewNumber;
+        const hostIdx = req.body.hostIdx;
+
+        UserReviewController.deleteReview(
+          req.cookies.user,
+          reviewNumber,
+          hostIdx
+        )
+          .then(result => {
+            res.json(result);
+          })
+          .catch(msg => {
+            res.json({ status: 400, msg });
+          });
+      });
   }
 }

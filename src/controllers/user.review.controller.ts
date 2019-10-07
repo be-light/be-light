@@ -12,20 +12,26 @@ import * as dateFormat from "dateformat";
 interface UserReviewControllerInterface {
   successMsg: ResSkeleton;
   getAllReviews(hostIdx: number): Promise<ReviewList[]>;
-  getLastReviews(): Promise<ReviewList[]>;
+  getLastReviews(count: number): Promise<ReviewList[]>;
   createReview(token: string, revObj: object): Promise<ResSkeleton>;
-  updateReview(token: string, revObj: object): Promise<ResSkeleton>;
-  deleteReview(token: string, revObj: object): Promise<ResSkeleton>;
+  updateReview(
+    token: string,
+    reviewNumber,
+    revObj: object
+  ): Promise<ResSkeleton>;
+  deleteReview(
+    token: string,
+    reviewNumber,
+    hostIdx: number
+  ): Promise<ResSkeleton>;
 }
 
 class UserReviewController implements UserReviewControllerInterface {
   public successMsg: ResSkeleton;
-  public LAST_REVIEW_COUNT: number;
 
   /* Setting Default successMsg from constructor */
   public constructor() {
     this.successMsg = { status: 200, msg: "success" };
-    this.LAST_REVIEW_COUNT = 5;
   }
 
   /* Get All Reviews */
@@ -43,10 +49,10 @@ class UserReviewController implements UserReviewControllerInterface {
   }
 
   /* Get Last Reviews */
-  public getLastReviews(): Promise<ReviewList[]> {
+  public getLastReviews(count: number): Promise<ReviewList[]> {
     return new Promise((resolve, reject) => {
       UserReview.findAll({
-        limit: this.LAST_REVIEW_COUNT,
+        limit: count,
         order: [["reviewNumber", "DESC"]]
       }).then(lastReview => {
         resolve(lastReview);
@@ -81,6 +87,7 @@ class UserReviewController implements UserReviewControllerInterface {
   /* Update Review */
   public updateReview(
     token: string,
+    reviewNumber: number,
     revObj: ReviewObject
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
@@ -96,7 +103,8 @@ class UserReviewController implements UserReviewControllerInterface {
           {
             where: {
               hostIdx: revObj["hostIdx"],
-              userId
+              userId,
+              reviewNumber
             },
             returning: false
           }
@@ -117,15 +125,17 @@ class UserReviewController implements UserReviewControllerInterface {
   /* Delete Review */
   public deleteReview(
     token: string,
-    revObj: ReviewObject
+    reviewNumber: number,
+    hostIdx: number
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let userId = expressJWT.verifyToken(token).userId;
       if (userId) {
         UserReview.destroy({
           where: {
-            hostIdx: revObj["hostIdx"],
-            userId
+            hostIdx,
+            userId,
+            reviewNumber
           }
         }).then(result => {
           if (result) resolve(this.successMsg);

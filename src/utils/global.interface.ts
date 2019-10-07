@@ -66,7 +66,7 @@ interface ReviewList {
 /* ReviewObject Interface */
 interface ReviewObject {
   review: string;
-  rewviewScore: number;
+  reviewScore: number;
   hostIdx: number;
 }
 
