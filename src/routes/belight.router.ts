@@ -362,5 +362,27 @@ export class Routes {
           res.json({ status: 400, msg });
         });
     });
+
+    // Review =====
+    /* Get All Reviews */
+    app.route("/api/review").get((req: Request, res: Response) => {});
+
+    /* Get 5 Reviews */
+    app.route("/api/review/:count").get((req: Request, res: Response) => {
+      console.log(req.params);
+    });
+
+    /* Create New Review */
+    app.route("/api/review").post((req: Request, res: Response) => {});
+
+    /* Update Review */
+    app
+      .route("/api/review/:reviewNumber")
+      .put((req: Request, res: Response) => {});
+
+    /* Delete Review */
+    app
+      .route("/api/review/:reviewNumber")
+      .delete((req: Request, res: Response) => {});
   }
 }
