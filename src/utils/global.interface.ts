@@ -61,13 +61,13 @@ interface ReviewList {
   reviewScore: number;
   reviewDate: Date;
   reviewNumber: number;
-  hostIdx: number;
 }
 
 /* ReviewObject Interface */
 interface ReviewObject {
   review: string;
   rewviewScore: number;
+  hostIdx: number;
 }
 
 export {
