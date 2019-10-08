@@ -412,56 +412,44 @@ export class Routes {
     });
 
     /* Update Review */
-    app
-      .route("/api/review/:reviewNumber")
-      .put((req: Request, res: Response) => {
-        if (!req.cookies.user) {
-          res.redirect("/");
-          return;
-        }
-        const reviewNumber = req.params.reviewNumber;
-        const revObj = {
-          review: req.body.review,
-          reviewScore: req.body.reviewScore,
-          hostIdx: req.body.hostIdx
-        };
+    app.route("/api/review").put((req: Request, res: Response) => {
+      if (!req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
+      const reviewNumber = req.body.reviewNumber;
+      const revObj = {
+        review: req.body.review,
+        reviewScore: req.body.reviewScore,
+        hostIdx: req.body.hostIdx
+      };
 
-        UserReviewController.updateReview(
-          req.cookies.user,
-          reviewNumber,
-          revObj
-        )
-          .then(result => {
-            res.json(result);
-          })
-          .catch(msg => {
-            res.json({ status: 400, msg });
-          });
-      });
+      UserReviewController.updateReview(req.cookies.user, reviewNumber, revObj)
+        .then(result => {
+          res.json(result);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
 
     /* Delete Review */
-    app
-      .route("/api/review/:reviewNumber")
-      .delete((req: Request, res: Response) => {
-        if (!req.cookies.user) {
-          res.redirect("/");
-          return;
-        }
+    app.route("/api/review/").delete((req: Request, res: Response) => {
+      if (!req.cookies.user) {
+        res.redirect("/");
+        return;
+      }
 
-        const reviewNumber = req.params.reviewNumber;
-        const hostIdx = req.body.hostIdx;
+      const reviewNumber = req.body.reviewNumber;
+      const hostIdx = req.body.hostIdx;
 
-        UserReviewController.deleteReview(
-          req.cookies.user,
-          reviewNumber,
-          hostIdx
-        )
-          .then(result => {
-            res.json(result);
-          })
-          .catch(msg => {
-            res.json({ status: 400, msg });
-          });
-      });
+      UserReviewController.deleteReview(req.cookies.user, reviewNumber, hostIdx)
+        .then(result => {
+          res.json(result);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
   }
 }

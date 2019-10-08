@@ -151,6 +151,29 @@ html(lang="en")
         p UserReview getLastReviews
         form(action="/api/reviews/5" method="GET")
             input(type="submit")
+
+        p UserReview CreateNewReview
+        form(action="/api/review" method="POST")
+            input(type="text" name="review")
+            input(type="text" name="reviewScore")
+            input(type="text" name="hostIdx")
+            input(type="submit")
+
+        p UserReview UpdateReview
+        form(action="/api/review?_method=PUT" method="POST")
+            input(type="text" name="reviewNumber")
+            input(type="text" name="review")
+            input(type="text" name="reviewScore")
+            input(type="text" name="hostIdx")
+            input(type="submit")
+        
+        p UserReview DeleteReview
+        form(action="/api/review?_method=DELETE" method="POST")
+            input(type="text" name="reviewNumber")
+            input(type="text" name="hostIdx")
+            input(type="submit")
+
+
     
 
     script(src="lightMap.js")
