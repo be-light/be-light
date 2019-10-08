@@ -37,7 +37,7 @@ export class Routes {
 
       UserController.login(id, pw)
         .then(user => {
-          let token: string = expressJWT.getToken(id);
+          let token: string = expressJWT.getToken(user, 0);
           res.cookie("user", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
@@ -127,7 +127,7 @@ export class Routes {
 
       HostUserController.login(id, pw)
         .then(user => {
-          let token: string = expressJWT.getToken(id);
+          let token: string = expressJWT.getToken(user, 1);
           res.cookie("host", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
