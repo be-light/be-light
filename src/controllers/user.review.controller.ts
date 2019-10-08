@@ -67,7 +67,7 @@ class UserReviewController implements UserReviewControllerInterface {
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let userId: string = expressJWT.verifyToken(token).userId;
-      const now: string = dateFormat(new Date(), "yyyy-mm-dd HH:MM");
+      const now: string = dateFormat(new Date(), "yyyy-mm-dd");
       if (userId) {
         UserReview.create({
           userId,
