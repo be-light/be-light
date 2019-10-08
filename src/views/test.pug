@@ -140,6 +140,17 @@ html(lang="en")
             input(type="text" placeholder="Search.." name="search__text", class="search__text" id="searchTextField")
 
         div#map
+
+        h1 UserReview
+
+        p UserReview getAllReviews
+        form(action="/api/reviews" method="GET")
+            input(type="text" name="hostIdx")
+            input(type="submit")
+
+        p UserReview getLastReviews
+        form(action="/api/reviews/5" method="GET")
+            input(type="submit")
     
 
     script(src="lightMap.js")

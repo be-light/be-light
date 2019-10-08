@@ -9,7 +9,7 @@ const HTTP_PORT: any = process.env.HTTP_PORT;
 const HTTPS_PORT: any = process.env.HTTPS_PORT;
 
 /* Sequelize Sync */
-sequelize.sync({ force: true });
+sequelize.sync({ force: false });
 
 /* Server Start */
 http.createServer(app).listen(HTTP_PORT);

@@ -365,8 +365,8 @@ export class Routes {
 
     // Review =====
     /* Get All Reviews */
-    app.route("/api/review").get((req: Request, res: Response) => {
-      const hostIdx = req.body.hostIdx;
+    app.route("/api/reviews").get((req: Request, res: Response) => {
+      const hostIdx = req.query.hostIdx;
 
       UserReviewController.getAllReviews(hostIdx)
         .then(reviews => {
@@ -378,8 +378,8 @@ export class Routes {
     });
 
     /* Get 5 Reviews */
-    app.route("/api/review/:count").get((req: Request, res: Response) => {
-      const count = req.params.count;
+    app.route("/api/reviews/:count").get((req: Request, res: Response) => {
+      const count: number = Number.parseInt(req.params.count);
       UserReviewController.getLastReviews(count)
         .then(reviews => {
           res.json(reviews);
