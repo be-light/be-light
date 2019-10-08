@@ -37,7 +37,13 @@ export class Routes {
 
       UserController.login(id, pw)
         .then(user => {
-          let token: string = expressJWT.getToken(user, 0);
+          let token: string = expressJWT.getToken(user);
+          let public_info = {
+            userName: user.userName,
+            userEmail: user.userEmail
+          };
+
+          res.cookie("public_user", public_info);
           res.cookie("user", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
@@ -127,7 +133,12 @@ export class Routes {
 
       HostUserController.login(id, pw)
         .then(user => {
-          let token: string = expressJWT.getToken(user, 1);
+          let token: string = expressJWT.getToken(user);
+          let public_info = {
+            hostUserName: user.hostUserName,
+            hostUserEmail: user.hostUserEmail
+          };
+          res.cookie("public_hostuser", public_info);
           res.cookie("host", token); // token save - req.cookies.user
           res.json({ status: 200, token: token }); // return token
         })
