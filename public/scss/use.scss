@@ -12,8 +12,21 @@
 
   .use__contents {
     .use__contents__columns {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       .stepimg {
         width: 200px;
+      }
+      .arrowimg {
+        width: 30px;
+        height: 30px;
+      }
+
+      .right_arrowimg {
+        margin-left: 18px;
+        margin-right: 18px;
       }
     }
   }
