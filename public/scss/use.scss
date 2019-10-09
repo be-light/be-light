@@ -1,2 +1,34 @@
 #use {
+  .use__header {
+    margin-top: 60px;
+    margin-bottom: 40px;
+
+    .use__header--text {
+      text-align: center;
+      font-size: 25px;
+      font-weight: 700;
+    }
+  }
+
+  .use__contents {
+    .use__contents__columns {
+      .stepimg {
+        width: 200px;
+      }
+    }
+  }
+
+  .use__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+
+    .use__footer--searchBtn {
+      background-color: #1a98d5;
+      padding: 10px 25px;
+      color: white;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+  }
 }
