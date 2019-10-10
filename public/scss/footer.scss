@@ -12,6 +12,72 @@
       width: 60px;
       height: 20px;
     }
-    // text #E9E9E9
+  }
+
+  .footer__columns {
+    display: flex;
+    justify-content: space-around;
+
+    .footer__column {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .footer__column--logo {
+        width: 200px;
+        height: 46px;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
+
+      .footer__column--comment {
+        color: #a8a8a8;
+        margin-bottom: 6px;
+      }
+
+      .bold {
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .footer__column--images img {
+        width: 45px;
+        height: 45px;
+      }
+
+      .sns {
+        cursor: pointer;
+      }
+
+      .sns:nth-child(2) {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .footer__column__help {
+        display: flex;
+        align-items: center;
+
+        .managerimg {
+          width: 85px;
+          height: 85px;
+          margin-right: 15px;
+        }
+
+        .footer__column__help--block {
+          margin-right: 15px;
+          .footer__column__help--lgtext {
+            color: #7d7d7d;
+            font-size: 30px;
+            font-weight: 900;
+            margin-bottom: 9px;
+          }
+        }
+      }
+    }
+
+    .align {
+      align-items: center;
+    }
   }
 }
