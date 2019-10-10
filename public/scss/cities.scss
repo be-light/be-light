@@ -2,9 +2,11 @@
   margin-top: 80px;
   background-image: url("../../public_dist/images/cities_background.png");
   background-position: top;
-  background-size: cover;
+  height: 800px;
 
   .cities__header {
+    padding-top: 30px;
+
     .cities__header--title {
       font-size: 40px;
       font-weight: 700;
@@ -30,6 +32,7 @@
       border-radius: 20px;
       padding-left: 10px;
       padding-top: 10px;
+      margin-top: 20px;
 
       &:nth-child(2) {
         margin-left: 30px;
