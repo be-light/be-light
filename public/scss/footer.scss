@@ -1,0 +1,14 @@
+.footer {
+  margin-top: 70px;
+
+  .footer__topbutton {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+
+    .top {
+      cursor: pointer;
+      width: 60px;
+    }
+  }
+}
