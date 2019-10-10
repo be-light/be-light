@@ -5,12 +5,13 @@
       font-weight: 700;
       margin-top: 20px;
       margin-bottom: 20px;
+      color: #565656;
     }
   }
 
   .intro__contents {
     min-height: 310px;
-    background-image: url("../../public_dist/images/background.png");
+    background-image: url("../../public_dist/images/main_background.png");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -21,6 +22,7 @@
       margin-bottom: 15px;
       padding-top: 10px;
       font-weight: 400;
+      color: black;
     }
 
     .intro__contents__store {
@@ -56,6 +58,7 @@
 
       .intro__searchform--baglabel {
         font-size: 12px;
+        color: #b4b5b7;
       }
 
       .intro__searchform--bagcount {

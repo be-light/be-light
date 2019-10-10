@@ -4,7 +4,7 @@
   .footer__header {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #d3d3d3;
     margin-bottom: 30px;
 
     .top {
@@ -12,5 +12,6 @@
       width: 60px;
       height: 20px;
     }
+    // text #E9E9E9
   }
 }
