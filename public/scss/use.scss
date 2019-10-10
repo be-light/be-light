@@ -24,7 +24,8 @@
         height: 30px;
       }
 
-      .right_arrowimg {
+      .right_arrowimg,
+      .left_arrowimg {
         margin-left: 18px;
         margin-right: 18px;
       }
@@ -37,7 +38,7 @@
 
         .use__contents__column--header {
           margin-top: 15px;
-          margin-bottom: 7px;
+          margin-bottom: 10px;
           font-size: 15px;
         }
 
@@ -45,6 +46,14 @@
           font-size: 20px;
           font-weight: 700;
           color: blue;
+        }
+
+        .use__contents__column--block {
+          margin-top: 18px;
+          margin-bottom: 18px;
+          .none {
+            visibility: hidden;
+          }
         }
       }
     }
