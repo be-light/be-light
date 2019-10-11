@@ -1,2 +1,34 @@
 #price {
+  .price__header {
+    margin-top: 80px;
+    margin-bottom: 20px;
+
+    .price__header--title {
+      font-weight: 900;
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .price__header--text {
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+
+  .price__contents {
+    .price__contents__header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+
+      .price__contents__header--text {
+        font-weight: 700;
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+.text {
+  font-weight: 600;
 }
