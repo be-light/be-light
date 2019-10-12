@@ -34,13 +34,24 @@
       border-bottom-right-radius: 0px;
       background-color: #d5e8f7;
       padding: 30px;
+    }
+
+    .selected {
+      width: 435px;
+      height: 346px;
+      opacity: 1;
+      border-radius: 15px;
+      background-color: #d5e8f7;
 
       .customer__reviews__review__content {
+        padding: 20px;
         width: 375px;
-        height: 290px;
+        height: 295px;
         border-radius: 10px;
         background-color: white;
-        padding: 20px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+          0 10px 10px rgba(0, 0, 0, 0.22);
+
         .customer__reviews__review__content--head {
           display: flex;
           align-items: center;
@@ -74,13 +85,6 @@
           }
         }
       }
-    }
-
-    .selected {
-      width: 415px;
-      height: 326px;
-      opacity: 1;
-      border-radius: 15px;
     }
 
     .hide {
