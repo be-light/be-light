@@ -10,11 +10,11 @@
   }
 
   .intro__contents {
-    min-height: 310px;
+    height: 450px;
     background-image: url("../../public_dist/images/main_background.png");
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center bottom;
     margin-bottom: 5px;
 
     .intro__contents--paragraph {
