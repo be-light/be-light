@@ -33,6 +33,47 @@
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px;
       background-color: #d5e8f7;
+      padding: 30px;
+
+      .customer__reviews__review__content {
+        width: 375px;
+        height: 290px;
+        border-radius: 10px;
+        background-color: white;
+        padding: 20px;
+        .customer__reviews__review__content--head {
+          display: flex;
+          align-items: center;
+          .userimg {
+            width: 30px;
+            height: 30px;
+
+            &:not(:last-child) {
+              margin-right: 5px;
+            }
+          }
+
+          .customer__reviews__reivew--username {
+            font-weight: 900;
+            margin-left: 5px;
+          }
+
+          .customer__reviews__review__content--images {
+            justify-self: flex-end;
+            margin-left: auto;
+          }
+        }
+
+        .customer__reviews__review__content--text {
+          font-size: 16px;
+          margin-top: 30px;
+        }
+
+        .customer__reviews__review__content--body {
+          p {
+          }
+        }
+      }
     }
 
     .selected {
