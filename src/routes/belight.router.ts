@@ -331,7 +331,8 @@ export class Routes {
       let reqOrder: object = {
         checkIn: req.body.checkIn,
         checkOut: req.body.checkOut,
-        reciptNumber: req.body.reciptNumber
+        reciptNumber: req.body.reciptNumber,
+        itemCount: req.body.itemCount
       };
 
       UserOrderController.updateOrder(reqOrder, req.cookies.user)

@@ -109,7 +109,8 @@ class UserOrderController implements UserOrderControllerInterface {
         UserOrder.update(
           {
             checkIn: reqOrder["checkIn"],
-            checkOut: reqOrder["checkOut"]
+            checkOut: reqOrder["checkOut"],
+            itemCount: reqOrder["itemCount"]
           },
           {
             where: {
