@@ -17,9 +17,11 @@ class ExpressJWT implements ExpressJWTInterface {
 
   /* Create JWT Token & Return */
   public getToken(user: any): string {
+    let check = user.userId ? user.userId : user.hostUserId;
+
     let token = jwt.sign(
       {
-        userId: user.userId
+        userId: check
       },
       this.jwtObj.secret,
       {

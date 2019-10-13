@@ -120,6 +120,12 @@ const userOrder = sequelize.define("UserOrder", {
     type: DataType.INTEGER,
     defaultValue: 0
   },
+  gHostIdx: {
+    type: DataType.STRING
+  },
+  itemCount: {
+    type: DataType.INTEGER
+  },
   reciptNumber: {
     type: DataType.INTEGER,
     primaryKey: true,

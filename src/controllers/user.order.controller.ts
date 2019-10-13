@@ -83,7 +83,9 @@ class UserOrderController implements UserOrderControllerInterface {
           checkIn: reqOrder["checkIn"],
           checkOut: reqOrder["checkOut"],
           paid: reqOrder["paid"],
-          hostIdx: reqOrder["hostIdx"]
+          hostIdx: reqOrder["hostIdx"],
+          gHostIdx: reqOrder["gHostIdx"],
+          itemCount: reqOrder["itemCount"]
           // TODO: Calculate Paid, Host Mapping Code
         })
           .then(order => {

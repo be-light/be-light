@@ -139,7 +139,7 @@ export class Routes {
             hostUserEmail: user.hostUserEmail
           };
           res.cookie("public_hostuser", public_info);
-          res.cookie("host", token); // token save - req.cookies.user
+          res.cookie("host", token); // token save - req.cookies.host
           res.json({ status: 200, token: token }); // return token
         })
         .catch(msg => {
@@ -307,7 +307,9 @@ export class Routes {
         checkIn: req.body.checkIn,
         checkOut: req.body.checkOut,
         paid: req.body.paid,
-        hostIdx: req.body.hostIdx // TODO
+        hostIdx: req.body.hostIdx,
+        gHostIdx: req.body.gHostIdx,
+        itemCount: req.body.itemCount
       };
 
       UserOrderController.requestNewOrder(reqOrder, req.cookies.user)
