@@ -27,8 +27,6 @@ html(lang="en")
         form(action="/api/user" method="GET")
             input(type="submit")
 
-        script(src="bundle.js")
-
         p UpdateMyProfile Form
         form(action="/api/user?_method=PUT" method="POST")
             input(type="text" name="userEmail")
@@ -176,9 +174,10 @@ html(lang="en")
             input(type="submit")
 
 
-    
-
+        button#modalBtn Button
+        include login.pug
     script(src="lightMap.js")
+    script(src="bundle.js")
     script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap&libraries=places")
 
         

@@ -97,6 +97,17 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./publ
 
 /***/ }),
 
+/***/ "./public/ts/login.ts":
+/*!****************************!*\
+  !*** ./public/ts/login.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("/* Get Element */\r\nconst modal = document.getElementById(\"loginModal\");\r\nconst modalBtn = document.getElementById(\"modalBtn\");\r\n/* Open Modal Event */\r\nmodalBtn.addEventListener(\"click\", () => {\r\n    modal.style.display = \"block\";\r\n});\r\n/* Click Outside and Close */\r\nwindow.addEventListener(\"click\", evt => {\r\n    if (evt.target === modal)\r\n        modal.style.display = \"none\";\r\n});\r\n/* Close Modal Event */\r\n\n\n//# sourceURL=webpack:///./public/ts/login.ts?");
+
+/***/ }),
+
 /***/ "./public/ts/main.ts":
 /*!***************************!*\
   !*** ./public/ts/main.ts ***!
@@ -105,7 +116,7 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./publ
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n__webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\r\n__webpack_require__(/*! ./login.ts */ \"./public/ts/login.ts\");\r\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
 
 /***/ })
 
