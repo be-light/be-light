@@ -22,14 +22,37 @@
       .modal__nav {
         display: flex;
         flex-direction: column;
+        position: relative;
         align-items: center;
+        justify-content: center;
         background-color: rgb(25, 150, 214);
         height: 100%;
         padding: 30px;
         border-top-left-radius: 15px;
         border-bottom-left-radius: 15px;
 
+        p {
+          color: white;
+        }
+
+        .modal__nav__header {
+          text-align: center;
+        }
+
+        .modal__nav__header--title {
+          font-size: 26px;
+          font-weight: 900;
+          margin-bottom: 20px;
+        }
+
+        .modal__nav__header--text {
+          font-size: 13px;
+          font-weight: 600;
+        }
+
         .modal__nav__footer {
+          position: absolute;
+          bottom: 20px;
           img {
             width: 100px;
           }
@@ -39,14 +62,38 @@
       .modal__contents {
         display: flex;
         flex-direction: column;
+        align-items: center;
+
         .modal__contents--block {
-          display: flex;
-          justify-content: flex-end;
+          position: absolute;
+          top: 3px;
+          right: 3px;
 
           img {
-            width: 30px;
-            height: 30px;
+            cursor: pointer;
+            margin-top: 3px;
+            margin-right: 3px;
+            margin-bottom: 20px;
+            width: 20px;
+            height: 20px;
           }
+        }
+
+        .modal__contents__input,
+        .loginButton {
+          width: 90%;
+          height: 30px;
+          border-radius: 20px;
+          border: 1px solid #565556;
+          text-align: center;
+          margin-bottom: 8px;
+        }
+
+        .loginButton {
+          border: none;
+          background-color: #1996d6;
+          color: white;
+          cursor: pointer;
         }
       }
     }
@@ -54,6 +101,7 @@
     .form {
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
+      justify-content: center;
     }
   }
 }
