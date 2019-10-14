@@ -37,4 +37,10 @@ export class Host extends Model<Host> {
 
   @Column
   public hostIntro!: string;
+
+  @Column
+  public hostOpenTime!: string;
+
+  @Column
+  public hostCloseTime!: string;
 }

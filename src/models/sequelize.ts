@@ -100,6 +100,12 @@ const host = sequelize.define("Host", {
   },
   hostIntro: {
     type: DataType.STRING
+  },
+  hostOpenTime: {
+    type: DataType.STRING
+  },
+  hostCloseTime: {
+    type: DataType.STRING
   }
 });
 

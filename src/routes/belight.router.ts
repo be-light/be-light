@@ -236,7 +236,9 @@ export class Routes {
         hostPostalCode: req.body.hostPostalCode,
         hostLatitude: req.body.hostLatitude,
         hostLongitude: req.body.hostLongitude,
-        hostIntro: req.body.hostIntro
+        hostIntro: req.body.hostIntro,
+        hostOpenTime: req.body.hostOpenTime,
+        hostCloseTime: req.body.hostCloseTime
       };
 
       HostController.addNewHost(req.cookies.host, hostObj)
@@ -257,7 +259,9 @@ export class Routes {
         hostPostalCode: req.body.hostPostalCode,
         hostLatitude: req.body.hostLatitude,
         hostLongitude: req.body.hostLongitude,
-        hostIntro: req.body.hostIntro
+        hostIntro: req.body.hostIntro,
+        hostOpenTime: req.body.hostOpenTime,
+        hostCloseTime: req.body.hostCloseTime
       };
 
       HostController.updateHost(req.cookies.host, req.body.idx, hostObj)

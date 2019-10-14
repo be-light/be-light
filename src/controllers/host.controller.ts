@@ -55,7 +55,9 @@ class HostController implements HostControllerInterface {
           hostPostalCode: hostObj["hostPostalCode"],
           hostLatitude: hostObj["hostLatitude"],
           hostLongitude: hostObj["hostLongitude"],
-          hostIntro: hostObj["hostIntro"]
+          hostIntro: hostObj["hostIntro"],
+          hostOpenTime: hostObj["hostOpenTime"],
+          hostCloseTime: hostObj["hostCloseTime"]
         }).then(host => {
           resolve(this.successMsg);
         });
@@ -82,7 +84,9 @@ class HostController implements HostControllerInterface {
             hostPostalCode: hostObj["hostPostalCode"],
             hostLatitude: hostObj["hostLatitude"],
             hostLongitude: hostObj["hostLongitude"],
-            hostIntro: hostObj["hostIntro"]
+            hostIntro: hostObj["hostIntro"],
+            hostOpenTime: hostObj["hostOpenTime"],
+            hostCloseTime: hostObj["hostCloseTime"]
           },
           {
             where: {
