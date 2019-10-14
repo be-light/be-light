@@ -104,7 +104,7 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./publ
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("/* Get Element */\r\nconst modal = document.getElementById(\"loginModal\");\r\nconst modalBtn = document.getElementById(\"modalBtn\");\r\n/* Open Modal Event */\r\nmodalBtn.addEventListener(\"click\", () => {\r\n    modal.style.display = \"block\";\r\n});\r\n/* Click Outside and Close */\r\nwindow.addEventListener(\"click\", evt => {\r\n    if (evt.target === modal)\r\n        modal.style.display = \"none\";\r\n});\r\n/* Close Modal Event */\r\n\n\n//# sourceURL=webpack:///./public/ts/login.ts?");
+eval("/* Get Element */\r\nconst modal = document.getElementById(\"loginModal\");\r\nconst modalBtn = document.querySelector(\".header__menu--login\");\r\n/* Open Modal Event */\r\nmodalBtn.addEventListener(\"click\", () => {\r\n    modal.style.display = \"block\";\r\n});\r\n/* Click Outside and Close */\r\nwindow.addEventListener(\"click\", evt => {\r\n    if (evt.target === modal)\r\n        modal.style.display = \"none\";\r\n});\r\n/* Close Modal Event */\r\n\n\n//# sourceURL=webpack:///./public/ts/login.ts?");
 
 /***/ }),
 

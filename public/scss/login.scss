@@ -1,10 +1,50 @@
 #loginModal {
   display: none;
+  position: fixed;
   z-index: 1;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  background-color: black;
+  height: 480px;
+  width: 800px;
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+
+  .modal__columns {
+    display: flex;
+    height: 100%;
+
+    .modal__column {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+
+      .modal__nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgb(25, 150, 214);
+        height: 100%;
+        padding: 30px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+
+        .modal__nav__footer {
+          img {
+            width: 100px;
+          }
+        }
+      }
+
+      .modal__contents {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .form {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
 }

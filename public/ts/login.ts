@@ -1,6 +1,6 @@
 /* Get Element */
 const modal: HTMLElement = document.getElementById("loginModal");
-const modalBtn: HTMLElement = document.getElementById("modalBtn");
+const modalBtn: HTMLElement = document.querySelector(".header__menu--login");
 
 /* Open Modal Event */
 modalBtn.addEventListener("click", () => {
