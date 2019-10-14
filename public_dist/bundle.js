@@ -104,7 +104,7 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./publ
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("/* Get Element */\r\nconst modal = document.getElementById(\"loginModal\");\r\nconst modalBtn = document.querySelector(\".header__menu--login\");\r\n/* Open Modal Event */\r\nmodalBtn.addEventListener(\"click\", () => {\r\n    modal.style.display = \"block\";\r\n});\r\n/* Click Outside and Close */\r\nwindow.addEventListener(\"click\", evt => {\r\n    if (evt.target === modal)\r\n        modal.style.display = \"none\";\r\n});\r\n/* Close Modal Event */\r\n\n\n//# sourceURL=webpack:///./public/ts/login.ts?");
+eval("/* Get Element */\nconst modal = document.getElementById(\"loginModal\");\nconst modalBtn = document.querySelector(\".header__menu--login\");\n/* Open Modal Event */\nmodalBtn.addEventListener(\"click\", () => {\n    modal.style.display = \"block\";\n});\n/* Click Outside and Close */\nwindow.addEventListener(\"click\", evt => {\n    if (evt.target === modal)\n        modal.style.display = \"none\";\n});\n/* Close Modal Event */\n\n\n//# sourceURL=webpack:///./public/ts/login.ts?");
 
 /***/ }),
 
@@ -116,7 +116,7 @@ eval("/* Get Element */\r\nconst modal = document.getElementById(\"loginModal\")
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\r\n__webpack_require__(/*! ./login.ts */ \"./public/ts/login.ts\");\r\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n__webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\n__webpack_require__(/*! ./login.ts */ \"./public/ts/login.ts\");\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
 
 /***/ })
 
