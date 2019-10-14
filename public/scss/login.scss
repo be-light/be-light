@@ -39,6 +39,15 @@
       .modal__contents {
         display: flex;
         flex-direction: column;
+        .modal__contents--block {
+          display: flex;
+          justify-content: flex-end;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
       }
     }
 
