@@ -1,4 +1,6 @@
 import Axios from "axios";
+import * as Cookies from "js-cookie";
+
 /* Get Element */
 const body: HTMLElement = document.querySelector("body");
 
@@ -98,3 +100,5 @@ loginButton.addEventListener("click", () => {
       }
     });
 });
+
+export declare const PUBLIC_USER = "whatever";
