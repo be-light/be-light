@@ -21,6 +21,11 @@
   },
   "homepage": "https://github.com/be-light/be-light#readme",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/runtime": "^7.6.3",
     "@types/bluebird": "^3.5.27",
     "@types/body-parser": "^1.17.0",
     "@types/cookie-parser": "^1.4.1",
@@ -69,6 +74,10 @@
     "webpack-watch-server": "^1.2.1"
   },
   "dependencies": {
-    "@types/es6-promise": "^3.3.0"
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/es6-promise": "^3.3.0",
+    "babel-loader": "^8.0.6"
   }
 }

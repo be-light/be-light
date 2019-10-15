@@ -8,9 +8,9 @@ import * as https from "https";
 const HTTP_PORT: any = process.env.HTTP_PORT;
 const HTTPS_PORT: any = process.env.HTTPS_PORT;
 
-/* Sequelize Sync */
-sequelize.sync({ force: false });
-
 /* Server Start */
 http.createServer(app).listen(HTTP_PORT);
-https.createServer({}, app).listen(HTTPS_PORT);
+const SERVER = https.createServer({}, app).listen(HTTPS_PORT, async () => {
+  /* Sequelize Sync */
+  await sequelize.sync({ force: false });
+});

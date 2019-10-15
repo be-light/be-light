@@ -4,27 +4,28 @@ import {
   Table,
   PrimaryKey,
   Unique,
-  AutoIncrement
+  AutoIncrement,
+  DataType
 } from "sequelize-typescript";
 
 @Table
 export class User extends Model<User> {
   @PrimaryKey
-  @Column
+  @Column(DataType.TEXT)
   public userId!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public userPassword!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public userName!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public userEmail!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public userPhoneNumber!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public userAddress!: string;
 }

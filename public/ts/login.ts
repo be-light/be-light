@@ -2,6 +2,10 @@ import Axios from "axios";
 import * as Cookies from "js-cookie";
 
 /* Get Element */
+export const PUBLIC_USER = Cookies.get("public_user")
+  ? JSON.parse(Cookies.get("public_user").slice(2))
+  : null;
+
 const body: HTMLElement = document.querySelector("body");
 
 const modal: HTMLElement = document.getElementById("loginModal");
@@ -100,5 +104,3 @@ loginButton.addEventListener("click", () => {
       }
     });
 });
-
-export declare const PUBLIC_USER = "whatever";

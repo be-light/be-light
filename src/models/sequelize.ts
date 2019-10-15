@@ -13,12 +13,12 @@ const config = {
   password: process.env.MYSQL_PASSWORD,
   host: process.env.MYSQL_HOST,
   dialect: process.env.MYSQL_DIALECT,
-  modelPaths: [__dirname + "/models"],
-  modelMatch: (filename, member) => {
+  modelPaths: [__dirname + "/models"]
+  /*modelMatch: (filename, member) => {
     return (
       filename.substring(0, filename.indexOf(".model")) === member.toLowerCase()
     );
-  }
+  }*/
 };
 
 /* create sequelize instance */

@@ -4,43 +4,44 @@ import {
   Table,
   PrimaryKey,
   Unique,
-  AutoIncrement
+  AutoIncrement,
+  DataType
 } from "sequelize-typescript";
 
 @Table
 export class Host extends Model<Host> {
   @AutoIncrement
   @PrimaryKey
-  @Column
+  @Column(DataType.INTEGER)
   public hostIdx!: number;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostUserId!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostName!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostTel!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostAddress!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostPostalCode!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostLatitude!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostLongitude!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostIntro!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostOpenTime!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostCloseTime!: string;
 }

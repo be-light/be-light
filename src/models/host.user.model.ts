@@ -4,24 +4,25 @@ import {
   Table,
   PrimaryKey,
   Unique,
-  AutoIncrement
+  AutoIncrement,
+  DataType
 } from "sequelize-typescript";
 
 @Table
 export class HostUser extends Model<HostUser> {
   @PrimaryKey
-  @Column
+  @Column(DataType.TEXT)
   public hostUserId!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostUserPassword!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostUserName!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostUserEmail!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostUserPhoneNumber!: string;
 }

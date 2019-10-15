@@ -4,37 +4,38 @@ import {
   Table,
   PrimaryKey,
   Unique,
-  AutoIncrement
+  AutoIncrement,
+  DataType
 } from "sequelize-typescript";
 
 @Table
 export class UserOrder extends Model<UserOrder> {
-  @Column
+  @Column(DataType.TEXT)
   public userId!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public checkIn!: Date;
 
-  @Column
+  @Column(DataType.DATE)
   public checkOut!: Date;
 
-  @Column
+  @Column(DataType.INTEGER)
   public paid!: number;
 
-  @Column
+  @Column(DataType.TEXT)
   public hostIdx!: string;
 
-  @Column
+  @Column(DataType.TEXT)
   public gHostIdx!: string;
 
-  @Column
+  @Column(DataType.INTEGER)
   public itemCount!: number;
 
-  @Column
+  @Column(DataType.INTEGER)
   public statusCode!: number;
 
   @PrimaryKey
   @AutoIncrement
-  @Column
+  @Column(DataType.INTEGER)
   public reciptNumber!: number;
 }
