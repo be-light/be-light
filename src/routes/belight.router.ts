@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import * as multer from "multer";
 import UserController from "../controllers/user.controller";
 import HostUserController from "../controllers/host.user.controller";
 import HostController from "../controllers/host.controller";
@@ -17,6 +18,16 @@ export class Routes {
       });
     });
 
+    /* API test */
+    app
+      .route("/api/test")
+      .post(multer().none(), (req: Request, res: Response) => {
+        const formdata = req.body;
+        console.log(formdata);
+
+        res.json(req.body);
+      });
+
     /* change test page routing */
     app.route("/test").get((req: Request, res: Response) => {
       res.render("test", {
@@ -27,30 +38,32 @@ export class Routes {
 
     // User =====
     /* User Login */
-    app.route("/api/auth/login").post((req: Request, res: Response) => {
-      let id: string = req.body.userId;
-      let pw: string = req.body.userPassword;
-      if (req.cookies.user) {
-        res.redirect("/");
-        return;
-      }
+    app
+      .route("/api/auth/login")
+      .post(multer().none(), (req: Request, res: Response) => {
+        let id: string = req.body.userId;
+        let pw: string = req.body.userPassword;
+        if (req.cookies.user) {
+          res.redirect("/");
+          return;
+        }
 
-      UserController.login(id, pw)
-        .then(user => {
-          let token: string = expressJWT.getToken(user);
-          let public_info = {
-            userName: user.userName,
-            userEmail: user.userEmail
-          };
+        UserController.login(id, pw)
+          .then(user => {
+            let token: string = expressJWT.getToken(user);
+            let public_info = {
+              userName: user.userName,
+              userEmail: user.userEmail
+            };
 
-          res.cookie("public_user", public_info);
-          res.cookie("user", token); // token save - req.cookies.user
-          res.json({ status: 200, token: token }); // return token
-        })
-        .catch(msg => {
-          res.json({ status: 400, msg: msg });
-        });
-    });
+            res.cookie("public_user", public_info);
+            res.cookie("user", token); // token save - req.cookies.user
+            res.json({ status: 200, token: token }); // return token
+          })
+          .catch(msg => {
+            res.json({ status: 400, msg: msg });
+          });
+      });
 
     /* User Register */
     app.route("/api/auth/register").post((req: Request, res: Response) => {

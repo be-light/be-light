@@ -1,3 +1,4 @@
+import Axios from "axios";
 /* Get Element */
 const body: HTMLElement = document.querySelector("body");
 
@@ -6,13 +7,17 @@ const modalBtn: HTMLElement = document.querySelector(".header__menu--login");
 const closeBtn: HTMLElement = document.querySelector(".closeBtn");
 const contents: HTMLElement = document.querySelector("#contents");
 
-const loginForm: HTMLElement = document.querySelector(".loginForm");
+const loginForm: HTMLFormElement = document.querySelector(".loginForm");
 const loginFooter: HTMLElement = document.querySelector(".login__footer");
 const loginLink: HTMLElement = document.querySelector(".login--link");
+const loginButton: HTMLButtonElement = document.querySelector(".loginButton");
 
 const registerFooter: HTMLElement = document.querySelector(".register__footer");
-const registerForm: HTMLElement = document.querySelector(".registerForm");
+const registerForm: HTMLFormElement = document.querySelector(".registerForm");
 const registerLink: HTMLElement = document.querySelector(".register--link");
+const registerButton: HTMLButtonElement = document.querySelector(
+  ".registerButton"
+);
 
 const navTitle: HTMLElement = document.querySelector(
   ".modal__nav__header--title"
@@ -72,3 +77,24 @@ const initializeModal = () => {
   registerFooter.style.display = "none";
   loginFooter.style.display = "block";
 };
+
+/* Login Submit Function */
+loginButton.addEventListener("click", () => {
+  const form = new FormData(loginForm);
+  Axios({
+    method: "POST",
+    url: "/api/auth/login",
+    data: form,
+    headers: { "Content-Type": "multipart/form-data" }
+  })
+    .then(response => {
+      return response.data;
+    })
+    .then(result => {
+      if (result.status === 200) {
+        location.href = "/";
+      } else {
+        alert("ID or Password is not valid.");
+      }
+    });
+});

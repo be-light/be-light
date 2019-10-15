@@ -1,6 +1,5 @@
 import * as express from "express";
 import * as path from "path";
-import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as methodOverride from "method-override";
 import { Routes } from "./routes/belight.router";
@@ -17,8 +16,9 @@ class App {
     this.app.set("view engine", "pug");
 
     /* use body-parser */
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    /* Deprecated */
+    //this.app.use(bodyParser.json());
+    //this.app.use(bodyParser.urlencoded({ extended: false }));
 
     /* use method-override */
     this.app.use(methodOverride("_method"));
