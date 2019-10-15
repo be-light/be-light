@@ -11,14 +11,26 @@ div#loginModal
         div.modal__column.form
             div.modal__contents
                 div.modal__contents--block
-                    img(src="images/cancel.png" alt="cancel" class="modal__contents--cancelBtn")
+                    img(src="images/cancel.png" alt="cancel" class="modal__contents--cancelBtn closeBtn")
                 
-                input(type="text" name="userId" class="modal__contents__input" placeholder="ID")
-                input(type="password" name="userPassword" class="modal__contents__input" placeholder="Password")
-                input(type="submit" class="loginButton")
-            div.modal__footer
-                p.forget--link Forgot Password
-                span.register--text No Account?
-                span.register--link Register now
-                
+                form(class="loginForm" method="POST" action="/api/auth/login")
+                    input(type="text" name="userId" class="modal__contents__input" placeholder="User ID")
+                    input(type="password" name="userPassword" class="modal__contents__input" placeholder="Password")
+                    input(type="submit" class="loginButton" value="Login")
+
+                form(class="registerForm" method="POST" action="/api/auth/register")
+                    input(type="text" name="userId" class="modal__contents__input" placeholder="User ID")
+                    input(type="password" name="userPassword" class="modal__contents__input" placeholder="Password")
+                    input(type="text" name="userName" class="modal__contents__input" placeholder="User Name")
+                    input(type="text" name="userEmail" class="modal__contents__input" placeholder="User Email")
+                    input(type="text" name="userPhoneNumber" class="modal__contents__input" placeholder="User PhoneNumber")
+                    input(type="text" name="userAddress" class="modal__contents__input" placeholder="User Address")
+                    input(type="submit" class="registerButton" value="Register")
+
+            div.modal__footer.login__footer
+                p.forget--link.strongText Forgot Password
+                span.register--text No Account? <span class="register--link strongText">Register now</span>
+            
+            div.modal__footer.register__footer
+                    span.register--text Already have a BeLight account? <span class="login--link strongText">Login</span
                     

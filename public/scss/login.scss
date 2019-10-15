@@ -79,21 +79,26 @@
           }
         }
 
-        .modal__contents__input,
-        .loginButton {
-          width: 90%;
-          height: 30px;
-          border-radius: 20px;
-          border: 1px solid #565556;
-          text-align: center;
-          margin-bottom: 8px;
-        }
+        .loginForm,
+        .registerForm {
+          .modal__contents__input,
+          .loginButton,
+          .registerButton {
+            width: 90%;
+            height: 30px;
+            border-radius: 20px;
+            border: 1px solid #aaaaaa;
+            text-align: center;
+            margin-bottom: 8px;
+          }
 
-        .loginButton {
-          border: none;
-          background-color: #1996d6;
-          color: white;
-          cursor: pointer;
+          .loginButton,
+          .registerButton {
+            border: none;
+            background-color: #1996d6;
+            color: white;
+            cursor: pointer;
+          }
         }
       }
     }
@@ -102,6 +107,33 @@
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
       justify-content: center;
+      text-align: center;
+      position: relative;
+
+      .modal__footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 20px;
+
+        .forget--link {
+          margin: 20px;
+        }
+
+        p,
+        span {
+          font-size: 12px;
+        }
+      }
     }
   }
+}
+
+.strongText {
+  color: #36a3db;
+  font-weight: 900;
+  cursor: pointer;
 }
