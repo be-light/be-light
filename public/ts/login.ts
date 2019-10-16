@@ -134,3 +134,27 @@ loginButton.addEventListener("click", () => {
       }
     });
 });
+
+/* Register Submit Function */
+
+registerButton.addEventListener("click", () => {
+  const form = new FormData(registerForm);
+  Axios({
+    method: "POST",
+    url: "/api/auth/register",
+    data: form,
+    headers: { "Content-Type": "multipart/form-data" }
+  })
+    .then(response => {
+      return response.data;
+    })
+
+    .then(result => {
+      if (result.status === 200) {
+        alert("환영합니다!");
+        location.href = "/";
+      } else {
+        alert("Something Error.");
+      }
+    });
+});

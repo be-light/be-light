@@ -66,29 +66,31 @@ export class Routes {
       });
 
     /* User Register */
-    app.route("/api/auth/register").post((req: Request, res: Response) => {
-      if (req.cookies.user) {
-        res.redirect("/");
-        return;
-      }
+    app
+      .route("/api/auth/register")
+      .post(multer().none(), (req: Request, res: Response) => {
+        if (req.cookies.user) {
+          res.redirect("/");
+          return;
+        }
 
-      let reqUser: object = {
-        id: req.body.userId,
-        pw: req.body.userPassword,
-        name: req.body.userName,
-        email: req.body.userEmail,
-        phone: req.body.userPhoneNumber,
-        address: req.body.userAddress
-      };
+        let reqUser: object = {
+          id: req.body.userId,
+          pw: req.body.userPassword,
+          name: req.body.userName,
+          email: req.body.userEmail,
+          phone: req.body.userPhoneNumber,
+          address: req.body.userAddress
+        };
 
-      UserController.register(reqUser)
-        .then(user => {
-          res.json(user);
-        })
-        .catch(msg => {
-          res.json({ status: 400, msg: msg });
-        });
-    });
+        UserController.register(reqUser)
+          .then(user => {
+            res.json(user);
+          })
+          .catch(msg => {
+            res.json({ status: 400, msg: msg });
+          });
+      });
 
     /* Bring User Profile */
     app.route("/api/user").get((req: Request, res: Response) => {
