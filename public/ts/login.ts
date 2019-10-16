@@ -1,160 +1,197 @@
 import Axios from "axios";
 import * as Cookies from "js-cookie";
 
-/* Get Element */
-const PUBLIC_USER = Cookies.get("public_user")
-  ? JSON.parse(Cookies.get("public_user").slice(2))
-  : null;
+class LoginWithRegister {
+  public PUBLIC_USER: any;
+  public body: HTMLBodyElement;
+  public headerMenu: HTMLMenuElement;
+  public headerLoginButton: HTMLButtonElement;
+  public modal: HTMLElement;
+  public modalBtn: HTMLUListElement;
+  public closeBtn: HTMLImageElement;
+  public contents: HTMLElement;
+  public loginForm: HTMLFormElement;
+  public loginFooter: HTMLDivElement;
+  public loginLink: HTMLSpanElement;
+  public loginButton: HTMLButtonElement;
+  public registerFooter: HTMLElement;
+  public registerForm: HTMLFormElement;
+  public registerLink: HTMLSpanElement;
+  public registerButton: HTMLButtonElement;
+  public navTitle: HTMLParagraphElement;
 
-const body: HTMLElement = document.querySelector("body");
+  constructor() {
+    /* User Cookies Check */
+    this.PUBLIC_USER = Cookies.get("public_user")
+      ? JSON.parse(Cookies.get("public_user").slice(2))
+      : null;
 
-const headerMenu: HTMLMenuElement = document.querySelector(".header__menu");
-const headerLoginButton: HTMLUListElement = document.querySelector(
-  ".header__menu--login"
-);
+    this.body = document.querySelector("body");
+    this.headerMenu = document.querySelector(".header__menu");
+    this.headerLoginButton = document.querySelector(".header__menu--login");
 
-const modal: HTMLElement = document.getElementById("loginModal");
-const modalBtn: HTMLElement = document.querySelector(".header__menu--login");
-const closeBtn: HTMLElement = document.querySelector(".closeBtn");
-const contents: HTMLElement = document.querySelector("#contents");
+    this.modal = document.getElementById("loginModal");
+    this.modalBtn = document.querySelector(".header__menu--login");
+    this.closeBtn = document.querySelector(".closeBtn");
+    this.contents = document.querySelector("#contents");
 
-const loginForm: HTMLFormElement = document.querySelector(".loginForm");
-const loginFooter: HTMLElement = document.querySelector(".login__footer");
-const loginLink: HTMLElement = document.querySelector(".login--link");
-const loginButton: HTMLButtonElement = document.querySelector(".loginButton");
+    this.loginForm = document.querySelector(".loginForm");
+    this.loginFooter = document.querySelector(".login__footer");
+    this.loginLink = document.querySelector(".login--link");
+    this.loginButton = document.querySelector(".loginButton");
 
-const registerFooter: HTMLElement = document.querySelector(".register__footer");
-const registerForm: HTMLFormElement = document.querySelector(".registerForm");
-const registerLink: HTMLElement = document.querySelector(".register--link");
-const registerButton: HTMLButtonElement = document.querySelector(
-  ".registerButton"
-);
+    this.registerFooter = document.querySelector(".register__footer");
+    this.registerForm = document.querySelector(".registerForm");
+    this.registerLink = document.querySelector(".register--link");
+    this.registerButton = document.querySelector(".registerButton");
 
-const navTitle: HTMLElement = document.querySelector(
-  ".modal__nav__header--title"
-);
+    this.navTitle = document.querySelector(".modal__nav__header--title");
 
-/* Login Check */
-if (PUBLIC_USER) {
-  const newMenu: HTMLElement = document.createElement("li");
-  newMenu.className = "header__menu--logout";
-  newMenu.innerText = "로그아웃";
+    /* Hide Register Form */
+    this.registerForm.style.display = "none";
+    this.registerFooter.style.display = "none";
 
-  newMenu.addEventListener("click", () => {
-    if (confirm("로그아웃 하시겠습니까?")) {
-      Cookies.remove("user");
-      Cookies.remove("public_user");
-      location.href = "/";
+    this.setRegisterLinkEventListener();
+    this.setLoginLinkEventListener();
+    this.setModalBtnEventListener();
+    this.setModalBtnEventListener();
+    this.setOutsideEventListener();
+    this.setCloseBtnEventListener();
+    this.setSubmitEventListener();
+    this.loginCheck();
+  }
+
+  public loginCheck = () => {
+    if (this.PUBLIC_USER) {
+      const newMenu: HTMLElement = document.createElement("li");
+      newMenu.className = "header__menu--logout";
+      newMenu.innerText = "로그아웃";
+
+      newMenu.addEventListener("click", () => {
+        if (confirm("로그아웃 하시겠습니까?")) {
+          Cookies.remove("user");
+          Cookies.remove("public_user");
+          location.href = "/";
+        }
+      });
+
+      this.headerLoginButton.style.display = "none";
+      this.headerMenu.appendChild(newMenu);
+    } else {
+      const oldMenu: HTMLUListElement = document.querySelector(
+        ".header__menu--logout"
+      );
+
+      this.headerLoginButton.style.display = "inline";
+      oldMenu ? this.headerMenu.removeChild(oldMenu) : "";
     }
-  });
+  };
 
-  headerLoginButton.style.display = "none";
-  headerMenu.appendChild(newMenu);
-} else {
-  const oldMenu: HTMLUListElement = document.querySelector(
-    ".header__menu--logout"
-  );
+  /* Open Register Form Event */
+  public setRegisterLinkEventListener = () => {
+    this.registerLink.addEventListener("click", () => {
+      this.loginForm.style.display = "none";
+      this.registerForm.style.display = "block";
+      this.registerLink.innerText = "Login";
+      this.navTitle.innerText = "Register";
+      this.loginFooter.style.display = "none";
+      this.registerFooter.style.display = "block";
+    });
+  };
 
-  headerLoginButton.style.display = "inline";
-  oldMenu ? headerMenu.removeChild(oldMenu) : "";
+  /* Open Login Event */
+  public setLoginLinkEventListener = () => {
+    this.loginLink.addEventListener("click", () => {
+      this.initializeModal();
+    });
+  };
+
+  /* Initialize Modal Function */
+  public initializeModal = () => {
+    this.contents.style.opacity = "1.0";
+    this.registerForm.style.display = "none";
+    this.registerLink.innerText = "Register now";
+    this.navTitle.innerText = "Login";
+    this.loginForm.style.display = "block";
+    this.registerFooter.style.display = "none";
+    this.loginFooter.style.display = "block";
+  };
+
+  /* Open Modal Event */
+  public setModalBtnEventListener = () => {
+    this.modalBtn.addEventListener("click", () => {
+      this.modal.style.display = "block";
+      this.contents.style.opacity = "0.5";
+    });
+  };
+
+  /* Set Outside Click EventListener */
+  public setOutsideEventListener = () => {
+    window.addEventListener("click", evt => {
+      if (evt.target === this.body) {
+        this.closeModalEvent();
+        this.initializeModal();
+      }
+    });
+  };
+
+  /* Set Close Modal EventListener */
+  public setCloseBtnEventListener = () => {
+    this.closeBtn.addEventListener("click", () => {
+      this.closeModalEvent();
+      this.initializeModal();
+    });
+  };
+
+  /* Close Modal Event Function */
+  public closeModalEvent = () => {
+    this.modal.style.display = "none";
+  };
+
+  /* Set Submit EventListeners */
+  public setSubmitEventListener = () => {
+    this.loginButton.addEventListener("click", () => {
+      const form = new FormData(this.loginForm);
+      Axios({
+        method: "POST",
+        url: "/api/auth/login",
+        data: form,
+        headers: { "Content-Type": "multipart/form-data" }
+      })
+        .then(response => {
+          return response.data;
+        })
+        .then(result => {
+          if (result.status === 200) {
+            location.href = "/";
+          } else {
+            alert("ID or Password is not valid.");
+          }
+        });
+    });
+
+    this.registerButton.addEventListener("click", () => {
+      const form = new FormData(this.registerForm);
+      Axios({
+        method: "POST",
+        url: "/api/auth/register",
+        data: form,
+        headers: { "Content-Type": "multipart/form-data" }
+      })
+        .then(response => {
+          return response.data;
+        })
+
+        .then(result => {
+          if (result.status === 200) {
+            alert("환영합니다!");
+            location.href = "/";
+          } else {
+            alert("Something Error.");
+          }
+        });
+    });
+  };
 }
 
-/* Hide Register Form */
-registerForm.style.display = "none";
-registerFooter.style.display = "none";
-
-/* Open Register Form Event */
-registerLink.addEventListener("click", () => {
-  loginForm.style.display = "none";
-  registerForm.style.display = "block";
-  registerLink.innerText = "Login";
-  navTitle.innerText = "Register";
-  loginFooter.style.display = "none";
-  registerFooter.style.display = "block";
-});
-
-/* Open Login Event */
-loginLink.addEventListener("click", () => {
-  initializeModal();
-});
-
-/* Open Modal Event */
-modalBtn.addEventListener("click", () => {
-  modal.style.display = "block";
-  contents.style.opacity = "0.5";
-});
-
-/* Click Outside and Close */
-window.addEventListener("click", evt => {
-  if (evt.target === body) {
-    closeModalEvent();
-    initializeModal();
-  }
-});
-
-/* Close Modal Event */
-closeBtn.addEventListener("click", () => {
-  closeModalEvent();
-  initializeModal();
-});
-
-/* Close Modal Event Function */
-const closeModalEvent = () => {
-  modal.style.display = "none";
-};
-
-/* Initialize Modal Function */
-const initializeModal = () => {
-  contents.style.opacity = "1.0";
-  registerForm.style.display = "none";
-  registerLink.innerText = "Register now";
-  navTitle.innerText = "Login";
-  loginForm.style.display = "block";
-  registerFooter.style.display = "none";
-  loginFooter.style.display = "block";
-};
-
-/* Login Submit Function */
-loginButton.addEventListener("click", () => {
-  const form = new FormData(loginForm);
-  Axios({
-    method: "POST",
-    url: "/api/auth/login",
-    data: form,
-    headers: { "Content-Type": "multipart/form-data" }
-  })
-    .then(response => {
-      return response.data;
-    })
-    .then(result => {
-      if (result.status === 200) {
-        location.href = "/";
-      } else {
-        alert("ID or Password is not valid.");
-      }
-    });
-});
-
-/* Register Submit Function */
-
-registerButton.addEventListener("click", () => {
-  const form = new FormData(registerForm);
-  Axios({
-    method: "POST",
-    url: "/api/auth/register",
-    data: form,
-    headers: { "Content-Type": "multipart/form-data" }
-  })
-    .then(response => {
-      return response.data;
-    })
-
-    .then(result => {
-      if (result.status === 200) {
-        alert("환영합니다!");
-        location.href = "/";
-      } else {
-        alert("Something Error.");
-      }
-    });
-});
+export default new LoginWithRegister();
