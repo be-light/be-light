@@ -29,7 +29,7 @@ function initMap() {
     types: ["geocode"]
   });
 }
-
+/*
 function createMarker(map, host) {
   let marker = new google.maps.Marker({
     map: map,
@@ -50,15 +50,15 @@ function createMarker(map, host) {
     infoWindow.open(map, marker);
   });
   return marker;
-}
+}*/
 
 // Old Version
 
-var search__form = document.querySelector(".search__form");
-var search__text = document.querySelector(".search__text");
+//var search__form = document.querySelector(".search__form");
+//var search__text = document.querySelector(".search__text");
 
 /* Search Address */
-function findAddress(event) {
+/*function findAddress(event) {
   event.preventDefault();
   geocoder.geocode(
     {
@@ -84,6 +84,6 @@ function findAddress(event) {
         });
     }
   );
-}
+}*/
 
-search__form.addEventListener("submit", findAddress);
+//search__form.addEventListener("submit", findAddress);
