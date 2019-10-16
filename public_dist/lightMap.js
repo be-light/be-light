@@ -24,10 +24,10 @@ function initMap() {
 
   geocoder = new google.maps.Geocoder();
 
-  const input = document.getElementById("searchTextField");
+  /*const input = document.getElementById("searchTextField");
   let autocomplete = new google.maps.places.Autocomplete(input, {
     types: ["geocode"]
-  });
+  });*/
 }
 /*
 function createMarker(map, host) {

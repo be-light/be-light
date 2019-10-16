@@ -3,14 +3,20 @@ class BeLightHeader {
   public searchButton: HTMLButtonElement;
   public startDate: HTMLInputElement;
   public endDate: HTMLInputElement;
+  public spanBagCount: HTMLSpanElement;
   public bagCount: HTMLInputElement;
+  public plusButton: HTMLImageElement;
+  public minusButton: HTMLImageElement;
 
   constructor() {
     this.LOGO = document.querySelector(".header__left--logo");
     this.searchButton = document.querySelector(".intro__searchform--submitbtn");
     this.startDate = document.querySelector(".startDate");
     this.endDate = document.querySelector(".endDate");
+    this.spanBagCount = document.querySelector(".intro__searchform--bagcount");
     this.bagCount = document.querySelector("input[name=bagCount]");
+    this.plusButton = document.querySelector(".plusButton");
+    this.minusButton = document.querySelector(".minusButton");
 
     /* Add All EventListeners */
     this.addEvents();
@@ -22,12 +28,27 @@ class BeLightHeader {
       location.href = "/";
     });
 
-    /* Click Seach Button Event */
-    this.searchButton.addEventListener("click", () => {
-      console.log(this.startDate.value);
-      console.log(this.endDate.value);
-      console.log(this.bagCount.value);
-    });
+    /* Click PlusButton & Minus ButtonEvent */
+    if (this.plusButton && this.minusButton) {
+      this.plusButton.addEventListener("click", () => {
+        this.bagCount.value = (
+          Number.parseInt(this.bagCount.value) + 1
+        ).toString();
+
+        this.spanBagCount.innerText = this.bagCount.value;
+      });
+
+      this.minusButton.addEventListener("click", () => {
+        let temp = Number.parseInt(this.bagCount.value);
+
+        if (temp - 1 <= 0) {
+          alert("최소 1개를 선택해야 합니다.");
+        } else {
+          this.bagCount.value = (temp - 1).toString();
+          this.spanBagCount.innerText = this.bagCount.value;
+        }
+      });
+    }
   };
 }
 

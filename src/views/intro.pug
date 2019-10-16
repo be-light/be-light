@@ -9,7 +9,7 @@ section#intro
             img(src="images/appstore.png" alt="appstore" class="intro__contents__store--appstoreimg storeimg")
             img(src="images/googlestore.png" alt="googlestore" class="intro__contents__store--googlestoreimg storeimg")
 
-    form.intro__searchform
+    form(action="/place" method="GET" class="intro__searchform")
         img(src="images/menu.png", alt="menu" class="intro__searchform--menu icon--menu")
 
         div.intro__searchform--block
@@ -29,10 +29,10 @@ section#intro
             span.intro__searchform--baglabel 개수 &nbsp;
             span.intro__searchform--bagcount 0
             input(type="hidden" name="bagCount" value="0")
-            img(src="images/minus.png" alt="minus" class="intro__searchform--minusbtn icon--sm")
-            img(src="images/plus.png" alt="plus" class="intro__searchform--plusbtn icon--sm")
+            img(src="images/minus.png" alt="minus" class="intro__searchform--minusbtn icon--sm minusButton")
+            img(src="images/plus.png" alt="plus" class="intro__searchform--plusbtn icon--sm plusButton")
 
-        input(type="button" value="Search" class="intro__searchform--submitbtn")
+        input(type="submit" value="Search" class="intro__searchform--submitbtn")
 
     div.intro__footer
         img(src="images/intro_footer1.png" alt="intro_footer1" class="intro__footer--img")
