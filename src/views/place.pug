@@ -1,0 +1,13 @@
+doctype html
+html(lang="ko")
+    head
+        title #{title}
+        link(href="app.css" rel="stylesheet")
+    body
+        include header.pug
+        main#contents
+            include hosts.pug
+        include login.pug
+        include footer.pug
+        
+        script(src="bundle.js")

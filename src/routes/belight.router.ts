@@ -18,6 +18,13 @@ export class Routes {
       });
     });
 
+    /* Place Page Routing */
+    app.route("/place").get(multer().none(), (req: Request, res: Response) => {
+      res.render("place", {
+        title: "BeLight Search Places"
+      });
+    });
+
     /* API test */
     app
       .route("/api/test")
