@@ -14,16 +14,21 @@ section#intro
 
         div.intro__searchform--block
             img(src="images/markerpin01.png" alt="markerpin01" class="intro__searchform--pin icon--sm")
-            input(type="text" placeholder="Where? City, Street, Postal" class="input__place")
+            input(type="text" placeholder="짐을 맡길 장소" class="input__place" name="dropPlace")
 
         div.intro__searchform--block.space
             img(src="images/calendar.png" alt="calendar" class="intro__searchform--calendar icon--sm")
-            input(type="text" placeholder="Drop-off -> Pick-up")
+            input(type="text" placeholder="짐을 맡기는 날짜" name="startDate")
+
+        div.intro__searchform--block.space
+            img(src="images/calendar.png" alt="calendar" class="intro__searchform--calendar icon--sm")
+            input(type="text" placeholder="짐을 찾아가는 날짜" name="endDate")
 
         div.intro__searchform--block.space
             img(src="images/bag.png" alt="bag" class="intro__searchform--bag icon--sm")
-            span.intro__searchform--baglabel Choose your object &nbsp;
+            span.intro__searchform--baglabel 개수 &nbsp;
             span.intro__searchform--bagcount 0
+            input(type="hidden" name="bagCount" value="0")
             img(src="images/minus.png" alt="minus" class="intro__searchform--minusbtn icon--sm")
             img(src="images/plus.png" alt="plus" class="intro__searchform--plusbtn icon--sm")
 
