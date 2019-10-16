@@ -2,11 +2,16 @@ import Axios from "axios";
 import * as Cookies from "js-cookie";
 
 /* Get Element */
-export const PUBLIC_USER = Cookies.get("public_user")
+const PUBLIC_USER = Cookies.get("public_user")
   ? JSON.parse(Cookies.get("public_user").slice(2))
   : null;
 
 const body: HTMLElement = document.querySelector("body");
+
+const headerMenu: HTMLMenuElement = document.querySelector(".header__menu");
+const headerLoginButton: HTMLUListElement = document.querySelector(
+  ".header__menu--login"
+);
 
 const modal: HTMLElement = document.getElementById("loginModal");
 const modalBtn: HTMLElement = document.querySelector(".header__menu--login");
@@ -28,6 +33,31 @@ const registerButton: HTMLButtonElement = document.querySelector(
 const navTitle: HTMLElement = document.querySelector(
   ".modal__nav__header--title"
 );
+
+/* Login Check */
+if (PUBLIC_USER) {
+  const newMenu: HTMLElement = document.createElement("li");
+  newMenu.className = "header__menu--logout";
+  newMenu.innerText = "로그아웃";
+
+  newMenu.addEventListener("click", () => {
+    if (confirm("로그아웃 하시겠습니까?")) {
+      Cookies.remove("user");
+      Cookies.remove("public_user");
+      location.href = "/";
+    }
+  });
+
+  headerLoginButton.style.display = "none";
+  headerMenu.appendChild(newMenu);
+} else {
+  const oldMenu: HTMLUListElement = document.querySelector(
+    ".header__menu--logout"
+  );
+
+  headerLoginButton.style.display = "inline";
+  oldMenu ? headerMenu.removeChild(oldMenu) : "";
+}
 
 /* Hide Register Form */
 registerForm.style.display = "none";
