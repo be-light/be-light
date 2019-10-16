@@ -444,10 +444,11 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./publ
 /*!*****************************!*\
   !*** ./public/ts/header.ts ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var LOGO = document.querySelector(\".header__left--logo\");\nLOGO.addEventListener(\"click\", function () {\n  location.href = \"/\";\n});\n\n//# sourceURL=webpack:///./public/ts/header.ts?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ \"./node_modules/@babel/runtime/helpers/classCallCheck.js\");\n/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar BeLightHeader = function BeLightHeader() {\n  var _this = this;\n\n  _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, BeLightHeader);\n\n  this.LOGO = void 0;\n\n  this.addEvents = function () {\n    /* Click Move Event */\n    _this.LOGO.addEventListener(\"click\", function () {\n      location.href = \"/\";\n    });\n  };\n\n  this.LOGO = document.querySelector(\".header__left--logo\");\n  /* Add All EventListeners */\n\n  this.addEvents();\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (new BeLightHeader());\n\n//# sourceURL=webpack:///./public/ts/header.ts?");
 
 /***/ }),
 
@@ -471,7 +472,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bab
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _header_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header.ts */ \"./public/ts/header.ts\");\n/* harmony import */ var _header_ts__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_header_ts__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _login_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login.ts */ \"./public/ts/login.ts\");\n\n\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./public/scss/styles.scss\");\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _header_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header.ts */ \"./public/ts/header.ts\");\n/* harmony import */ var _login_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login.ts */ \"./public/ts/login.ts\");\n\n\n\n\n//# sourceURL=webpack:///./public/ts/main.ts?");
 
 /***/ })
 
