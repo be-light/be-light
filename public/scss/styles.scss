@@ -34,3 +34,19 @@ input {
   width: 500px;
   height: 500px;
 }
+
+/* GoogleMaps Autocomplete Input Styles */
+.pac-container {
+  width: 400px !important;
+  .pac-item {
+    padding: 10px 10px !important;
+    .pac-icon {
+      background-image: url("../../public_dist/svg/markerpin02.svg") !important;
+      background-size: 50px !important;
+    }
+
+    .pac-icon-marker {
+      background-position: center;
+    }
+  }
+}
