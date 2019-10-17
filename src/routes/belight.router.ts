@@ -21,10 +21,14 @@ export class Routes {
     /* Place Page Routing */
     app.route("/place").get(multer().none(), (req: Request, res: Response) => {
       const dropPlace = req.query.dropPlace;
-      if (!dropPlace) {
-      }
-      res.render("place", {
-        title: "BeLight Search Places"
+      const latitude = req.query.latitude;
+      const longitude = req.query.longitude;
+
+      MapController.getSearchHosts({ latitude, longitude }).then(list => {
+        res.render("place", {
+          title: "BeLight Search Places",
+          hostList: list
+        });
       });
     });
 
