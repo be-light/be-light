@@ -1,6 +1,6 @@
 var map;
 var geocoder;
-var ZOOM = 11;
+var ZOOM = 10;
 var prev_infowindow = false;
 
 function getQueryString() {
@@ -45,6 +45,15 @@ function showCurrentPosition(latLng) {
     map: map,
     draggable: false
   });
+
+  var infoWindow = new google.maps.InfoWindow({
+    content: "내 위치"
+  });
+
+  if (prev_infowindow) prev_infowindow.close();
+  prev_infowindow = infoWindow;
+
+  infoWindow.open(map, marker);
 }
 
 /* Initialize Google Maps */
