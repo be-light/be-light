@@ -1,6 +1,6 @@
 var map;
 var geocoder;
-var ZOOM = 12;
+var ZOOM = 11;
 var prev_infowindow = false;
 
 /* Initialize Google Maps */
