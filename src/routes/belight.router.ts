@@ -20,6 +20,9 @@ export class Routes {
 
     /* Place Page Routing */
     app.route("/place").get(multer().none(), (req: Request, res: Response) => {
+      const dropPlace = req.query.dropPlace;
+      if (!dropPlace) {
+      }
       res.render("place", {
         title: "BeLight Search Places"
       });
