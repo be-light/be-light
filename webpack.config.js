@@ -64,5 +64,23 @@ module.exports = [
         filename: "app.css"
       })
     ]
+  },
+  {
+    entry: "./public/js/belight_autocomplete.js",
+    output: {
+      filename: "bundle_autocomplete.js",
+      path: path.resolve(__dirname, "public_dist")
+    },
+    resolve: {
+      extensions: [".js", ".jsx", ".json"]
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js)x?$/,
+          loader: "babel-loader"
+        }
+      ]
+    }
   }
 ];
