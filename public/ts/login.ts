@@ -82,7 +82,9 @@ class LoginWithRegister {
         ".header__menu--logout"
       );
 
-      this.headerLoginButton.style.display = "inline";
+      this.headerLoginButton
+        ? (this.headerLoginButton.style.display = "inline")
+        : "";
       oldMenu ? this.headerMenu.removeChild(oldMenu) : "";
     }
   };
@@ -119,6 +121,7 @@ class LoginWithRegister {
 
   /* Open Modal Event */
   public setModalBtnEventListener = () => {
+    if (!this.modalBtn) return;
     this.modalBtn.addEventListener("click", () => {
       this.modal.style.display = "block";
       this.contents ? (this.contents.style.opacity = "0.5") : "";

@@ -3,6 +3,9 @@ html(lang="ko")
     head
         title #{title}
         link(href="app.css" rel="stylesheet")
+
+        script(src="bundle_maps.js")
+        script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap&libraries=places")
     body
         include header_place.pug
         main#place_contents
@@ -10,6 +13,5 @@ html(lang="ko")
         include login.pug
         include footer.pug
 
+        script(src="bundle_placecomplete.js")
         script(src="bundle.js")
-        script(src="bundle_maps.js")
-        script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap&libraries=places")

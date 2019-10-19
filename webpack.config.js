@@ -100,5 +100,23 @@ module.exports = [
         }
       ]
     }
+  },
+  {
+    entry: "./public/js/place_autocomplete.js",
+    output: {
+      filename: "bundle_placecomplete.js",
+      path: path.resolve(__dirname, "public_dist")
+    },
+    resolve: {
+      extensions: [".js", ".jsx", ".json"]
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js)x?$/,
+          loader: "babel-loader"
+        }
+      ]
+    }
   }
 ];
