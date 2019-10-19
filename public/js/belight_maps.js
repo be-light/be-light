@@ -174,6 +174,7 @@ class BeLightMaps {
         "hosts__columns__review--btn reviewButton";
       hostsColumnsReviewBtn.type = "button";
       hostsColumnsReviewBtn.value = "리뷰";
+      hostsColumnsReviewBtn.setAttribute("idx", hostList[i].hostIdx);
 
       for (let i = 0; i < 5; i++) {
         let starFull = document.createElement("img");
