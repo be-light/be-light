@@ -6,10 +6,12 @@ class BeLightMaps {
     }
     this.prev_infowindow = false;
 
-    const latitude = this.getQueryString("latitude");
-    const longitude = this.getQueryString("longitude");
+    this.latitude = Number.parseFloat(this.getQueryString("latitude"));
+    this.longitude = Number.parseFloat(this.getQueryString("longitude"));
 
-    fetch(`/api/map/hosts?latitude=${latitude}&longitude=${longitude}`)
+    fetch(
+      `/api/map/hosts?latitude=${this.latitude}&longitude=${this.longitude}`
+    )
       .then(response => {
         return response.json();
       })
@@ -25,8 +27,8 @@ class BeLightMaps {
     navigator.geolocation.getCurrentPosition(pos => {
       this.map = new google.maps.Map(document.getElementById("map"), {
         center: {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
+          lat: this.latitude,
+          lng: this.longitude
         },
         zoom: 10,
         fullscreenControl: false,
@@ -34,10 +36,7 @@ class BeLightMaps {
         mapTypeControl: false
       });
 
-      const latLng = new google.maps.LatLng(
-        pos.coords.latitude,
-        pos.coords.longitude
-      );
+      const latLng = new google.maps.LatLng(this.latitude, this.longitude);
 
       this.showCurrentPosition(latLng);
     });
