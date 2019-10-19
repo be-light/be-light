@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as bodyParser from "body-parser";
 import * as path from "path";
 import * as cookieParser from "cookie-parser";
 import * as methodOverride from "method-override";
@@ -17,8 +18,8 @@ class App {
 
     /* use body-parser */
     /* Deprecated */
-    //this.app.use(bodyParser.json());
-    //this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
 
     /* use method-override */
     this.app.use(methodOverride("_method"));
