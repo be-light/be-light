@@ -397,8 +397,8 @@ export class Routes {
     /* Get Hosts for Google Maps */
     app.route("/api/map/hosts").get((req: Request, res: Response) => {
       const pos = {
-        latitude: req.query.lat,
-        longitude: req.query.lng
+        latitude: req.query.latitude,
+        longitude: req.query.longitude
       };
 
       MapController.getSearchHosts(pos)

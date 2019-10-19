@@ -1,10 +1,20 @@
 class BeLightMaps {
-  constructor(map) {
+  constructor() {
     if (!navigator.geolocation) {
       alert("위치 서비스를 허용 해주세요.");
       location.href = "/";
     }
 
+    const latitude = this.getQueryString("latitude");
+    const longitude = this.getQueryString("longitude");
+
+    fetch(`/api/map/hosts?latitude=${latitude}&longitude=${longitude}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        this.createMarker(result);
+      });
     window.initMap = this.initMap;
   }
 
@@ -32,10 +42,9 @@ class BeLightMaps {
   };
 
   /* GET  QueryString from URL */
-  getQueryString = () => {
-    const url_string = window.location.href;
-    const url = new URL(url_string);
-    console.log(url);
+  getQueryString = key => {
+    const url = new URLSearchParams(window.location.search);
+    return url.get(key);
   };
 
   /* Show Current Position with Marker */
@@ -57,6 +66,24 @@ class BeLightMaps {
     });
 
     infoWindow.open(this.map, marker);
+  };
+
+  /* Create Marker of Hosts*/
+  createMarker = hosts => {
+    for (let i = 0; i < hosts.length; i++) {
+      let latLng = new google.maps.LatLng(
+        Number.parseInt(hosts[i].hostLatitude),
+        Number.parseInt(hosts[i].hostLongitude)
+      );
+
+      let marker = new google.maps.Marker({
+        map: this.map,
+        position: latLng,
+        title: "Host",
+        draggable: false,
+        icon: "/svg/markerpin02.svg"
+      });
+    }
   };
 }
 
