@@ -91,7 +91,27 @@ class BeLightMaps {
 
       google.maps.event.addListener(marker, "click", () => {
         let infoWindow = new google.maps.InfoWindow({
-          content: hosts[i].hostName
+          content: `
+            <div class="info__window">
+                <p class="info__window--hostName">${hosts[i].hostName}</p>
+                <div class="info__window--block">
+                    <img src="https://via.placeholder.com/150" alt="placeholder" />
+                </div>
+               <p class="info__window--hostTel">${hosts[i].hostTel}</p>
+               <p class="info__window--hostAddress">${hosts[i].hostAddress}</p>
+                <div class="info__window--block">
+                    Open <span class="info__window--hostOpenTime"> ${hosts[i].hostOpenTime}</span>
+                    Close <span class="info__window--hostCloseTime">${hosts[i].hostCloseTime}</span>
+                </div>
+
+                <div class="info__window--buttons">
+                    <input type="button" class="dropBtn info--btn" value="맡기기" idx="${hosts[i].hostIdx}"/>
+                    <input type="button" class="getBtn info--btn" value="찾기" idx="${hosts[i].hostIdx}"/>
+                </div>
+
+               
+            </div>
+          `
         });
 
         if (this.prev_infowindow) this.prev_infowindow.close();
