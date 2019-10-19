@@ -14,8 +14,8 @@ class BeLightMaps {
         return response.json();
       })
       .then(result => {
-        console.log(result);
         this.createMarker(result);
+        this.addHostList(result);
       });
     window.initMap = this.initMap;
   }
@@ -119,6 +119,89 @@ class BeLightMaps {
 
         infoWindow.open(this.map, marker);
       });
+    }
+  };
+
+  /* Insert Host Informations from Left Side Menu */
+  addHostList = hostList => {
+    console.log(hostList);
+    const hostsColumns = document.querySelector(".hosts__columns");
+    for (let i = 0; i < hostList.length; i++) {
+      const hostsColumn = document.createElement("div");
+      hostsColumn.className = "hosts__column";
+
+      const hostsColumnHeader = document.createElement("div");
+      hostsColumnHeader.className = "hosts__column__header";
+
+      const hostsColumnTitle = document.createElement("p");
+      hostsColumnTitle.className = "hosts__column--title";
+      hostsColumnTitle.innerText = "Tour Information Center";
+
+      const hostsColumnHeaderImages = document.createElement("div");
+      hostsColumnHeaderImages.className = "hosts__column__header--images";
+
+      const hostsColumnContents = document.createElement("div");
+      hostsColumnContents.className = "hosts__column__contents";
+
+      const hostsColumnContentsBlock = document.createElement("div");
+      hostsColumnContentsBlock.className = "hosts__column__contents--block";
+
+      const hostsColumnHostName = document.createElement("p");
+      hostsColumnHostName.className = "hosts__column--hostName";
+      hostsColumnHostName.innerHTML = hostList[i].hostName;
+
+      const hostsColumnHostTel = document.createElement("p");
+      hostsColumnHostTel.className = "hosts__column--hostTel";
+      hostsColumnHostTel.innerHTML = hostList[i].hostTel;
+
+      const hostsColumnHostAddress = document.createElement("p");
+      hostsColumnHostAddress.className = "hosts__column--hostAddress";
+      hostsColumnHostAddress.innerHTML = hostList[i].hostAddress;
+
+      const hostsColumnContentsImage = document.createElement("div");
+      hostsColumnContentsImage.className = "hosts__column__contents--image";
+
+      const placeholder = document.createElement("img");
+      placeholder.src = "https://via.placeholder.com/100";
+      placeholder.alt = "placeholder";
+      placeholder.className = "placeholder";
+
+      const hostsColumnsReview = document.createElement("div");
+      hostsColumnsReview.className = "hosts__columns__review";
+
+      const hostsColumnsReviewBtn = document.createElement("input");
+      hostsColumnsReviewBtn.className =
+        "hosts__columns__review--btn reviewButton";
+      hostsColumnsReviewBtn.type = "button";
+      hostsColumnsReviewBtn.value = "리뷰";
+
+      for (let i = 0; i < 5; i++) {
+        let starFull = document.createElement("img");
+        starFull.src = "images/star_full.png";
+        starFull.className = "star_full_image";
+        starFull.alt = "star_full";
+
+        hostsColumnHeaderImages.appendChild(starFull);
+      }
+
+      hostsColumnHeader.appendChild(hostsColumnTitle);
+      hostsColumnHeader.appendChild(hostsColumnHeaderImages);
+
+      hostsColumnContentsBlock.appendChild(hostsColumnHostName);
+      hostsColumnContentsBlock.appendChild(hostsColumnHostTel);
+      hostsColumnContentsBlock.appendChild(hostsColumnHostAddress);
+
+      hostsColumnContentsImage.appendChild(placeholder);
+
+      hostsColumnContents.appendChild(hostsColumnContentsBlock);
+      hostsColumnContents.appendChild(hostsColumnContentsImage);
+
+      hostsColumn.appendChild(hostsColumnHeader);
+      hostsColumn.appendChild(hostsColumnContents);
+
+      hostsColumnsReview.appendChild(hostsColumnsReviewBtn);
+      hostsColumns.appendChild(hostsColumn);
+      hostsColumns.appendChild(hostsColumnsReview);
     }
   };
 }

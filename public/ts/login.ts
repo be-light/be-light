@@ -108,7 +108,7 @@ class LoginWithRegister {
 
   /* Initialize Modal Function */
   public initializeModal = () => {
-    this.contents.style.opacity = "1.0";
+    this.contents ? (this.contents.style.opacity = "1.0") : "";
     this.registerForm.style.display = "none";
     this.registerLink.innerText = "Register now";
     this.navTitle.innerText = "Login";
