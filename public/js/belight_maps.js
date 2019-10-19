@@ -123,7 +123,6 @@ class BeLightMaps {
 
   /* Insert Host Informations from Left Side Menu */
   addHostList = hostList => {
-    console.log(hostList);
     const hostsColumns = document.querySelector(".hosts__columns");
     for (let i = 0; i < hostList.length; i++) {
       const hostsColumn = document.createElement("div");
