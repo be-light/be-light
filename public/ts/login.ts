@@ -121,7 +121,7 @@ class LoginWithRegister {
   public setModalBtnEventListener = () => {
     this.modalBtn.addEventListener("click", () => {
       this.modal.style.display = "block";
-      this.contents.style.opacity = "0.5";
+      this.contents ? (this.contents.style.opacity = "0.5") : "";
     });
   };
 
