@@ -4,6 +4,7 @@ class BeLightMaps {
       alert("위치 서비스를 허용 해주세요.");
       location.href = "/";
     }
+    this.prev_infowindow = false;
 
     const latitude = this.getQueryString("latitude");
     const longitude = this.getQueryString("longitude");
@@ -13,6 +14,7 @@ class BeLightMaps {
         return response.json();
       })
       .then(result => {
+        console.log(result);
         this.createMarker(result);
       });
     window.initMap = this.initMap;
@@ -66,22 +68,36 @@ class BeLightMaps {
     });
 
     infoWindow.open(this.map, marker);
+
+    setTimeout(() => {
+      infoWindow.close();
+    }, 3000);
   };
 
   /* Create Marker of Hosts*/
   createMarker = hosts => {
     for (let i = 0; i < hosts.length; i++) {
       let latLng = new google.maps.LatLng(
-        Number.parseInt(hosts[i].hostLatitude),
-        Number.parseInt(hosts[i].hostLongitude)
+        Number.parseFloat(hosts[i].hostLatitude),
+        Number.parseFloat(hosts[i].hostLongitude)
       );
 
       let marker = new google.maps.Marker({
         map: this.map,
         position: latLng,
         title: "Host",
-        draggable: false,
-        icon: "/svg/markerpin02.svg"
+        draggable: false
+      });
+
+      google.maps.event.addListener(marker, "click", () => {
+        let infoWindow = new google.maps.InfoWindow({
+          content: hosts[i].hostName
+        });
+
+        if (this.prev_infowindow) this.prev_infowindow.close();
+        this.prev_infowindow = infoWindow;
+
+        infoWindow.open(this.map, marker);
       });
     }
   };
