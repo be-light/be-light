@@ -14,6 +14,30 @@
   }
 }
 
+.header__contents {
+  display: flex;
+  margin: 0 auto;
+
+  .header__contents--block {
+    .input__place {
+      width: 800px;
+      height: 30px;
+      border: none;
+      border-radius: 20px;
+      text-align: center;
+    }
+  }
+
+  .header__contents--searchBtn {
+    margin-left: 10px;
+    border-radius: 20px;
+    width: 100px;
+    color: white;
+    background-color: darkseagreen;
+    cursor: pointer;
+  }
+}
+
 .header__right {
   .header__menu li {
     display: inline;
