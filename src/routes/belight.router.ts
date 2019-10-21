@@ -123,7 +123,8 @@ export class Routes {
       let reqUser: object = {
         email: req.body.userEmail,
         phone: req.body.userPhoneNumber,
-        address: req.body.userAddress
+        address: req.body.userAddress,
+        password: req.body.userPassword
       };
 
       UserController.updateMyProfile(reqUser, req.cookies.user)
@@ -217,7 +218,8 @@ export class Routes {
       let reqUser: object = {
         hostUserEmail: req.body.hostUserEmail,
         hostUserPhoneNumber: req.body.hostUserPhoneNumber,
-        hostUserName: req.body.hostUserName
+        hostUserName: req.body.hostUserName,
+        hostUserPassword: req.body.hostUserPassword
       };
 
       HostUserController.updateHostProfile(reqUser, req.cookies.host)
