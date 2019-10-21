@@ -74,10 +74,20 @@ html(lang="en")
             input(type="text" name="hostUserPassword")
             input(type="submit")
 
-        p HostUser Get User Order
-        form(action="/api/hoster/order" method="GET")
+        p HostUser Get Accept User Order
+        form(action="/api/hoster/order/all" method="GET")
             input(type="submit")
 
+
+        p HostUser Get Pending User Order
+        form(action="/api/hoster/order/pending" method="GET")
+            input(type="submit")
+
+        p HostUser Accept User Order
+        form(action="/api/hoster/order?_method=PUT" method="POST")
+            input(type="text" name="reciptNumber")
+            input(type="text" name="accept")
+            input(type="submit")
         h1 Host
 
         p Host addNewHost

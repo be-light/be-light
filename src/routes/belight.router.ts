@@ -246,6 +246,45 @@ export class Routes {
         });
     });
 
+    /* HostUser get Accept UserOrder */
+    app.route("/api/hoster/order/all").get((req: Request, res: Response) => {
+      HostUserController.getAcceptUserOrder(req.cookies.host, 1)
+        .then(result => {
+          res.json(result);
+        })
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg });
+        });
+    });
+
+    /* HostUser Accept/Non-Accept UserOrder */
+    app.route("/api/hoster/order").put((req: Request, res: Response) => {
+      let reciptNumber = req.body.reciptNumber;
+      let accept = req.body.accept;
+      HostUserController.acceptUserOrder(req.cookies.host, reciptNumber, accept)
+        .then(result => {
+          res
+            .status(200)
+            .json({ status: 200, msg: "success", changeValue: result[1] });
+        })
+        .catch(msg => {
+          res.status(400).json({ status: 400, msg });
+        });
+    });
+
+    /* Hostuser get Pending UserOrder */
+    app
+      .route("/api/hoster/order/pending")
+      .get((req: Request, res: Response) => {
+        HostUserController.getAcceptUserOrder(req.cookies.host, 0)
+          .then(result => {
+            res.json(result);
+          })
+          .catch(msg => {
+            res.status(400).json({ status: 400, msg });
+          });
+      });
+
     // Host =====
     /* Get all Host */
     app.route("/api/host").get((req: Request, res: Response) => {

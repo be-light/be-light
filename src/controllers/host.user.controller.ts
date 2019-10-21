@@ -6,6 +6,7 @@ import {
   UserOrderOfHostUser
 } from "../utils/global.interface";
 import { HostUser } from "../models/host.user.model";
+import { UserOrder } from "../models/user.order.model";
 import { Sequelize } from "sequelize-typescript";
 
 /* HostUserController Interface */
@@ -16,11 +17,14 @@ interface HostUserControllerInterface {
   bringHostProfile(token: string): Promise<ResponseHostUser>;
   updateHostProfile(reqHost: object, token: string): Promise<ResSkeleton>;
   hostWithDraw(pw: string, token: string): Promise<ResSkeleton>;
-  getAllUserOrder(token: string): Promise<UserOrderOfHostUser[]>;
+  getAcceptUserOrder(
+    token: string,
+    statusCode: number
+  ): Promise<UserOrderOfHostUser[]>;
   acceptUserOrder(
     token: string,
     reciptNumber: number,
-    accept: boolean
+    accept: number
   ): Promise<ResSkeleton>;
 }
 
@@ -152,42 +156,34 @@ class HostUserController implements HostUserControllerInterface {
   public acceptUserOrder(
     token: string,
     reciptNumber: number,
-    accept: boolean
+    accept: number
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(token).userId;
-      let statusValue = accept === true ? 1 : 0;
+      let query = `
+      UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept} WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
+      `;
       if (hostUserId) {
-        HostUser.update(
-          {
-            statusCode: statusValue
-          },
-          {
-            where: {
-              hostUserId,
-              reciptNumber
-            }
-          }
-        )
-          .then(result => {
-            resolve(this.successMsg);
+        resolve(
+          UserOrder.sequelize.query(query, {
+            type: Sequelize.QueryTypes.UPDATE
           })
-          .catch(result => {
-            reject("Error");
-          });
+        );
       } else {
         reject("Your Token is Expired.");
       }
     });
   }
 
-  /* Get UserOrder of HostUser */
-  public getAllUserOrder(token: string): Promise<UserOrderOfHostUser[]> {
+  /* Get Accept UserOrder of HostUser */
+  public getAcceptUserOrder(
+    token: string,
+    statusCode: number
+  ): Promise<UserOrderOfHostUser[]> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(token).userId;
-
       let query = `
-      SELECT DISTINCT a.userId, a.checkIn, a.checkOut, a.paid, a.statusCode, a.gHostIdx, a.itemCount, a.reciptNumber, a.hostIdx FROM UserOrder a, Host b, HostUser c WHERE a.hostIdx = b.hostIdx AND b.hostUserId = ${hostUserId}
+      SELECT DISTINCT a.userId, a.checkIn, a.checkOut, a.paid, a.statusCode, a.gHostIdx, a.itemCount, a.reciptNumber, a.hostIdx FROM UserOrder a, Host b, HostUser c WHERE a.hostIdx = b.hostIdx AND b.hostUserId = "${hostUserId}" AND a.statusCode = ${statusCode}
       `;
       if (hostUserId) {
         resolve(
