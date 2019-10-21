@@ -42,6 +42,19 @@ interface UserOrderList {
   hostUserPhoneNumber: string;
 }
 
+/* Response UserOrder of HostUser */
+interface UserOrderOfHostUser {
+  userId: string;
+  checkIn: Date;
+  checkOut: Date;
+  paid: number;
+  reciptNumber: number;
+  hostIdx: number;
+  gHostIdx: number;
+  itemCount: number;
+  statusCode: number;
+}
+
 /* Hosts Interface */
 interface Hosts {
   hostName: string;
@@ -78,5 +91,6 @@ export {
   UserOrderList,
   Hosts,
   ReviewList,
-  ReviewObject
+  ReviewObject,
+  UserOrderOfHostUser
 };

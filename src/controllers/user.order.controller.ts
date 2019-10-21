@@ -31,27 +31,6 @@ class UserOrderController implements UserOrderControllerInterface {
     */
     return new Promise((resolve, reject) => {
       let userId = expressJWT.verifyToken(token).userId;
-
-      /*
-      let query = `SELECT
-      a.userId as userId,
-      a.checkIn as checkin,
-      a.checkOut as checkOut,
-      a.paid as paid,
-      a.reciptNumber as reciptNumber,
-      a.HostIdx as hostIdx,
-      a.statusCode as statusCode,
-      b.hostAddress as hostaddress,
-      b.hostPostalCode as hostPostalCode,
-      b.hostName as hostName,
-      (select hostUserPhoneNumber from HostUser where hostuserId = b.hostUserId) as hostUserPhoneNumber
-    FROM
-      UserOrder as a left outer JOIN Host as b
-    ON
-      a.hostIdx = b.hostIdx
-    
-    WHERE a.userId = "${userId}"`;*/
-
       let query = `   
 SELECT
 a.userId as userId,

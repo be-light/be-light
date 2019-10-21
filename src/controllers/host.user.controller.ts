@@ -2,9 +2,11 @@ import expressJWT from "../utils/jwt";
 import {
   ResSkeleton,
   ResponseUser,
-  ResponseHostUser
+  ResponseHostUser,
+  UserOrderOfHostUser
 } from "../utils/global.interface";
 import { HostUser } from "../models/host.user.model";
+import { Sequelize } from "sequelize-typescript";
 
 /* HostUserController Interface */
 interface HostUserControllerInterface {
@@ -14,6 +16,12 @@ interface HostUserControllerInterface {
   bringHostProfile(token: string): Promise<ResponseHostUser>;
   updateHostProfile(reqHost: object, token: string): Promise<ResSkeleton>;
   hostWithDraw(pw: string, token: string): Promise<ResSkeleton>;
+  getAllUserOrder(token: string): Promise<UserOrderOfHostUser[]>;
+  acceptUserOrder(
+    token: string,
+    reciptNumber: number,
+    accept: boolean
+  ): Promise<ResSkeleton>;
 }
 
 /* Host User Controller */
@@ -136,6 +144,59 @@ class HostUserController implements HostUserControllerInterface {
           });
       } else {
         reject("Maybe Token Expired.");
+      }
+    });
+  }
+
+  /* Accept User Order */
+  public acceptUserOrder(
+    token: string,
+    reciptNumber: number,
+    accept: boolean
+  ): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+      let statusValue = accept === true ? 1 : 0;
+      if (hostUserId) {
+        HostUser.update(
+          {
+            statusCode: statusValue
+          },
+          {
+            where: {
+              hostUserId,
+              reciptNumber
+            }
+          }
+        )
+          .then(result => {
+            resolve(this.successMsg);
+          })
+          .catch(result => {
+            reject("Error");
+          });
+      } else {
+        reject("Your Token is Expired.");
+      }
+    });
+  }
+
+  /* Get UserOrder of HostUser */
+  public getAllUserOrder(token: string): Promise<UserOrderOfHostUser[]> {
+    return new Promise((resolve, reject) => {
+      let hostUserId = expressJWT.verifyToken(token).userId;
+
+      let query = `
+      SELECT DISTINCT a.userId, a.checkIn, a.checkOut, a.paid, a.statusCode, a.gHostIdx, a.itemCount, a.reciptNumber, a.hostIdx FROM UserOrder a, Host b, HostUser c WHERE a.hostIdx = b.hostIdx AND b.hostUserId = ${hostUserId}
+      `;
+      if (hostUserId) {
+        resolve(
+          HostUser.sequelize.query(query, {
+            type: Sequelize.QueryTypes.SELECT
+          })
+        );
+      } else {
+        reject("Your Token is not valid or Expired.");
       }
     });
   }
