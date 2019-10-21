@@ -40,6 +40,8 @@ a.paid as paid,
 a.reciptNumber as reciptNumber,
 a.HostIdx as hostIdx,
 a.statusCode as statusCode,
+a.gHostIdx as gHostIdx,
+a.itemCount as itemCount,
 
 b.hostAddress as hostaddress,
 b.hostPostalCode as hostPostalCode,
