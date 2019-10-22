@@ -6,6 +6,7 @@ import HostController from "../controllers/host.controller";
 import UserOrderController from "../controllers/user.order.controller";
 import MapController from "../controllers/map.controller";
 import UserReviewController from "../controllers/user.review.controller";
+import AuthController from "../controllers/auth.controller";
 import expressJWT from "../utils/jwt";
 import upload from "../utils/file";
 
@@ -276,14 +277,12 @@ export class Routes {
     app.route("/api/hoster/order").put((req: Request, res: Response) => {
       let reciptNumber = req.body.reciptNumber;
       let accept: number = Number.parseInt(req.body.accept);
-      let checkText: string = req.body.checkText;
       let userId: string = req.body.userId;
 
       HostUserController.acceptUserOrder(
         req.cookies.host,
         reciptNumber,
         accept,
-        checkText,
         userId
       )
         .then(result => {
@@ -310,11 +309,34 @@ export class Routes {
       });
 
     /* HostUser Get User Item Process */
-    app.route("/api/hoster/order/status").get((req: Request, res: Response) => {
-      let authString = req.body.authString;
+    app
+      .route("/api/hoster/order/status")
+      .post((req: Request, res: Response) => {
+        let randomString: string = req.body.randomString;
+        let userId: string = req.body.userId;
+        let reciptNumber: number = req.body.reciptNumber;
 
-      // [0] = checkText, [1] = userId,
-      let values: Array<any> = authString.split("=").splice(1, 2);
+        AuthController.createAuth(randomString, userId, reciptNumber, 2).then(
+          result => {
+            res.json(result);
+          }
+        );
+      });
+
+    /* Update UserOrder StatusCode Process */
+    app.route("/api/user/order/status").post((req: Request, res: Response) => {
+      let randomString: string = req.body.randomString;
+      let userId: string = req.body.userId;
+      let reciptNumber: number = req.body.reciptNumber;
+
+      AuthController.updateDone(randomString, userId, reciptNumber, 3).then(
+        result => {
+          console.log(result);
+          result[1] === 1
+            ? res.json({ status: 200, msg: "success" })
+            : res.json({ status: 400, msg: "bad request" });
+        }
+      );
     });
 
     // Host =====

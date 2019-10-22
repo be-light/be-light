@@ -25,7 +25,6 @@ interface HostUserControllerInterface {
     token: string,
     reciptNumber: number,
     accept: number,
-    checkText: string,
     userId: string
   ): Promise<ResSkeleton>;
   updateUserOrderStatus(
@@ -166,7 +165,6 @@ class HostUserController implements HostUserControllerInterface {
     token: string,
     reciptNumber: number,
     accept: number,
-    checkText: string,
     userId: string
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
@@ -181,7 +179,7 @@ class HostUserController implements HostUserControllerInterface {
       let hostUserId = expressJWT.verifyToken(token).userId;
       if (accept === 1) {
         let query = `
-        UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept},  UserOrder.checkText = "${checkText}" WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
+        UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept} WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
         `;
         if (hostUserId) {
           resolve(
