@@ -493,6 +493,18 @@ export class Routes {
         });
     });
 
+    /* Get User Reviews */
+    app.route("/api/review").get((req: Request, res: Response) => {
+      let userId = req.query.userId;
+      UserReviewController.getUserReviews(userId)
+        .then(reviews => {
+          res.json(reviews);
+        })
+        .catch(msg => {
+          res.json({ status: 400, msg });
+        });
+    });
+
     /* Create New Review */
     app.route("/api/review").post((req: Request, res: Response) => {
       if (!req.cookies.user) {

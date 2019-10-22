@@ -60,6 +60,18 @@ class UserReviewController implements UserReviewControllerInterface {
     });
   }
 
+  /* Get User Reviews */
+  public getUserReviews(userId: string): Promise<ReviewList[]> {
+    console.log(userId);
+    return new Promise((resolve, reject) => {
+      UserReview.findAll({
+        where: { userId }
+      }).then(result => {
+        resolve(result);
+      });
+    });
+  }
+
   /* Create New Review */
   public createReview(
     token: string,
