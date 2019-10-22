@@ -123,13 +123,17 @@ export class Routes {
     app
       .route("/api/user")
       .put(upload.option.single("profile"), (req: Request, res: Response) => {
+        let profileImage: string = req.file
+          ? "/upload/" + req.file.filename
+          : "";
+
         let reqUser: object = {
           email: req.body.userEmail,
           phone: req.body.userPhoneNumber,
           address: req.body.userAddress,
-          password: req.body.userPassword
+          password: req.body.userPassword,
+          profileImage
         };
-        console.log(req.file);
 
         UserController.updateMyProfile(reqUser, req.cookies.user)
           .then(user => {

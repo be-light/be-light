@@ -47,6 +47,9 @@ const user = sequelize.define(
     },
     userAddress: {
       type: DataType.STRING
+    },
+    userProfileImage: {
+      type: DataType.STRING
     }
   },
   { timestamps: false, paranoid: false }

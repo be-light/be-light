@@ -28,4 +28,7 @@ export class User extends Model<User> {
 
   @Column(DataType.TEXT)
   public userAddress!: string;
+
+  @Column(DataType.TEXT)
+  public userProfileImage!: string;
 }

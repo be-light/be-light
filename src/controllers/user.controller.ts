@@ -87,7 +87,8 @@ class UserController implements UserControllerInterface {
             userEmail: reqUser["email"],
             userPhoneNumber: reqUser["phone"],
             userAddress: reqUser["address"],
-            userPassword: reqUser["password"]
+            userPassword: reqUser["password"],
+            userProfileImage: reqUser["profileImage"]
           },
           {
             where: { userId: tokens.userId },
