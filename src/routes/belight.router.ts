@@ -444,6 +444,7 @@ export class Routes {
 
       MapController.getSearchHosts(pos)
         .then(hosts => {
+          console.log(hosts);
           res.json(hosts);
         })
         .catch(msg => {
