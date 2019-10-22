@@ -28,6 +28,10 @@ interface HostUserControllerInterface {
     checkText: string,
     userId: string
   ): Promise<ResSkeleton>;
+  updateUserOrderStatus(
+    values: Array<any>,
+    accept: number
+  ): Promise<ResSkeleton>;
 }
 
 /* Host User Controller */
@@ -168,6 +172,8 @@ class HostUserController implements HostUserControllerInterface {
     return new Promise((resolve, reject) => {
       /*
         accept === 1 Accept
+        accept === 2 Proceeding
+        accept === 3 Done
         accept === 0 Pending
         accept === -1 Reject
       */
@@ -206,6 +212,17 @@ class HostUserController implements HostUserControllerInterface {
       } else {
         reject("Request is not valid");
       }
+    });
+  }
+
+  /* Update UserOrder StatusCode to UserOrder */
+  public updateUserOrderStatus(
+    values: Array<any>,
+    accept: number
+  ): Promise<ResSkeleton> {
+    return new Promise((resolve, reject) => {
+      let checkText = values[0];
+      let userId = values[1];
     });
   }
 

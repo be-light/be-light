@@ -309,6 +309,14 @@ export class Routes {
           });
       });
 
+    /* HostUser Get User Item Process */
+    app.route("/api/hoster/order/status").get((req: Request, res: Response) => {
+      let authString = req.body.authString;
+
+      // [0] = checkText, [1] = userId,
+      let values: Array<any> = authString.split("=").splice(1, 2);
+    });
+
     // Host =====
     /* Get all Host */
     app.route("/api/host").get((req: Request, res: Response) => {

@@ -5,6 +5,7 @@ import { Host } from "./host.model";
 import { HostUser } from "./host.user.model";
 import { UserOrder } from "./user.order.model";
 import { UserReview } from "./user.review.model";
+import { Auth } from "./auth.model";
 
 /* sequelize-typescript config */
 const config = {
@@ -23,7 +24,7 @@ const config = {
 
 /* create sequelize instance */
 const sequelize: Sequelize = new Sequelize(config);
-sequelize.addModels([User, Host, HostUser, UserOrder, UserReview]);
+sequelize.addModels([User, Host, HostUser, UserOrder, UserReview, Auth]);
 
 /* define models */
 const user = sequelize.define(
@@ -168,6 +169,12 @@ const userReview = sequelize.define("UserReview", {
   }
 });
 
+const auth = sequelize.define("Auth", {
+  randomString: {
+    type: DataType.STRING
+  }
+});
+
 /* associate settings*/
 host.belongsTo(hostUser, {
   foreignKey: "hostUserId"
@@ -187,6 +194,14 @@ userReview.belongsTo(user, {
 
 userReview.belongsTo(host, {
   foreignKey: "hostIdx"
+});
+
+auth.belongsTo(user, {
+  foreignKey: "userId"
+});
+
+auth.belongsTo(userOrder, {
+  foreignKey: "reciptNumber"
 });
 
 /* export */
