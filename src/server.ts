@@ -12,5 +12,5 @@ const HTTPS_PORT: any = process.env.HTTPS_PORT;
 http.createServer(app).listen(HTTP_PORT);
 const SERVER = https.createServer({}, app).listen(HTTPS_PORT, async () => {
   /* Sequelize Sync */
-  await sequelize.sync({ force: false });
+  await sequelize.sync({ force: true });
 });

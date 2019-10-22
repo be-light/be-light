@@ -1,5 +1,4 @@
 import expressJWT from "../utils/jwt";
-import QRCode from "../utils/qrcode";
 import {
   ResSkeleton,
   ResponseUser,
@@ -167,11 +166,16 @@ class HostUserController implements HostUserControllerInterface {
     userId: string
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
+      /*
+        accept === 1 Accept
+        accept === 0 Pending
+        accept === -1 Reject
+      */
+
       let hostUserId = expressJWT.verifyToken(token).userId;
       if (accept === 1) {
-        const qrCode = QRCode.createQRCodeString(checkText, userId);
         let query = `
-        UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept},  UserOrder.checkText = "${checkText}", UserOrder.qrCode = "${qrCode}" WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
+        UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept},  UserOrder.checkText = "${checkText}" WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
         `;
         if (hostUserId) {
           resolve(
@@ -186,7 +190,7 @@ class HostUserController implements HostUserControllerInterface {
         } else {
           reject("Your Token is Expired.");
         }
-      } else if (accept === 0) {
+      } else if (accept === -1) {
         let query = `
         UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = -1 WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
         `;

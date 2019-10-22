@@ -37,9 +37,6 @@ export class UserOrder extends Model<UserOrder> {
   @Column(DataType.TEXT)
   public checkText!: string;
 
-  @Column(DataType.TEXT)
-  public qrCode!: string;
-
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
