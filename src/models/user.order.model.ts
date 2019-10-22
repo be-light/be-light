@@ -25,8 +25,8 @@ export class UserOrder extends Model<UserOrder> {
   @Column(DataType.TEXT)
   public hostIdx!: string;
 
-  @Column(DataType.TEXT)
-  public gHostIdx!: string;
+  @Column(DataType.INTEGER)
+  public gHostIdx!: number;
 
   @Column(DataType.INTEGER)
   public itemCount!: number;
