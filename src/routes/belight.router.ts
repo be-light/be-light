@@ -7,6 +7,7 @@ import UserOrderController from "../controllers/user.order.controller";
 import MapController from "../controllers/map.controller";
 import UserReviewController from "../controllers/user.review.controller";
 import expressJWT from "../utils/jwt";
+import upload from "../utils/file";
 
 export class Routes {
   public routes(app): void {
@@ -119,23 +120,26 @@ export class Routes {
     });
 
     /* Update My Profile */
-    app.route("/api/user").put((req: Request, res: Response) => {
-      let reqUser: object = {
-        email: req.body.userEmail,
-        phone: req.body.userPhoneNumber,
-        address: req.body.userAddress,
-        password: req.body.userPassword
-      };
+    app
+      .route("/api/user")
+      .put(upload.option.single("profile"), (req: Request, res: Response) => {
+        let reqUser: object = {
+          email: req.body.userEmail,
+          phone: req.body.userPhoneNumber,
+          address: req.body.userAddress,
+          password: req.body.userPassword
+        };
+        console.log(req.file);
 
-      UserController.updateMyProfile(reqUser, req.cookies.user)
-        .then(user => {
-          res.json(user);
-        })
-        .catch(msg => {
-          res.clearCookie("user");
-          res.status(403).json({ status: 403, msg: msg });
-        });
-    });
+        UserController.updateMyProfile(reqUser, req.cookies.user)
+          .then(user => {
+            res.json(user);
+          })
+          .catch(msg => {
+            res.clearCookie("user");
+            res.status(403).json({ status: 403, msg: msg });
+          });
+      });
 
     /* Destory User */
     app.route("/api/user").delete((req: Request, res: Response) => {

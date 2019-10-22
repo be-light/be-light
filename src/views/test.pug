@@ -28,11 +28,12 @@ html(lang="en")
             input(type="submit")
 
         p UpdateMyProfile Form
-        form(action="/api/user?_method=PUT" method="POST")
+        form(action="/api/user?_method=PUT" method="POST" enctype="multipart/form-data")
             input(type="text" name="userEmail")
             input(type="text" name="userPhoneNumber")
             input(type="text" name="userAddress")
             input(type="password" name="userPassword")
+            input(type="file" name="profile" accept="image/*")
             input(type="submit")
         
         p withDraw Form.

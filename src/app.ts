@@ -29,7 +29,7 @@ class App {
     /* setting default static folder */
     this.app.use(express.static("public_dist"));
     this.app.use(express.static("public_dist/svg"));
-    this.app.use(express.static("public/images"));
+    this.app.use(express.static("public_dist/upload"));
 
     /* routing settings */
     this.routePrv.routes(this.app);
