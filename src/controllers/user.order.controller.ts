@@ -99,7 +99,7 @@ WHERE a.userId = "${userId}"`;
           checkOut: reqOrder["checkOut"],
           paid: reqOrder["paid"],
           hostIdx: reqOrder["hostIdx"],
-          gHostIdx: reqOrder["gHostIdx"],
+          gHostIdx: Number.parseInt(reqOrder["gHostIdx"]),
           itemCount: reqOrder["itemCount"]
           // TODO: Calculate Paid, Host Mapping Code
         })
