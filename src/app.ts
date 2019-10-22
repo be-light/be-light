@@ -17,7 +17,6 @@ class App {
     this.app.set("view engine", "pug");
 
     /* use body-parser */
-    /* Deprecated */
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
