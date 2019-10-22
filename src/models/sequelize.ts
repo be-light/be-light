@@ -138,6 +138,12 @@ const userOrder = sequelize.define("UserOrder", {
   itemCount: {
     type: DataType.INTEGER
   },
+  checkText: {
+    type: DataType.STRING
+  },
+  qrCode: {
+    type: DataType.STRING
+  },
   reciptNumber: {
     type: DataType.INTEGER,
     primaryKey: true,

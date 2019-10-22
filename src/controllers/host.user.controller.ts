@@ -1,4 +1,5 @@
 import expressJWT from "../utils/jwt";
+import QRCode from "../utils/qrcode";
 import {
   ResSkeleton,
   ResponseUser,
@@ -24,7 +25,9 @@ interface HostUserControllerInterface {
   acceptUserOrder(
     token: string,
     reciptNumber: number,
-    accept: number
+    accept: number,
+    checkText: string,
+    userId: string
   ): Promise<ResSkeleton>;
 }
 
@@ -159,21 +162,45 @@ class HostUserController implements HostUserControllerInterface {
   public acceptUserOrder(
     token: string,
     reciptNumber: number,
-    accept: number
+    accept: number,
+    checkText: string,
+    userId: string
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(token).userId;
-      let query = `
-      UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept} WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
-      `;
-      if (hostUserId) {
-        resolve(
-          UserOrder.sequelize.query(query, {
-            type: Sequelize.QueryTypes.UPDATE
-          })
-        );
+      if (accept === 1) {
+        const qrCode = QRCode.createQRCodeString(checkText, userId);
+        let query = `
+        UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept},  UserOrder.checkText = "${checkText}", UserOrder.qrCode = "${qrCode}" WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
+        `;
+        if (hostUserId) {
+          resolve(
+            UserOrder.sequelize
+              .query(query, {
+                type: Sequelize.QueryTypes.UPDATE
+              })
+              .catch(err => {
+                reject("Your Permission denied");
+              })
+          );
+        } else {
+          reject("Your Token is Expired.");
+        }
+      } else if (accept === 0) {
+        let query = `
+        UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = -1 WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
+        `;
+        if (hostUserId) {
+          resolve(
+            UserOrder.sequelize.query(query, {
+              type: Sequelize.QueryTypes.UPDATE
+            })
+          );
+        } else {
+          reject("Your Token is Expired.");
+        }
       } else {
-        reject("Your Token is Expired.");
+        reject("Request is not valid");
       }
     });
   }

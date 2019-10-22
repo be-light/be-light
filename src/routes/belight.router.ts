@@ -275,8 +275,17 @@ export class Routes {
     /* HostUser Accept/Non-Accept UserOrder */
     app.route("/api/hoster/order").put((req: Request, res: Response) => {
       let reciptNumber = req.body.reciptNumber;
-      let accept = req.body.accept;
-      HostUserController.acceptUserOrder(req.cookies.host, reciptNumber, accept)
+      let accept: number = Number.parseInt(req.body.accept);
+      let checkText: string = req.body.checkText;
+      let userId: string = req.body.userId;
+
+      HostUserController.acceptUserOrder(
+        req.cookies.host,
+        reciptNumber,
+        accept,
+        checkText,
+        userId
+      )
         .then(result => {
           res
             .status(200)

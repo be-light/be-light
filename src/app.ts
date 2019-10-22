@@ -30,6 +30,7 @@ class App {
     this.app.use(express.static("public_dist"));
     this.app.use(express.static("public_dist/svg"));
     this.app.use(express.static("public_dist/upload"));
+    this.app.use(express.static("public_dist/qrcode"));
 
     /* routing settings */
     this.routePrv.routes(this.app);
