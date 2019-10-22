@@ -89,6 +89,7 @@ class HostUserController implements HostUserControllerInterface {
             exclude: ["hostUserPassword"]
           }
         }).then(user => {
+          console.log(user);
           resolve(user);
         });
       } else {

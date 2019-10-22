@@ -224,31 +224,28 @@ export class Routes {
     /* HostUser Profile Update */
     app
       .route("/api/hoster")
-      .put(
-        upload.option.single("hostProfile"),
-        (req: Request, res: Response) => {
-          let profileImage: string = req.file
-            ? "/upload/" + req.file.filename
-            : "";
+      .put(upload.option.single("profile"), (req: Request, res: Response) => {
+        let profileImage: string = req.file
+          ? "/upload/" + req.file.filename
+          : "";
 
-          let reqUser: object = {
-            hostUserEmail: req.body.hostUserEmail,
-            hostUserPhoneNumber: req.body.hostUserPhoneNumber,
-            hostUserName: req.body.hostUserName,
-            hostUserPassword: req.body.hostUserPassword,
-            profileImage
-          };
+        let reqUser: object = {
+          hostUserEmail: req.body.hostUserEmail,
+          hostUserPhoneNumber: req.body.hostUserPhoneNumber,
+          hostUserName: req.body.hostUserName,
+          hostUserPassword: req.body.hostUserPassword,
+          profileImage
+        };
 
-          HostUserController.updateHostProfile(reqUser, req.cookies.host)
-            .then(host => {
-              res.json(host);
-            })
-            .catch(msg => {
-              res.clearCookie("host");
-              res.status(403).json({ status: 403, msg: msg });
-            });
-        }
-      );
+        HostUserController.updateHostProfile(reqUser, req.cookies.host)
+          .then(host => {
+            res.json(host);
+          })
+          .catch(msg => {
+            res.clearCookie("host");
+            res.status(403).json({ status: 403, msg: msg });
+          });
+      });
 
     /* HostUser Destroy */
     app.route("/api/hoster").delete((req: Request, res: Response) => {
