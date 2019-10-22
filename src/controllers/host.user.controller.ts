@@ -101,13 +101,15 @@ class HostUserController implements HostUserControllerInterface {
   public updateHostProfile(reqHost: object, tok: string): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(tok).userId;
+
       if (tok) {
         HostUser.update(
           {
             hostUserEmail: reqHost["hostUserEmail"],
             hostUserName: reqHost["hostUserName"],
             hostUserPhoneNumber: reqHost["hostUserPhoneNumber"],
-            hostUserPassword: reqHost["hostUserPassword"]
+            hostUserPassword: reqHost["hostUserPassword"],
+            hostUserProfileImage: reqHost["profileImage"]
           },
           {
             where: {

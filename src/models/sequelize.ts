@@ -71,6 +71,9 @@ const hostUser = sequelize.define("HostUser", {
   },
   hostUserPhoneNumber: {
     type: DataType.STRING
+  },
+  hostUserProfileImage: {
+    type: DataType.STRING
   }
 });
 

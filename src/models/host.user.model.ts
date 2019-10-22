@@ -25,4 +25,7 @@ export class HostUser extends Model<HostUser> {
 
   @Column(DataType.TEXT)
   public hostUserPhoneNumber!: string;
+
+  @Column(DataType.TEXT)
+  public hostUserProfileImage!: string;
 }

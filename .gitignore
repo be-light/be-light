@@ -10,3 +10,4 @@ v8-compile-cache-0/*
 acme-challenge/*
 nohup.out
 npm-debug.log
+public_dist/upload/*

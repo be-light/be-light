@@ -62,11 +62,12 @@ html(lang="en")
             input(type="submit")
 
         p HostUser Update Profile
-        form(action="/api/hoster?_method=PUT", method="POST")
+        form(action="/api/hoster?_method=PUT", method="POST" enctype="multipart/form-data")
             input(type="text" name="hostUserName")
             input(type="text" name="hostUserEmail")
             input(type="text" name="hostUserPhoneNumber")
             input(type="password" name="hostUserPassword")
+            input(type="file" name="hostProfile" accept="image/*")
             input(type="submit")
 
 
