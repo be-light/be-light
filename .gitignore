@@ -11,3 +11,4 @@ acme-challenge/*
 nohup.out
 npm-debug.log
 public_dist/upload/*
+public_dist/qrcode/*

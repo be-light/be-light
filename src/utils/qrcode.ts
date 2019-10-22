@@ -11,7 +11,7 @@ class BeLightQRCode implements BeLightQRCodeInterface {
 
   public createQRCodeString(text: string, id: string): string {
     const qrName = new Date().valueOf() + path.extname(text);
-    let qrContent = text + "&userId=" + id;
+    let qrContent = "checkText=" + text + "&userId=" + id;
     QRCode.toFile(
       "./public_dist/qrcode/" + qrName + ".png",
       qrContent,
