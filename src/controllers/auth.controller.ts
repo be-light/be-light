@@ -56,6 +56,9 @@ class AuthController implements AuthControllerInterface {
         reciptNumber
       })
         .then(res => {
+          return res;
+        })
+        .done(res => {
           this.updateProceeding(
             randomString,
             userId,
@@ -64,13 +67,7 @@ class AuthController implements AuthControllerInterface {
           ).then(res => {
             res[1] === 1 ? resolve(this.successMsg) : reject("somthing errors");
           });
-
-          resolve(null);
-        })
-        .catch(msg => {
-          reject("Something Errors");
         });
-      resolve(null);
     });
   }
 

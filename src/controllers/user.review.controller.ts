@@ -61,14 +61,19 @@ class UserReviewController implements UserReviewControllerInterface {
   }
 
   /* Get User Reviews */
-  public getUserReviews(userId: string): Promise<ReviewList[]> {
-    console.log(userId);
+  public getUserReviews(token: string): Promise<ReviewList[]> {
+    let userId = expressJWT.verifyToken(token).userId;
+
     return new Promise((resolve, reject) => {
-      UserReview.findAll({
-        where: { userId }
-      }).then(result => {
-        resolve(result);
-      });
+      if (userId) {
+        UserReview.findAll({
+          where: { userId }
+        }).then(result => {
+          resolve(result);
+        });
+      } else {
+        reject("Your Token is not valid or Expired.");
+      }
     });
   }
 

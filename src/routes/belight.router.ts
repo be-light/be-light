@@ -331,7 +331,6 @@ export class Routes {
 
       AuthController.updateDone(randomString, userId, reciptNumber, 3).then(
         result => {
-          console.log(result);
           result[1] === 1
             ? res.json({ status: 200, msg: "success" })
             : res.json({ status: 400, msg: "bad request" });
