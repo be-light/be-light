@@ -103,14 +103,13 @@ class BeLightMaps {
                 <div class="info__window--block">
                     Open <span class="info__window--hostOpenTime"> ${hosts[i].hostOpenTime}</span>
                     Close <span class="info__window--hostCloseTime">${hosts[i].hostCloseTime}</span>
+              
                 </div>
 
                 <div class="info__window--buttons">
-                    <input type="button" class="dropBtn info--btn" value="맡기기" idx="${hosts[i].hostIdx}"/>
-                    <input type="button" class="getBtn info--btn" value="찾기" idx="${hosts[i].hostIdx}"/>
+                    <input type="button" class="dropBtn info--btn btnShow" value="맡길거에요" idx="${hosts[i].hostIdx}" latitude="${hosts[i].hostLatitude}" longitude="${hosts[i].hostLongitude}" onclick="javascript:setDrop(this)"/>
+                    <input type="button" class="getBtn info--btn btnShow" value="찾을거에요" idx="${hosts[i].hostIdx}" latitude="${hosts[i].hostLatitude}" longitude="${hosts[i].hostLongitude}" onclick="javascript:setGet(this)"/>
                 </div>
-
-               
             </div>
           `
         });
