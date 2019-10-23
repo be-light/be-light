@@ -2,11 +2,11 @@ import "dotenv/config";
 import * as FCM from "fcm-node";
 
 /* FCM Controller */
-export class FCMController {
+class FCMController {
   public fcm;
 
-  constructor() {
-    this.fcm = new FCM(process.env.FCM_SERVER_KEY);
+  constructor(SERVER_KEY) {
+    this.fcm = new FCM(SERVER_KEY);
   }
 
   public push(deviceToken: string, info: string): Promise<any> {
@@ -14,20 +14,17 @@ export class FCMController {
       const msg = {
         to: deviceToken,
         notification: {
-          title: "FCM-NODE",
+          title: "BeLight",
           body: info
         }
       };
 
       this.fcm.send(msg, (err, res) => {
-        if (err) {
-          console.log(err);
-          reject("err");
-        } else {
-          console.log(res);
-          resolve(res);
-        }
+        if (err) reject("err");
+        else resolve(res);
       });
     });
   }
 }
+
+export default new FCMController(process.env.FCM_SERVER_KEY);

@@ -8,6 +8,8 @@ import {
 import { HostUser } from "../models/host.user.model";
 import { UserOrder } from "../models/user.order.model";
 import { Sequelize } from "sequelize-typescript";
+import firebase from "../controllers/fcm.controller";
+import { User } from "../models/user.model";
 
 /* HostUserController Interface */
 interface HostUserControllerInterface {
@@ -174,6 +176,7 @@ class HostUserController implements HostUserControllerInterface {
 
       let hostUserId = expressJWT.verifyToken(token).userId;
       if (accept === 1) {
+        this.acceptOrderPush(reciptNumber);
         let query = `
         UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept} WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
         `;
@@ -207,6 +210,22 @@ class HostUserController implements HostUserControllerInterface {
         reject("Request is not valid");
       }
     });
+  }
+
+  /* Accet User Order Push Notification to User */
+  public async acceptOrderPush(reciptNumber: number) {
+    let query = `
+    SELECT A.userDeviceToken, A.userName FROM User as A, UserOrder as B WHERE A.userId = B.userId AND B.reciptNumber = ${reciptNumber}
+    `;
+
+    let result = await User.sequelize.query(query, {
+      type: Sequelize.QueryTypes.SELECT
+    });
+
+    let userName = result[0].userName;
+    let deviceToken = result[0].userDeviceToken;
+
+    firebase.push(deviceToken, `${userName}님 예약이 승인 되었습니다.`);
   }
 
   /* Get Accept UserOrder of HostUser */

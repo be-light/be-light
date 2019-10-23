@@ -103,15 +103,36 @@ WHERE a.userId = "${userId}"`;
           // TODO: Calculate Paid, Host Mapping Code
         })
           .then(order => {
+            this.requestNewOrderPush(reqOrder["hostIdx"]);
             resolve(this.successMsg);
           })
           .catch(() => {
             reject("Request New Order Faild.");
           });
+
+        /* Send Push Notification */
       } else {
         reject("Your Token is Expired.");
       }
     });
+  }
+
+  /* Send Accept Order Push Notifications to host, ghost*/
+
+  public async requestNewOrderPush(hostIdx: number) {
+    let query = `
+    SELECT A.hostUserDeviceToken, B.hostUserName FROM Host as A, HostUser as B WHERE hostIdx = ${hostIdx} AND A.hostUserId = B.hostUserId
+    `;
+
+    let result = await Host.sequelize.query(query, {
+      type: Sequelize.QueryTypes.SELECT
+    });
+
+    let deviceToken = result[0].hostUserDeviceToken;
+    let hostUserName = result[0].hostUserName;
+
+    //TODO: change serverkey2
+    //firebase.push(deviceToken, `${hostUserName}님 새로운 예약이 신청 되었습니다.`);
   }
 
   /* Update Order*/
