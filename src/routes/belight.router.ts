@@ -10,6 +10,7 @@ import AuthController from "../controllers/auth.controller";
 import firebase from "../controllers/fcm.controller";
 import expressJWT from "../utils/jwt";
 import upload from "../utils/file";
+import validate from "../utils/validate";
 
 export class Routes {
   public routes(app): void {
@@ -57,8 +58,8 @@ export class Routes {
     app
       .route("/api/auth/login")
       .post(multer().none(), (req: Request, res: Response) => {
-        let id: string = req.body.userId;
-        let pw: string = req.body.userPassword;
+        let id: string = validate.replaceSpace(req.body.userId);
+        let pw: string = validate.replaceSpace(req.body.userPassword);
         if (req.cookies.user) {
           res.redirect("/");
           return;
@@ -91,13 +92,15 @@ export class Routes {
         }
 
         let reqUser: object = {
-          id: req.body.userId,
-          pw: req.body.userPassword,
-          name: req.body.userName,
-          email: req.body.userEmail,
-          phone: req.body.userPhoneNumber,
-          address: req.body.userAddress,
-          deviceToken: req.body.userDeviceToken ? req.body.userDeviceToken : ""
+          id: validate.replaceSpace(req.body.userId),
+          pw: validate.replaceSpace(req.body.userPassword),
+          name: validate.replaceSpace(req.body.userName),
+          email: validate.replaceSpace(req.body.userEmail),
+          phone: validate.replaceSpace(req.body.userPhoneNumber),
+          address: validate.replaceSpace(req.body.userAddress),
+          deviceToken: validate.replaceSpace(
+            req.body.userDeviceToken ? req.body.userDeviceToken : ""
+          )
         };
 
         UserController.register(reqUser)
