@@ -3,6 +3,7 @@ html(lang="ko")
     head
         title #{title}
         link(href="app.css" rel="stylesheet")
+        script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&libraries=places")
     body
         include header.pug
         main#contents
@@ -15,6 +16,5 @@ html(lang="ko")
         include login.pug
         include footer.pug
         
-        script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&libraries=places")
         script(src="bundle_autocomplete.js")
         script(src="bundle.js")
