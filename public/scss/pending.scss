@@ -1,3 +1,6 @@
+.pending__body {
+  height: unset !important;
+}
 #pending {
   margin-top: 150px;
   margin-left: 50px;
@@ -11,6 +14,7 @@
   }
 
   .pending__contents {
+    margin-bottom: 170px;
     .pending__contents__column {
       .pending__contents--title {
         color: #1797d6;
