@@ -3,14 +3,16 @@
     margin-top: 80px;
     margin-bottom: 20px;
 
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+
     .price__header--title {
-      font-weight: 900;
-      font-size: 25px;
+      font-size: 35px;
       margin-bottom: 18px;
+      color: black;
     }
 
     .price__header--text {
-      font-weight: 600;
       font-size: 20px;
     }
   }

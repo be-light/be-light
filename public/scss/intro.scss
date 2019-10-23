@@ -1,11 +1,13 @@
 #intro {
   .intro__header {
     .intro__header--title {
-      font-size: 25px;
+      font-size: 30px;
       font-weight: 700;
       margin-top: 20px;
       margin-bottom: 20px;
-      color: #565656;
+      color: black;
+      font-family: "Jua", sans-serif;
+      font-weight: 400;
     }
   }
 
@@ -21,8 +23,10 @@
       margin-top: 10px;
       margin-bottom: 15px;
       padding-top: 10px;
+      color: #565656;
+      font-size: 22px;
+      font-family: "Jua", sans-serif;
       font-weight: 400;
-      color: black;
     }
 
     .intro__contents__store {

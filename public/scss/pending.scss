@@ -8,9 +8,10 @@
   color: #b2b2b2;
 
   .pending__header {
-    font-weight: 600;
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
   }
 
   .pending__contents {
@@ -18,9 +19,10 @@
     .pending__contents__column {
       .pending__contents--title {
         color: #1797d6;
-        font-size: 35px;
-        font-weight: 600;
+        font-size: 40px;
         margin-bottom: 30px;
+        font-family: "Jua", sans-serif;
+        font-weight: 400;
       }
 
       .pending__contents__sub {
@@ -30,8 +32,10 @@
 
         .pending__contents__sub--text {
           margin-bottom: 0px;
-          font-weight: 900;
+          font-size: 20px;
           margin-right: 17px;
+          font-family: "Jua", sans-serif;
+          font-weight: 400;
         }
         .pending__contents__sub--bagCount {
           border: 1px solid #707070;
@@ -40,6 +44,13 @@
           text-align: center;
           margin-right: 14px;
           width: 50px;
+        }
+        .pending__contents__sub--block {
+          p {
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+          }
         }
 
         .bagImg {
