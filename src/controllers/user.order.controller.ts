@@ -4,6 +4,7 @@ import { UserOrder } from "../models/user.order.model";
 import { Host } from "../models/host.model";
 import { HostUser } from "../models/host.user.model";
 import { Sequelize } from "sequelize-typescript";
+import firebase from "../controllers/fcm.controller";
 
 /* Define UserOrder Controller Interface */
 interface UserOrderControllerInterface {
@@ -109,8 +110,6 @@ WHERE a.userId = "${userId}"`;
           .catch(() => {
             reject("Request New Order Faild.");
           });
-
-        /* Send Push Notification */
       } else {
         reject("Your Token is Expired.");
       }
@@ -121,7 +120,7 @@ WHERE a.userId = "${userId}"`;
 
   public async requestNewOrderPush(hostIdx: number) {
     let query = `
-    SELECT A.hostUserDeviceToken, B.hostUserName FROM Host as A, HostUser as B WHERE hostIdx = ${hostIdx} AND A.hostUserId = B.hostUserId
+    SELECT B.hostUserDeviceToken, B.hostUserName FROM Host as A, HostUser as B WHERE hostIdx = ${hostIdx} AND A.hostUserId = B.hostUserId
     `;
 
     let result = await Host.sequelize.query(query, {
@@ -131,8 +130,10 @@ WHERE a.userId = "${userId}"`;
     let deviceToken = result[0].hostUserDeviceToken;
     let hostUserName = result[0].hostUserName;
 
-    //TODO: change serverkey2
-    //firebase.push(deviceToken, `${hostUserName}님 새로운 예약이 신청 되었습니다.`);
+    firebase.push(
+      deviceToken,
+      `${hostUserName}님 새로운 예약이 신청 되었습니다.`
+    );
   }
 
   /* Update Order*/
