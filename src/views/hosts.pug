@@ -2,5 +2,10 @@ section#hosts
     div.hosts__columns
     div#map
 div.hosts__footer--block
-    form(method="GET" action="" class="hosts__next--Form")
+    form(method="GET" action="/tester" class="hosts__next--Form")
+        input(type="hidden" class="bagCount" name="bagCount")
+        input(type="hidden" class="hostLatitude" name="hostLatitude")
+        input(type="hidden" class="hostLongitude" name="hostLongitude")
+        input(type="hidden" class="gHostLatitude" name="gHostLatitude")
+        input(type="hidden" class="gHostLongitude" name="gHostLongitude")
         input(type="button" class="hosts__nextBtn" value="다음")

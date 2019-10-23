@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", event => {
       });
 
       const latLng = new google.maps.LatLng(res.lat, res.lng);
-      console.log(res);
       showCurrentPosition(latLng);
 
       fetch(`/api/map/hosts?latitude=${res.lat}&longitude=${res.lng}`)
@@ -202,9 +201,9 @@ addHostList = hostList => {
     hostsColumn.appendChild(hostsColumnHeader);
     hostsColumn.appendChild(hostsColumnContents);
 
-    hostsColumnsReview.appendChild(hostsColumnsReviewBtn);
+    //hostsColumnsReview.appendChild(hostsColumnsReviewBtn);
     hostsColumns.appendChild(hostsColumn);
-    hostsColumns.appendChild(hostsColumnsReview);
+    //hostsColumns.appendChild(hostsColumnsReview);
   }
 };
 

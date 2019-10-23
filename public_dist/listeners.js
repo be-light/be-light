@@ -23,6 +23,14 @@ function setGet(e) {
 }
 
 nextBtn.addEventListener("click", function(e) {
-  console.log({ dropLatitude, dropLongitude });
-  console.log({ getLatitude, getLongitude });
+  var urlParams = new URLSearchParams(location.search);
+  var bagCount = urlParams.get("bagCount");
+
+  document.querySelector(".bagCount").value = bagCount;
+  document.querySelector(".hostLatitude").value = dropLatitude;
+  document.querySelector(".hostLongitude").value = dropLongitude;
+  document.querySelector(".gHostLatitude").value = getLatitude;
+  document.querySelector(".gHostLongitude").value = getLongitude;
+
+  document.querySelector(".hosts__next--Form").submit();
 });

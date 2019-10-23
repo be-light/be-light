@@ -7,10 +7,12 @@ class BeLightHeader {
   public bagCount: HTMLInputElement;
   public plusButton: HTMLImageElement;
   public minusButton: HTMLImageElement;
+  public inputPlace: HTMLInputElement;
 
   constructor() {
     this.LOGO = document.querySelector(".header__left--logo");
-    this.searchButton = document.querySelector(".intro__searchform--submitbtn");
+    this.searchButton = document.querySelector(".global__searchBtn");
+    this.inputPlace = document.querySelector(".input__place");
     this.startDate = document.querySelector(".startDate");
     this.endDate = document.querySelector(".endDate");
     this.spanBagCount = document.querySelector(".intro__searchform--bagcount");
@@ -26,6 +28,13 @@ class BeLightHeader {
     /* Click Move Event */
     this.LOGO.addEventListener("click", () => {
       location.href = "/";
+    });
+
+    this.inputPlace.addEventListener("keydown", evt => {
+      if (evt.keyCode === 13) {
+        this.searchButton.click();
+        this.inputPlace.value = "";
+      }
     });
 
     /* Click PlusButton & Minus ButtonEvent */
