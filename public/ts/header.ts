@@ -30,12 +30,15 @@ class BeLightHeader {
       location.href = "/";
     });
 
-    this.inputPlace.addEventListener("keydown", evt => {
-      if (evt.keyCode === 13) {
-        this.searchButton.click();
-        this.inputPlace.value = "";
-      }
-    });
+    /* Key Press Event */
+    if (this.inputPlace) {
+      this.inputPlace.addEventListener("keydown", evt => {
+        if (evt.keyCode === 13) {
+          this.searchButton.click();
+          this.inputPlace.value = "";
+        }
+      });
+    }
 
     /* Click PlusButton & Minus ButtonEvent */
     if (this.plusButton && this.minusButton) {

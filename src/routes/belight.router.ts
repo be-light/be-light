@@ -39,7 +39,8 @@ export class Routes {
     /* Reserve Pending Routing */
     app.route("/pending").get((req: Request, res: Response) => {
       res.render("reserve_pending", {
-        title: "BeLight"
+        title: "BeLight",
+        bagCount: req.query.bagCount
       });
     });
 
