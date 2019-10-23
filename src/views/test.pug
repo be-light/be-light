@@ -215,8 +215,12 @@ html(lang="en")
             input(type="text" name="hostIdx")
             input(type="submit")
 
-
         button#modalBtn Button
+
+        h1 Push Testing
+        form(action="/tests" method="POST")
+            input(type="submit")
+
         include login.pug
     script(src="lightMap.js")
     script(src="bundle.js")

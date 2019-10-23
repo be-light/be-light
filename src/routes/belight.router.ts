@@ -7,6 +7,7 @@ import UserOrderController from "../controllers/user.order.controller";
 import MapController from "../controllers/map.controller";
 import UserReviewController from "../controllers/user.review.controller";
 import AuthController from "../controllers/auth.controller";
+import { FCMController } from "../controllers/fcm.controller";
 import expressJWT from "../utils/jwt";
 import upload from "../utils/file";
 
@@ -35,14 +36,14 @@ export class Routes {
     });
 
     /* API test */
-    app
-      .route("/api/test")
-      .post(multer().none(), (req: Request, res: Response) => {
-        const formdata = req.body;
-        console.log(formdata);
-
-        res.json(req.body);
+    app.route("/tests").post((req: Request, res: Response) => {
+      const fcm = new FCMController();
+      fcm.push("test").then(result => {
+        console.log("---");
+        console.log(result);
+        res.send(result);
       });
+    });
 
     /* change test page routing */
     app.route("/test").get((req: Request, res: Response) => {
