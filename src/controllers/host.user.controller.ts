@@ -194,6 +194,7 @@ class HostUserController implements HostUserControllerInterface {
           reject("Your Token is Expired.");
         }
       } else if (accept === -1) {
+        this.acceptOrderPush(reciptNumber, true);
         let query = `
         UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = -1 WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
         `;
@@ -213,7 +214,8 @@ class HostUserController implements HostUserControllerInterface {
   }
 
   /* Accet User Order Push Notification to User */
-  public async acceptOrderPush(reciptNumber: number) {
+  public async acceptOrderPush(reciptNumber: number, reject?: boolean) {
+    let char = reject ? "승인" : "거절";
     let query = `
     SELECT A.userDeviceToken, A.userName FROM User as A, UserOrder as B WHERE A.userId = B.userId AND B.reciptNumber = ${reciptNumber}
     `;
@@ -225,7 +227,7 @@ class HostUserController implements HostUserControllerInterface {
     let userName = result[0].userName;
     let deviceToken = result[0].userDeviceToken;
 
-    firebase.push(deviceToken, `${userName}님 예약이 승인 되었습니다.`);
+    firebase.push(deviceToken, `${userName}님 예약이 ${char} 되었습니다.`);
   }
 
   /* Get Accept UserOrder of HostUser */
