@@ -105,8 +105,8 @@ createMarker = hosts => {
                 </div>
 
                 <div class="info__window--buttons">
-                    <input type="button" class="dropBtn info--btn" value="맡기기" idx="${hosts[i].hostIdx}"/>
-                    <input type="button" class="getBtn info--btn" value="찾기" idx="${hosts[i].hostIdx}"/>
+                    <input type="button" class="dropBtn info--btn" value="맡길거에요" idx="${hosts[i].hostIdx}"/>
+                    <input type="button" class="getBtn info--btn" value="찾을거에요" idx="${hosts[i].hostIdx}"/>
                 </div>
 
                
