@@ -198,9 +198,9 @@ class BeLightMaps {
       hostsColumn.appendChild(hostsColumnHeader);
       hostsColumn.appendChild(hostsColumnContents);
 
-      hostsColumnsReview.appendChild(hostsColumnsReviewBtn);
+      //hostsColumnsReview.appendChild(hostsColumnsReviewBtn);
       hostsColumns.appendChild(hostsColumn);
-      hostsColumns.appendChild(hostsColumnsReview);
+      //hostsColumns.appendChild(hostsColumnsReview);
     }
   };
 }
