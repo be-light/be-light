@@ -62,31 +62,35 @@ class LoginWithRegister {
   }
 
   public loginCheck = () => {
-    if (this.PUBLIC_USER) {
-      const newMenu: HTMLElement = document.createElement("li");
-      newMenu.className = "header__menu--logout";
-      newMenu.innerText = "로그아웃";
+    try {
+      if (this.PUBLIC_USER) {
+        const newMenu: HTMLElement = document.createElement("li");
+        newMenu.className = "header__menu--logout";
+        newMenu.innerText = "로그아웃";
 
-      newMenu.addEventListener("click", () => {
-        if (confirm("로그아웃 하시겠습니까?")) {
-          Cookies.remove("user");
-          Cookies.remove("public_user");
-          location.href = "/";
-        }
-      });
+        newMenu.addEventListener("click", () => {
+          if (confirm("로그아웃 하시겠습니까?")) {
+            Cookies.remove("user");
+            Cookies.remove("public_user");
+            location.href = "/";
+          }
+        });
 
-      this.headerLoginButton.style.display = "none";
-      this.headerMenu.appendChild(newMenu);
-    } else {
-      const oldMenu: HTMLUListElement = document.querySelector(
-        ".header__menu--logout"
-      );
+        this.headerLoginButton
+          ? (this.headerLoginButton.style.display = "none")
+          : "";
+        this.headerMenu.appendChild(newMenu);
+      } else {
+        const oldMenu: HTMLUListElement = document.querySelector(
+          ".header__menu--logout"
+        );
 
-      this.headerLoginButton
-        ? (this.headerLoginButton.style.display = "inline")
-        : "";
-      oldMenu ? this.headerMenu.removeChild(oldMenu) : "";
-    }
+        this.headerLoginButton
+          ? (this.headerLoginButton.style.display = "inline")
+          : "";
+        oldMenu ? this.headerMenu.removeChild(oldMenu) : "";
+      }
+    } catch (e) {}
   };
 
   /* Open Register Form Event */
