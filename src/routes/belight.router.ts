@@ -36,6 +36,13 @@ export class Routes {
       });
     });
 
+    /* Reserve Pending Routing */
+    app.route("/pending").get((req: Request, res: Response) => {
+      res.render("reserve_pending", {
+        title: "BeLight"
+      });
+    });
+
     /* API test */
     app.route("/tests").post((req: Request, res: Response) => {
       /*firebase.push("test").then(result => {
