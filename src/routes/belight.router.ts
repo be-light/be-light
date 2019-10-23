@@ -277,14 +277,8 @@ export class Routes {
     app.route("/api/hoster/order").put((req: Request, res: Response) => {
       let reciptNumber = req.body.reciptNumber;
       let accept: number = Number.parseInt(req.body.accept);
-      let userId: string = req.body.userId;
 
-      HostUserController.acceptUserOrder(
-        req.cookies.host,
-        reciptNumber,
-        accept,
-        userId
-      )
+      HostUserController.acceptUserOrder(req.cookies.host, reciptNumber, accept)
         .then(result => {
           res
             .status(200)
