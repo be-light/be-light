@@ -44,4 +44,7 @@ export class Host extends Model<Host> {
 
   @Column(DataType.TEXT)
   public hostCloseTime!: string;
+
+  @Column(DataType.TEXT)
+  public hostImage!: string;
 }

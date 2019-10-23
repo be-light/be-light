@@ -167,8 +167,8 @@ export class Routes {
     // HostUser ---
     /* HostUser Login */
     app.route("/api/auth/hoster/login").post((req: Request, res: Response) => {
-      let id: string = req.body.hostUserId;
-      let pw: string = req.body.hostUserPassword;
+      let id: string = validate.replaceSpace(req.body.hostUserId);
+      let pw: string = validate.replaceSpace(req.body.hostUserPassword);
       if (req.cookies.host) {
         res.redirect("/");
         return;
@@ -198,13 +198,15 @@ export class Routes {
       }
 
       let reqHost: object = {
-        hostUserId: req.body.hostUserId,
-        hostUserPassword: req.body.hostUserPassword,
-        hostUserName: req.body.hostUserName,
-        hostUserEmail: req.body.hostUserEmail,
-        hostUserPhoneNumber: req.body.hostUserPhoneNumber,
-        hostUserDeviceToken: req.body.hostUserDeviceToken
-          ? req.body.hostUserDeviceToken
+        hostUserId: validate.replaceSpace(req.body.hostUserId),
+        hostUserPassword: validate.replaceSpace(req.body.hostUserPassword),
+        hostUserName: validate.replaceSpace(req.body.hostUserName),
+        hostUserEmail: validate.replaceSpace(req.body.hostUserEmail),
+        hostUserPhoneNumber: validate.replaceSpace(
+          req.body.hostUserPhoneNumber
+        ),
+        hostUserDeviceToken: validate.replaceSpace(req.body.hostUserDeviceToken)
+          ? validate.replaceSpace(req.body.hostUserDeviceToken)
           : ""
       };
 
@@ -352,27 +354,38 @@ export class Routes {
     });
 
     /* Add New Host */
-    app.route("/api/host").post((req: Request, res: Response) => {
-      let hostObj: object = {
-        hostName: req.body.hostName,
-        hostTel: req.body.hostTel,
-        hostAddress: req.body.hostAddress,
-        hostPostalCode: req.body.hostPostalCode,
-        hostLatitude: req.body.hostLatitude,
-        hostLongitude: req.body.hostLongitude,
-        hostIntro: req.body.hostIntro,
-        hostOpenTime: req.body.hostOpenTime,
-        hostCloseTime: req.body.hostCloseTime
-      };
+    app
+      .route("/api/host")
+      .post(
+        upload.option.single("hostImage"),
+        (req: Request, res: Response) => {
+          let hostImage: string = req.file
+            ? "/upload/" + req.file.filename
+            : "";
 
-      HostController.addNewHost(req.cookies.host, hostObj)
-        .then(msg => {
-          res.json(msg);
-        })
-        .catch(msg => {
-          res.status(400).json({ status: 400, msg });
-        });
-    });
+          console.log(req.file.filename);
+          let hostObj: object = {
+            hostName: req.body.hostName,
+            hostTel: req.body.hostTel,
+            hostAddress: req.body.hostAddress,
+            hostPostalCode: req.body.hostPostalCode,
+            hostLatitude: req.body.hostLatitude,
+            hostLongitude: req.body.hostLongitude,
+            hostIntro: req.body.hostIntro,
+            hostOpenTime: req.body.hostOpenTime,
+            hostCloseTime: req.body.hostCloseTime,
+            hostImage
+          };
+
+          HostController.addNewHost(req.cookies.host, hostObj)
+            .then(msg => {
+              res.json(msg);
+            })
+            .catch(msg => {
+              res.status(400).json({ status: 400, msg });
+            });
+        }
+      );
 
     /* update Host */
     app.route("/api/host").put((req: Request, res: Response) => {

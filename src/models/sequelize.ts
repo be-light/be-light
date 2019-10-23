@@ -119,6 +119,9 @@ const host = sequelize.define("Host", {
   },
   hostCloseTime: {
     type: DataType.STRING
+  },
+  hostImage: {
+    type: DataType.STRING
   }
 });
 

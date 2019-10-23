@@ -57,7 +57,8 @@ class HostController implements HostControllerInterface {
           hostLongitude: hostObj["hostLongitude"],
           hostIntro: hostObj["hostIntro"],
           hostOpenTime: hostObj["hostOpenTime"],
-          hostCloseTime: hostObj["hostCloseTime"]
+          hostCloseTime: hostObj["hostCloseTime"],
+          hostImage: hostObj["hostImage"]
         }).then(host => {
           resolve(this.successMsg);
         });
