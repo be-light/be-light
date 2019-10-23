@@ -531,8 +531,7 @@ export class Routes {
 
     /* Get User Reviews */
     app.route("/api/review").get((req: Request, res: Response) => {
-      let userId = req.query.userId;
-      UserReviewController.getUserReviews(userId)
+      UserReviewController.getUserReviews(req.cookies.user)
         .then(reviews => {
           res.json(reviews);
         })
