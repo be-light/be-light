@@ -66,7 +66,10 @@ class HostUserController implements HostUserControllerInterface {
               hostUserPassword: reqHost["hostUserPassword"],
               hostUserName: reqHost["hostUserName"],
               hostUserEmail: reqHost["hostUserEmail"],
-              hostUserPhoneNumber: reqHost["hostUserPhoneNumber"]
+              hostUserPhoneNumber: reqHost["hostUserPhoneNumber"],
+              hostUserDeviceToken: reqHost["hostUserDeviceToken"]
+                ? reqHost["hostUserDeviceToken"]
+                : ""
             })
               .then(host => {
                 resolve(this.successMsg);

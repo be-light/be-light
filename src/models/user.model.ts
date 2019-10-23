@@ -31,4 +31,7 @@ export class User extends Model<User> {
 
   @Column(DataType.TEXT)
   public userProfileImage!: string;
+
+  @Column(DataType.TEXT)
+  public userDeviceToken?: string;
 }

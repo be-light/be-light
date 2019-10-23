@@ -28,4 +28,7 @@ export class HostUser extends Model<HostUser> {
 
   @Column(DataType.TEXT)
   public hostUserProfileImage!: string;
+
+  @Column(DataType.TEXT)
+  public hostUserDeviceToken?: string;
 }

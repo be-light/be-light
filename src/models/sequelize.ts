@@ -51,6 +51,9 @@ const user = sequelize.define(
     },
     userProfileImage: {
       type: DataType.STRING
+    },
+    userDeviceToken: {
+      type: DataType.STRING
     }
   },
   { timestamps: false, paranoid: false }
@@ -74,6 +77,9 @@ const hostUser = sequelize.define("HostUser", {
     type: DataType.STRING
   },
   hostUserProfileImage: {
+    type: DataType.STRING
+  },
+  hostUserDeviceToken: {
     type: DataType.STRING
   }
 });

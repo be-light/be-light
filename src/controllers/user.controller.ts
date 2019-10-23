@@ -45,7 +45,10 @@ class UserController implements UserControllerInterface {
             userName: reqUser["name"],
             userEmail: reqUser["email"],
             userPhoneNumber: reqUser["phone"],
-            userAddress: reqUser["address"]
+            userAddress: reqUser["address"],
+            userDeviceToken: reqUser["deviceToken"]
+              ? reqUser["deviceToken"]
+              : ""
           }).then(user => {
             resolve(this.successMsg);
           });
