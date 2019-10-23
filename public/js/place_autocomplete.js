@@ -95,7 +95,7 @@ createMarker = hosts => {
             <div class="info__window">
                 <p class="info__window--hostName">${hosts[i].hostName}</p>
                 <div class="info__window--block">
-                    <img src="https://via.placeholder.com/150" alt="placeholder" />
+                    <img src="${hosts[i].hostImage}" alt="hostImage" class="hostImage" />
                 </div>
                <p class="info__window--hostTel">${hosts[i].hostTel}</p>
                <p class="info__window--hostAddress">${hosts[i].hostAddress}</p>
@@ -162,9 +162,9 @@ addHostList = hostList => {
     hostsColumnContentsImage.className = "hosts__column__contents--image";
 
     const placeholder = document.createElement("img");
-    placeholder.src = "https://via.placeholder.com/100";
-    placeholder.alt = "placeholder";
-    placeholder.className = "placeholder";
+    placeholder.src = `${hostList[i].hostImage}`;
+    placeholder.alt = "hostImage";
+    placeholder.className = "hostProfileImage";
 
     const hostsColumnsReview = document.createElement("div");
     hostsColumnsReview.className = "hosts__columns__review";
