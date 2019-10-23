@@ -176,7 +176,7 @@ class HostUserController implements HostUserControllerInterface {
 
       let hostUserId = expressJWT.verifyToken(token).userId;
       if (accept === 1) {
-        this.acceptOrderPush(reciptNumber);
+        this.acceptOrderPush(reciptNumber, true);
         let query = `
         UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = ${accept} WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
         `;
@@ -194,7 +194,7 @@ class HostUserController implements HostUserControllerInterface {
           reject("Your Token is Expired.");
         }
       } else if (accept === -1) {
-        this.acceptOrderPush(reciptNumber, true);
+        this.acceptOrderPush(reciptNumber, false);
         let query = `
         UPDATE UserOrder,Host,HostUser SET UserOrder.statusCode = -1 WHERE UserOrder.hostIdx = Host.hostIdx AND Host.hostUserId = "${hostUserId}" AND UserOrder.reciptNumber = ${reciptNumber}
         `;
