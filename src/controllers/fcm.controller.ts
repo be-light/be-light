@@ -13,10 +13,9 @@ class FCMController {
     return new Promise((resolve, reject) => {
       const msg = {
         to: deviceToken,
-        notification: {
+        data: {
           title: "BeLight",
-          body: info,
-          priority: "high"
+          body: info
         }
       };
 
