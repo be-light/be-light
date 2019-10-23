@@ -56,7 +56,8 @@ showCurrentPosition = latLng => {
     position: latLng,
     title: "My Position",
     map: map,
-    draggable: false
+    draggable: false,
+    icon: "/images/map_pin.png"
   });
 
   showInfoWindow(marker);
@@ -87,32 +88,32 @@ createMarker = hosts => {
       map: map,
       position: latLng,
       title: "Host",
-      draggable: false
+      draggable: false,
+      icon: "/images/map_pin.png"
     });
 
     google.maps.event.addListener(marker, "click", () => {
       let infoWindow = new google.maps.InfoWindow({
         content: `
-            <div class="info__window">
-                <p class="info__window--hostName">${hosts[i].hostName}</p>
-                <div class="info__window--block">
-                    <img src="${hosts[i].hostImage}" alt="hostImage" class="hostImage" />
-                </div>
-               <p class="info__window--hostTel">${hosts[i].hostTel}</p>
-               <p class="info__window--hostAddress">${hosts[i].hostAddress}</p>
-                <div class="info__window--block">
-                    Open <span class="info__window--hostOpenTime"> ${hosts[i].hostOpenTime}</span>
-                    Close <span class="info__window--hostCloseTime">${hosts[i].hostCloseTime}</span>
-                </div>
-
-                <div class="info__window--buttons">
-                    <input type="button" class="dropBtn info--btn" value="맡길거에요" idx="${hosts[i].hostIdx}"/>
-                    <input type="button" class="getBtn info--btn" value="찾을거에요" idx="${hosts[i].hostIdx}"/>
-                </div>
-
-               
+        <div class="info__window">
+            <p class="info__window--hostName">${hosts[i].hostName}</p>
+            <div class="info__window--block">
+                <img src="${hosts[i].hostImage}" alt="hostImage"  class="hostImage" />
             </div>
-          `
+           <p class="info__window--hostTel">${hosts[i].hostTel}</p>
+           <p class="info__window--hostAddress">${hosts[i].hostAddress}</p>
+            <div class="info__window--block">
+                Open <span class="info__window--hostOpenTime"> ${hosts[i].hostOpenTime}</span>
+                Close <span class="info__window--hostCloseTime">${hosts[i].hostCloseTime}</span>
+          
+            </div>
+
+            <div class="info__window--buttons">
+                <input type="button" class="dropBtn info--btn btnShow" value="맡길거에요" idx="${hosts[i].hostIdx}" latitude="${hosts[i].hostLatitude}" longitude="${hosts[i].hostLongitude}" onclick="javascript:setDrop(this)"/>
+                <input type="button" class="getBtn info--btn btnShow" value="찾을거에요" idx="${hosts[i].hostIdx}" latitude="${hosts[i].hostLatitude}" longitude="${hosts[i].hostLongitude}" onclick="javascript:setGet(this)"/>
+            </div>
+        </div>
+      `
       });
 
       if (prev_infowindow) prev_infowindow.close();
