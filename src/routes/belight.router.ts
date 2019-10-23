@@ -96,7 +96,8 @@ export class Routes {
           name: req.body.userName,
           email: req.body.userEmail,
           phone: req.body.userPhoneNumber,
-          address: req.body.userAddress
+          address: req.body.userAddress,
+          deviceToken: req.body.userDeviceToken ? req.body.userDeviceToken : ""
         };
 
         UserController.register(reqUser)
@@ -198,7 +199,10 @@ export class Routes {
         hostUserPassword: req.body.hostUserPassword,
         hostUserName: req.body.hostUserName,
         hostUserEmail: req.body.hostUserEmail,
-        hostUserPhoneNumber: req.body.hostUserPhoneNumber
+        hostUserPhoneNumber: req.body.hostUserPhoneNumber,
+        hostUserDeviceToken: req.body.hostUserDeviceToken
+          ? req.body.hostUserDeviceToken
+          : ""
       };
 
       HostUserController.register(reqHost)
