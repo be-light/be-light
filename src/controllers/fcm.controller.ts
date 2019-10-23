@@ -15,7 +15,8 @@ class FCMController {
         to: deviceToken,
         notification: {
           title: "BeLight",
-          body: info
+          body: info,
+          priority: "high"
         }
       };
 
