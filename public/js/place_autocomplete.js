@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", event => {
       });
 
       const latLng = new google.maps.LatLng(res.lat, res.lng);
+      console.log(res);
       showCurrentPosition(latLng);
 
       fetch(`/api/map/hosts?latitude=${res.lat}&longitude=${res.lng}`)

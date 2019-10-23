@@ -54,7 +54,8 @@ class BeLightMaps {
       position: latLng,
       title: "My Position",
       map: this.map,
-      draggable: false
+      draggable: false,
+      icon: "/images/map_pin.png"
     });
 
     this.showInfoWindow(marker);
@@ -85,7 +86,8 @@ class BeLightMaps {
         map: this.map,
         position: latLng,
         title: "Host",
-        draggable: false
+        draggable: false,
+        icon: "/images/map_pin.png"
       });
 
       google.maps.event.addListener(marker, "click", () => {
