@@ -167,8 +167,8 @@ export class Routes {
     // HostUser ---
     /* HostUser Login */
     app.route("/api/auth/hoster/login").post((req: Request, res: Response) => {
-      let id: string = validate.replaceSpace(req.body.hostUserId);
-      let pw: string = validate.replaceSpace(req.body.hostUserPassword);
+      let id: string = req.body.hostUserId;
+      let pw: string = req.body.hostUserPassword;
       if (req.cookies.host) {
         res.redirect("/");
         return;
@@ -198,15 +198,13 @@ export class Routes {
       }
 
       let reqHost: object = {
-        hostUserId: validate.replaceSpace(req.body.hostUserId),
-        hostUserPassword: validate.replaceSpace(req.body.hostUserPassword),
-        hostUserName: validate.replaceSpace(req.body.hostUserName),
-        hostUserEmail: validate.replaceSpace(req.body.hostUserEmail),
-        hostUserPhoneNumber: validate.replaceSpace(
-          req.body.hostUserPhoneNumber
-        ),
-        hostUserDeviceToken: validate.replaceSpace(req.body.hostUserDeviceToken)
-          ? validate.replaceSpace(req.body.hostUserDeviceToken)
+        hostUserId: req.body.hostUserId,
+        hostUserPassword: req.body.hostUserPassword,
+        hostUserName: req.body.hostUserName,
+        hostUserEmail: req.body.hostUserEmail,
+        hostUserPhoneNumber: req.body.hostUserPhoneNumber,
+        hostUserDeviceToken: req.body.hostUserDeviceToken
+          ? req.body.hostUserDeviceToken
           : ""
       };
 
