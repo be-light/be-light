@@ -108,7 +108,7 @@ html(lang="en")
         h1 Host
 
         p Host addNewHost
-        form(action="/api/host" method="POST")
+        form(action="/api/host" method="POST" enctype="multipart/form-data")
             input(type="text" name="hostName")
             input(type="text" name="hostTel")
             input(type="text" name="hostAddress")
