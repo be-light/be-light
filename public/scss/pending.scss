@@ -46,10 +46,25 @@
           width: 50px;
         }
         .pending__contents__sub--block {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           p {
             font-family: "Jua", sans-serif;
             font-weight: 400;
             font-size: 17px;
+          }
+
+          .subCalendar {
+            border: 1px solid #565656;
+            padding: 10px;
+            font-size: 23px;
+            border-radius: 50px;
+            text-align: center;
+          }
+
+          .startDate {
+            margin-right: 10px;
           }
         }
 
