@@ -33,7 +33,17 @@ orderBtn.addEventListener("click", function() {
   itemCount.value = getQueryString("bagCount");
   paid.value = 3000;
 
-  orderForm.submit();
+  try {
+    fetch("/api/user/order", {
+      method: "POST",
+      body: new FormData(orderForm)
+    }).then(response => {
+      if (response.status === 200) {
+        alert("예약이 신청되었습니다");
+        location.href = "/";
+      }
+    });
+  } catch (err) {}
 });
 
 function getQueryString(key) {

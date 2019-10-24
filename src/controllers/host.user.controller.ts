@@ -224,8 +224,8 @@ class HostUserController implements HostUserControllerInterface {
       type: Sequelize.QueryTypes.SELECT
     });
 
-    let userName = result[0].userName;
-    let deviceToken = result[0].userDeviceToken;
+    let userName = await result[0].userName;
+    let deviceToken = await result[0].userDeviceToken;
 
     firebase.push(deviceToken, `${userName}님 예약이 ${char} 되었습니다.`);
   }

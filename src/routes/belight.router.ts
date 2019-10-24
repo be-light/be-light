@@ -453,29 +453,31 @@ export class Routes {
     });
 
     /* Request New User Order */
-    app.route("/api/user/order").post((req: Request, res: Response) => {
-      if (!req.cookies.user) {
-        res.redirect("/");
-        return;
-      }
+    app
+      .route("/api/user/order")
+      .post(multer().none(), (req: Request, res: Response) => {
+        if (!req.cookies.user) {
+          res.redirect("/");
+          return;
+        }
 
-      let reqOrder: object = {
-        checkIn: req.body.checkIn,
-        checkOut: req.body.checkOut,
-        paid: req.body.paid,
-        hostIdx: req.body.hostIdx,
-        gHostIdx: req.body.gHostIdx,
-        itemCount: req.body.itemCount
-      };
+        let reqOrder: object = {
+          checkIn: req.body.checkIn,
+          checkOut: req.body.checkOut,
+          paid: req.body.paid,
+          hostIdx: req.body.hostIdx,
+          gHostIdx: req.body.gHostIdx,
+          itemCount: req.body.itemCount
+        };
 
-      UserOrderController.requestNewOrder(reqOrder, req.cookies.user)
-        .then(order => {
-          res.json(order);
-        })
-        .catch(msg => {
-          res.json({ status: 400, msg: msg });
-        });
-    });
+        UserOrderController.requestNewOrder(reqOrder, req.cookies.user)
+          .then(order => {
+            res.json(order);
+          })
+          .catch(msg => {
+            res.json({ status: 400, msg: msg });
+          });
+      });
 
     /* Update User Order */
     app.route("/api/user/order").put((req: Request, res: Response) => {
