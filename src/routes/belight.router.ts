@@ -16,9 +16,12 @@ export class Routes {
   public routes(app): void {
     /* Main Page Routing */
     app.route("/").get((req: Request, res: Response) => {
-      res.render("index", {
-        title: "BeLight",
-        message: "Express.js + Pug + Webpack + Typescript + SaSS"
+      UserReviewController.getLastReviews(3).then(result => {
+        res.render("index", {
+          title: "BeLight",
+          message: "Express.js + Pug + Webpack + Typescript + SaSS",
+          reviews: result
+        });
       });
     });
 

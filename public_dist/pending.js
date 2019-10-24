@@ -1,6 +1,7 @@
 var plusBtn = document.querySelector(".plusImg");
 var minusBtn = document.querySelector(".minusImg");
 var bgCount = document.querySelector(".pending__contents__sub--bagCount");
+var orderBtn = document.querySelector(".completeBtn");
 
 plusBtn.addEventListener("click", function() {
   bgCount.value = (Number.parseInt(bgCount.value) + 1).toString();
@@ -14,4 +15,8 @@ minusBtn.addEventListener("click", function() {
   } else {
     bgCount.value = (temp - 1).toString();
   }
+});
+
+orderBtn.addEventListener("click", function() {
+  alert("click");
 });
