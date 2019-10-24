@@ -31,6 +31,8 @@ nextBtn.addEventListener("click", function(e) {
   document.querySelector(".hostLongitude").value = dropLongitude;
   document.querySelector(".gHostLatitude").value = getLatitude;
   document.querySelector(".gHostLongitude").value = getLongitude;
+  document.querySelector(".hostIdx").value = dropIdx;
+  document.querySelector(".gHostIdx").value = getIdx;
 
   document.querySelector(".hosts__next--Form").submit();
 });

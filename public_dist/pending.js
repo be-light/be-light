@@ -2,6 +2,7 @@ var plusBtn = document.querySelector(".plusImg");
 var minusBtn = document.querySelector(".minusImg");
 var bgCount = document.querySelector(".pending__contents__sub--bagCount");
 var orderBtn = document.querySelector(".completeBtn");
+var orderForm = document.querySelector(".orderForm");
 
 plusBtn.addEventListener("click", function() {
   bgCount.value = (Number.parseInt(bgCount.value) + 1).toString();
@@ -18,5 +19,24 @@ minusBtn.addEventListener("click", function() {
 });
 
 orderBtn.addEventListener("click", function() {
-  alert("click");
+  let checkIn = document.querySelector(".hid__checkIn");
+  let checkOut = document.querySelector(".hid__checkOut");
+  let paid = document.querySelector(".hid__paid");
+  let hostIdx = document.querySelector(".hid__hostIdx");
+  let gHostIdx = document.querySelector(".hid__gHostIdx");
+  let itemCount = document.querySelector(".hid__itemCount");
+
+  checkIn.value = document.querySelector(".f_start").value;
+  checkOut.value = document.querySelector(".f_end").value;
+  hostIdx.value = getQueryString("hostIdx");
+  gHostIdx.value = getQueryString("gHostIdx");
+  itemCount.value = getQueryString("bagCount");
+  paid.value = 3000;
+
+  orderForm.submit();
 });
+
+function getQueryString(key) {
+  const url = new URLSearchParams(window.location.search);
+  return url.get(key);
+}

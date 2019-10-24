@@ -66,58 +66,62 @@ export class Routes {
 
     // User =====
     /* User Login */
-    app.route("/api/auth/login").post((req: Request, res: Response) => {
-      let id: string = validate.replaceSpace(req.body.userId);
-      let pw: string = validate.replaceSpace(req.body.userPassword);
-      if (req.cookies.user) {
-        res.redirect("/");
-        return;
-      }
+    app
+      .route("/api/auth/login")
+      .post(multer().none(), (req: Request, res: Response) => {
+        let id: string = validate.replaceSpace(req.body.userId);
+        let pw: string = validate.replaceSpace(req.body.userPassword);
+        if (req.cookies.user) {
+          res.redirect("/");
+          return;
+        }
 
-      UserController.login(id, pw)
-        .then(user => {
-          let token: string = expressJWT.getToken(user);
-          let public_info = {
-            userName: user.userName,
-            userEmail: user.userEmail
-          };
+        UserController.login(id, pw)
+          .then(user => {
+            let token: string = expressJWT.getToken(user);
+            let public_info = {
+              userName: user.userName,
+              userEmail: user.userEmail
+            };
 
-          res.cookie("public_user", public_info);
-          res.cookie("user", token); // token save - req.cookies.user
-          res.json({ status: 200, token: token }); // return token
-        })
-        .catch(msg => {
-          res.json({ status: 400, msg: msg });
-        });
-    });
+            res.cookie("public_user", public_info);
+            res.cookie("user", token); // token save - req.cookies.user
+            res.json({ status: 200, token: token }); // return token
+          })
+          .catch(msg => {
+            res.json({ status: 400, msg: msg });
+          });
+      });
 
     /* User Register */
-    app.route("/api/auth/register").post((req: Request, res: Response) => {
-      if (req.cookies.user) {
-        res.redirect("/");
-        return;
-      }
+    app
+      .route("/api/auth/register")
+      .post(multer().none(), (req: Request, res: Response) => {
+        if (req.cookies.user) {
+          res.redirect("/");
+          return;
+        }
 
-      let reqUser: object = {
-        id: validate.replaceSpace(req.body.userId),
-        pw: validate.replaceSpace(req.body.userPassword),
-        name: validate.replaceSpace(req.body.userName),
-        email: validate.replaceSpace(req.body.userEmail),
-        phone: validate.replaceSpace(req.body.userPhoneNumber),
-        address: validate.replaceSpace(req.body.userAddress),
-        deviceToken: validate.replaceSpace(
-          req.body.userDeviceToken ? req.body.userDeviceToken : ""
-        )
-      };
+        let reqUser: object = {
+          id: validate.replaceSpace(req.body.userId),
+          pw: validate.replaceSpace(req.body.userPassword),
+          name: validate.replaceSpace(req.body.userName),
+          email: validate.replaceSpace(req.body.userEmail),
+          phone: validate.replaceSpace(req.body.userPhoneNumber),
+          address: validate.replaceSpace(req.body.userAddress),
+          deviceToken: validate.replaceSpace(
+            req.body.userDeviceToken ? req.body.userDeviceToken : ""
+          )
+        };
 
-      UserController.register(reqUser)
-        .then(user => {
-          res.json(user);
-        })
-        .catch(msg => {
-          res.json({ status: 400, msg: msg });
-        });
-    });
+        UserController.register(reqUser)
+          .then(user => {
+            res.json(user);
+          })
+          .catch(msg => {
+            res.json({ status: 400, msg: msg });
+          });
+      });
 
     /* Bring User Profile */
     app.route("/api/user").get((req: Request, res: Response) => {

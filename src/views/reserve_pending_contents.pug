@@ -20,10 +20,18 @@ div.pending__contents
         div.pending__contents__sub
             div.pending__contents__sub--block
                 p.pending__dateText.pspace 맡겨주실 날짜
-                input(type="date" class="startDate subCalendar")
+                input(type="date" class="startDate subCalendar f_start")
 
             div.pending__contents__sub--block
                 p.pending__dateText.pspace 찾아주실 날짜
-                input(type="date" class="endDate subCalendar")
+                input(type="date" class="endDate subCalendar f_end")
+        
+        form(method="POST" action="/api/user/order" class="orderForm")
+            input(type="date" hidden="true" name="checkIn" class="hid__checkIn")
+            input(type="date" hidden="true" name="checkOut" class="hid__checkOut")
+            input(type="text" hidden="true" name="paid" class="hid__paid")
+            input(type="text" hidden="true" name="hostIdx" class="hid__hostIdx")
+            input(type="text" hidden="true" name="gHostIdx" class="hid__gHostIdx")
+            input(type="text" hidden="true" name="itemCount" class="hid__itemCount")
         
         input(type="button" class="completeBtn" value="예약신청")
