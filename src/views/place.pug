@@ -2,8 +2,8 @@ doctype html
 html(lang="ko")
     head
         title #{title}
+        include favicons.pug
         link(href="app.css" rel="stylesheet")
-
         script(src="bundle_maps.js")
         script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFijLTfazyIENRDX07mOhq_2ZZb2cqRrw&callback=initMap&libraries=places")
     body
