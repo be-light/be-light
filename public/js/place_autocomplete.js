@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", event => {
           lat: res.lat,
           lng: res.lng
         },
-        zoom: 10,
+        zoom: 12,
         fullscreenControl: false,
         streetViewControl: false,
         mapTypeControl: false

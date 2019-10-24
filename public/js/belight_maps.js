@@ -30,7 +30,7 @@ class BeLightMaps {
           lat: this.latitude,
           lng: this.longitude
         },
-        zoom: 10,
+        zoom: 12,
         fullscreenControl: false,
         streetViewControl: false,
         mapTypeControl: false
