@@ -398,27 +398,32 @@ export class Routes {
       );
 
     /* update Host */
-    app.route("/api/host").put((req: Request, res: Response) => {
-      let hostObj: object = {
-        hostName: req.body.hostName,
-        hostTel: req.body.hostTel,
-        hostAddress: req.body.hostAddress,
-        hostPostalCode: req.body.hostPostalCode,
-        hostLatitude: req.body.hostLatitude,
-        hostLongitude: req.body.hostLongitude,
-        hostIntro: req.body.hostIntro,
-        hostOpenTime: req.body.hostOpenTime,
-        hostCloseTime: req.body.hostCloseTime
-      };
+    app
+      .route("/api/host")
+      .put(upload.option.single("hostImage"), (req: Request, res: Response) => {
+        let hostImage: string = req.file ? "/upload/" + req.file.filename : "";
 
-      HostController.updateHost(req.cookies.host, req.body.idx, hostObj)
-        .then(msg => {
-          res.json(msg);
-        })
-        .catch(msg => {
-          res.status(400).json({ status: 400, msg });
-        });
-    });
+        let hostObj: object = {
+          hostName: req.body.hostName,
+          hostTel: req.body.hostTel,
+          hostAddress: req.body.hostAddress,
+          hostPostalCode: req.body.hostPostalCode,
+          hostLatitude: req.body.hostLatitude,
+          hostLongitude: req.body.hostLongitude,
+          hostIntro: req.body.hostIntro,
+          hostOpenTime: req.body.hostOpenTime,
+          hostCloseTime: req.body.hostCloseTime,
+          hostImage
+        };
+
+        HostController.updateHost(req.cookies.host, req.body.idx, hostObj)
+          .then(msg => {
+            res.json(msg);
+          })
+          .catch(msg => {
+            res.status(400).json({ status: 400, msg });
+          });
+      });
 
     /* Destroy Host */
     app.route("/api/host").delete((req: Request, res: Response) => {

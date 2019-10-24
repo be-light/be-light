@@ -76,27 +76,27 @@ class HostController implements HostControllerInterface {
   ): Promise<ResSkeleton> {
     return new Promise((resolve, reject) => {
       let hostUserId = expressJWT.verifyToken(token).userId;
+      let updateData = {
+        hostName: hostObj["hostName"],
+        hostTel: hostObj["hostTel"],
+        hostAddress: hostObj["hostAddress"],
+        hostPostalCode: hostObj["hostPostalCode"],
+        hostLatitude: hostObj["hostLatitude"],
+        hostLongitude: hostObj["hostLongitude"],
+        hostIntro: hostObj["hostIntro"],
+        hostOpenTime: hostObj["hostOpenTime"],
+        hostCloseTime: hostObj["hostCloseTime"],
+        hostImage: hostObj["hostImage"]
+      };
+
       if (hostUserId) {
-        Host.update(
-          {
-            hostName: hostObj["hostName"],
-            hostTel: hostObj["hostTel"],
-            hostAddress: hostObj["hostAddress"],
-            hostPostalCode: hostObj["hostPostalCode"],
-            hostLatitude: hostObj["hostLatitude"],
-            hostLongitude: hostObj["hostLongitude"],
-            hostIntro: hostObj["hostIntro"],
-            hostOpenTime: hostObj["hostOpenTime"],
-            hostCloseTime: hostObj["hostCloseTime"]
+        Host.update(updateData, {
+          where: {
+            hostIdx: idx,
+            hostUserId: hostUserId
           },
-          {
-            where: {
-              hostIdx: idx,
-              hostUserId: hostUserId
-            },
-            returning: false
-          }
-        )
+          returning: false
+        })
           .then(msg => {
             if (msg.toString() !== "0") resolve(this.successMsg);
             else reject("Request is not valid.");

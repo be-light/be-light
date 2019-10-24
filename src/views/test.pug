@@ -126,7 +126,7 @@ html(lang="en")
             input(type="submit")
 
         p Host updateHost
-        form(action="/api/host?_method=PUT" method="POST")
+        form(action="/api/host?_method=PUT" method="POST" enctype="multipart/form-data")
             input(type="text" name="idx")
             input(type="text" name="hostName")
             input(type="text" name="hostTel")
@@ -137,6 +137,7 @@ html(lang="en")
             input(type="text" name="hostIntro")
             input(type="time" name="hostOpenTime")
             input(type="time" name="hostCloseTime")
+            input(type="file" name="hostImage")
             input(type="submit")
 
         p Host Destroy
