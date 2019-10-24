@@ -30,7 +30,7 @@ class BeLightMaps {
           lat: this.latitude,
           lng: this.longitude
         },
-        zoom: 12,
+        zoom: 16,
         fullscreenControl: false,
         streetViewControl: false,
         mapTypeControl: false
@@ -68,10 +68,6 @@ class BeLightMaps {
     });
 
     infoWindow.open(this.map, marker);
-
-    setTimeout(() => {
-      infoWindow.close();
-    }, 3000);
   };
 
   /* Create Marker of Hosts*/

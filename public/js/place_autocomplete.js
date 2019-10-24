@@ -28,13 +28,14 @@ document.addEventListener("DOMContentLoaded", event => {
           lat: res.lat,
           lng: res.lng
         },
-        zoom: 12,
+        zoom: 16,
         fullscreenControl: false,
         streetViewControl: false,
         mapTypeControl: false
       });
 
       const latLng = new google.maps.LatLng(res.lat, res.lng);
+      console.log(latLng);
       showCurrentPosition(latLng);
 
       fetch(`/api/map/hosts?latitude=${res.lat}&longitude=${res.lng}`)
@@ -69,10 +70,6 @@ showInfoWindow = marker => {
   });
 
   infoWindow.open(map, marker);
-
-  setTimeout(() => {
-    infoWindow.close();
-  }, 3000);
 };
 
 /* Create Marker of Hosts*/
